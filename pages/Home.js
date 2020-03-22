@@ -22,7 +22,7 @@ const logow=require('../assets/Images/LogoW.png')
         <View style={{ flexDirection: 'row', justifyContent: 'flex-end', marginTop: 38 }}>
           <Image source={logow} style={{ width: 100, height: 100 }} />
           <View style={{ flexDirection: 'column' }}>
-            <Text style={{ color: 'white', fontSize: 18 }}>Welcome to</Text>
+            <Text style={{ color: 'white', fontSize: 18 }}>Welcome tooooo</Text>
             <Text style={{ color: 'white', fontSize: 40 }}>SPAZIO</Text>
             <Text style={{ color: 'white', fontSize: 18 }}>Workin' Spaces</Text>
           </View>
