@@ -1,25 +1,42 @@
 import React, { Component } from 'react';
-import { Picker, FlatList, StyleSheet, Text, View, Button, TextInput, Image, TouchableHighlight } from 'react-native';
+import { Picker, FlatList, StyleSheet, Text, View, TextInput, Image, TouchableHighlight } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Dropdown } from 'react-native-material-dropdown';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { ButtonGroup, Input } from 'react-native-elements';
+import { Input } from 'react-native-elements';
+import Availability from '../Components/Availability.js';
+import Facilities from '../Components/Facilities.js';
+import Equipment from '../Components/Equipment.js';
+import SpaceTermsAndRules from '../Components/SpaceTermsAndRules.js'
+import { ButtonGroup, Button, InputGroup, FormControl } from 'react-bootstrap';
+import DepoistBank from '../Components/DepositBank.js'
 
 class AddSpace extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            field: 2
+            field: ' '
 
         }
-        this.updateField = this.updateField.bind(this)
+        this.updateFieldB = this.updateFieldB.bind(this);
+        this.updateFieldS = this.updateFieldS.bind(this);
+        this.updateFieldA = this.updateFieldA.bind(this);
     }
 
-    updateField(field) {
-        this.setState({ field })
+    updateFieldB() {
+        this.setState({ field: 'Beauty' });
+
     }
 
+
+    updateFieldS() {
+        this.setState({ field: 'Sport' });
+    }
+
+    updateFieldA() {
+        this.setState({ field: 'Art' });
+    }
 
 
     render() {
@@ -31,7 +48,7 @@ class AddSpace extends Component {
             <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1, paddingTop: '7%' }} >
 
                 <View style={{ width: '10%', alignSelf: 'flex-end', paddingRight: '5%' }}>
-                    <Button title='X' />
+                    <Button variant="link">X</Button>
                 </View>
 
                 <View style={{ paddingLeft: '10%' }}>
@@ -40,7 +57,7 @@ class AddSpace extends Component {
                     </View>
                 </View>
 
-                <View style={{ paddingLeft: '4%', paddingTop: '10%' }}>
+                <View style={{ paddingLeft: '4%', paddingTop: '10%', paddingBottom: 20 }}>
 
                     <View style={{ flexDirection: 'column', width: '60%' }}>
                         <Input
@@ -48,35 +65,78 @@ class AddSpace extends Component {
                             leftIcon={{ name: 'chevron-right' }}
                         />
 
-                        <View style={{ flexDirection: 'row', paddingTop: 20, alignItems:'center' }}>
-                            <Text style={{ color: 'white', fontSize: 22 }}>Field:  </Text>
-                            <ButtonGroup
-                                onPress={this.updateField}
-                                field={field}
-                                buttonStyle={{ height: 100 }}
-                                buttons={buttons}
-                                containerStyle={{ width: 250, backgroundColor: 'transparent' }} />
-                        </View>
-                        <View style={{ flexDirection: 'row', alignItems:'center', paddingTop:20}}>
-                            <Text style={{ color: 'white', fontSize: 22 }}>Calendar: </Text>
-                            <Icon 
-                            size='40'
-                                name='calendar' />
+                        <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 20, alignItems: 'center' }}>
+                            <Text style={{ color: 'white', fontSize: 22 }}>Adress:  </Text>
+                            <View style={{ flexDirection: 'column' }}>
+                                <Input
+                                    containerStyle={{ width: 200 }}
+                                    label="City"
+                                    placeholder='Example: Tel Aviv'
+                                    leftIcon={{ name: 'chevron-right' }}
+                                />
+                                <Input
+                                    containerStyle={{ width: 200 }}
+                                    label="Street"
+                                    placeholder='Example: Alenbi'
+                                    leftIcon={{ name: 'chevron-right' }}
+                                />
+                                <Input
+                                    containerStyle={{ width: 85 }}
+                                    label="Number"
+                                    leftIcon={{ name: 'chevron-right' }}
+                                />
+                            </View>
                         </View>
 
-                        <View style={{ flexDirection: 'row', paddingTop: '10%' }}>
-                        <Icon color='#595959'
-                            size='30'
-                                name='photo' />
-                        
-                            <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}>Add space picture</Text>
+                        <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 20, alignItems: 'center' }}>
+                            <Text style={{ color: 'white', fontSize: 22 }}>Field:  </Text>
+
+                            <ButtonGroup aria-label="Basic example">
+                                <Button variant="outline-dark" onClick={this.updateFieldB}>Beauty</Button>
+                                <Button variant="outline-dark" onClick={this.updateFieldS}>Sport</Button>
+                                <Button variant="outline-dark" onClick={this.updateFieldA}>Art</Button>
+                            </ButtonGroup>
+
                         </View>
+
+                        <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 7, alignItems: 'center' }}>
+                            <Text style={{ color: 'white', fontSize: 22 }}>Price:  </Text>
+                            <Input
+                                placeholder='00.00 NIS/hr'
+                                leftIcon={{ name: 'chevron-right' }}
+                            />
+                        </View>
+
+                        <View style={{ width: 350, alignItems: 'stretch', paddingTop: 20 }}>
+
+                            <Availability />
+
+                            <Facilities />
+
+                            <Equipment />
+
+                            <View style={{ flexDirection: 'row', paddingTop: '3%', paddingBottom:'3%' }}>
+                                <Icon color='#595959'
+                                    size='30'
+                                    name='photo' />
+
+                                <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}>Add space pictures</Text>
+                            </View>
+
+                            <SpaceTermsAndRules />
+
+                            <DepoistBank/>
+
+
+                        </View>
+
+
 
                     </View>
 
-
-
                 </View>
+
+                <Button variant="success">Continue</Button>
 
             </LinearGradient>
         );

@@ -3,7 +3,8 @@ import { StyleSheet, Text, View, Button, TextInput  } from 'react-native';
 import Home from './pages/Home.js';
 import Register from './pages/Register.js';
 import AddSpace from './pages/AddSpace.js';
-import AccordionExample from './pages/test.js';
+import Test1 from './pages/Test1.js'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function App() {
 

@@ -38,7 +38,7 @@ export default function Home() {
           <Image source={logow} style={{ width: 100, height: 100 }} />
           <View style={{ flexDirection: "column" }}>
             <Text style={{ color: "white", fontSize: 18 }}>
-              Welcome new change aviv o
+              
             </Text>
             <Text style={{ color: "white", fontSize: 40 }}>SPAZIO</Text>
             <Text style={{ color: "white", fontSize: 18 }}>Workin' Spaces</Text>
