@@ -6,8 +6,101 @@ import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 
-export default function Register() {
+class Register extends Component {
 
+
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+          Email: "",
+          Password:"",
+          FirstName:"",
+          LastName:"",
+          PhoneNumber:"",
+          addedUsers:[]
+        };
+      }
+    
+      componentDidMount() {
+        this.apiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/spazioUser/";
+        
+      }
+
+    EmailChanged = (event) => {
+        this.setState({ Email: event })
+    }
+    PasswordChanged = (event) => {
+        this.setState({ Password: event })
+    }
+    FirstNameChanged = (event) => {
+        this.setState({ FirstName: event })
+    }
+    LastNameChanged = (event) => {
+        this.setState({ LastName: event })
+    }
+    PhoneNumberChanged = (event) => {
+        this.setState({ PhoneNumber: event })
+    }
+
+
+    Fullname = (a,b)=>
+    {
+        return (a + "  " + b);
+    }
+    
+
+    
+    addUser = () => {
+
+        
+        const user = {
+            Email:this.state.Email,
+            Password: this.state.Password,
+            UserName: this.Fullname(this.state.FirstName,this.state.LastName),
+            PhoneNumber : this.state.PhoneNumber
+            
+    
+        };
+        console.log("im user", user.Name)
+    
+    
+        fetch(this.apiUrl, {
+            method: 'POST',
+            body: JSON.stringify(user),
+            headers: new Headers({
+                'Content-type': 'application/json; charset=UTF-8',
+    
+                //very important to add the 'charset=UTF-8'!!!!
+            })
+        })
+            .then(res => {
+                console.log('res=', res);
+                return res.json()
+            })
+            .then(
+                (result) => {
+                    console.log("fetch POST= ", result);
+    
+                },
+                (error) => {
+                    console.log("err post=", error);
+                });
+    
+        this.setState({
+    
+            addedUsers: this.state.addedUsers.concat(user),
+    
+            // adjustedUsers:this.state.adjustedUsers.filter(m=>m.id!==item.id)
+    
+        })
+        for(var i=0;i<this.state.addedUsers.length;i++)
+        {
+            console.log(this.state.addedUsers[i]);
+        }
+    }
+
+    render(){
     const logow1 = require('../assets/Images/LogoW.png');
     const personI = require('../assets/Images/PersonIcon.png');
     const spaceI = require('../assets/Images/SpaceIcon.png');
@@ -25,7 +118,7 @@ export default function Register() {
                     <View style={{ paddingLeft: '5%', flexDirection: 'row' }}>
                         <View style={{ flexDirection: 'column', width: '60%' }}>
                             <Text style={{ color: 'white', fontSize: 22 }}>Email adress:</Text>
-                            <Input placeholder=" emailllllll@adress.com"
+                            <Input onChangeText={this.EmailChanged} placeholder=" emailllllll@adress.com"
                                 leftIcon={
                                     <Icon
                                         name='envelope'
@@ -34,7 +127,7 @@ export default function Register() {
                                     />
                                 } />
                             <Text style={{ color: 'white', fontSize: 22 }}>Password:</Text>
-                            <Input placeholder=" Password"
+                            <Input onChangeText={this.PasswordChanged} placeholder=" Password"
                                 leftIcon={
                                     <Icon
                                         name='lock'
@@ -43,7 +136,7 @@ export default function Register() {
                                     />
                                 } />
                             <Text style={{ color: 'white', fontSize: 22 }}>Phone number:</Text>
-                            <Input placeholder=" 05X-XXXX-XXX"
+                            <Input onChangeText={this.PhoneNumberChanged} placeholder=" 05X-XXXX-XXX"
                                 leftIcon={
                                     <Icon
                                         name='phone'
@@ -53,9 +146,9 @@ export default function Register() {
                                 } />
 
                             <Text style={{ color: 'white', fontSize: 22 }}>First name:</Text>
-                            <Input placeholder="" />
+                            <Input onChangeText={this.FirstNameChanged} placeholder="" />
                             <Text style={{ color: 'white', fontSize: 22 }}>Last name:</Text>
-                            <Input />
+                            <Input onChangeText={this.LastNameChanged} />
 
 
                             <View style={{ flexDirection: 'row', paddingTop: 10 }}>
@@ -89,7 +182,7 @@ export default function Register() {
 
                     </View>
                     <View style={{paddingTop:15, height:30}}>
-                        <Button color='#056b60' title='Register' />
+                        <Button color='#056b60' title='Register' onPress={this.addUser} />
                     </View>
 
                 </View>
@@ -97,6 +190,10 @@ export default function Register() {
         </LinearGradient>
     );
 }
+}
+export default Register;
+
+
 
 const styles = StyleSheet.create({
     container: {
