@@ -12,8 +12,93 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import User from '../Classes/User';
 
-export default function Home() {
+
+
+class Home extends Component {
+
+  FetchGetUsers = () => {
+    fetch(this.apiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            Users: result.map(
+              item =>
+                new User(
+                  item.Email,
+                  item.Password,
+                  item.UserName,
+                  item.PhoneNumber,
+                )
+            )
+          });
+        },
+        error => {}
+      );
+  };
+
+  componentDidMount() {
+    this.apiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/spazioUser/";
+    this.FetchGetUsers();
+  }
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Users: [],
+      Email: "",
+      Password:""
+    };
+  }
+
+  EmailChanged = (event) => {
+    this.setState({ Email: event })
+}
+  PasswordChanged = (event) => {
+  this.setState({ Password: event })
+}
+
+checkUser = () => {
+  let tempArr = this.state.Users;
+    console.log(this.state.Users);
+    console.log(this.state.Email);
+    console.log(this.state.Password);
+   
+    let userExsists=false;
+    
+for(var i=0;i<this.state.Users.length ;i++)
+{
+  
+  if(this.state.Email == this.state.Users[i].email)
+  {
+    console.log(this.state.Email);
+    console.log(this.state.Users[i].name);
+    userExsists=true;
+    if(this.state.Password == this.state.Users[i].password)
+    {
+      console.log("You Are logged in");
+      alert("You Are logged in");
+    }
+      else {
+        console.log("The password is incorrect")
+        alert("The password is incorrect");
+      }
+  }
+}
+if(userExsists==false)
+    console.log("Invalid user")
+  }
+
+  render() {
+
+
   const logow = require("../assets/Images/LogoW.png");
 
   return (
@@ -48,7 +133,7 @@ export default function Home() {
         <View style={{ marginTop: 30 }}>
           <View style={{ marginLeft: 3 }}>
             <Text style={{ color: "white" }}>Email adress:</Text>
-            <TextInput
+            <TextInput onChangeText={this.EmailChanged} 
               style={{
                 height: 20,
                 width: "90%",
@@ -58,7 +143,7 @@ export default function Home() {
               }}
             />
             <Text style={{ color: "white" }}>Password:</Text>
-            <TextInput
+            <TextInput secureTextEntry={true} onChangeText={this.PasswordChanged}
               style={{
                 height: 20,
                 width: "90%",
@@ -77,7 +162,7 @@ export default function Home() {
                 <Button title="Register" color="#056b60"></Button>
               </View>
               <View>
-                <Button title="Log In" color="#056b60"></Button>
+                <Button title="Log In" color="#056b60" onPress={this.checkUser}></Button>
               </View>
             </View>
             <View style={{ marginTop: 5 }}>
@@ -89,6 +174,9 @@ export default function Home() {
     </LinearGradient>
   );
 }
+}
+export default Home;
+
 
 const styles = StyleSheet.create({
   container: {
