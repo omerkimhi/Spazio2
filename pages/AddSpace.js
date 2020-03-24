@@ -41,23 +41,15 @@ class AddSpace extends Component {
 
     render() {
 
-        const buttons = ['טיפוח ויופי', 'ספורט', 'אומנות']
+
         const { field } = this.state
 
         return (
             <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1, paddingTop: '7%' }} >
 
-                <View style={{ width: '10%', alignSelf: 'flex-end', paddingRight: '5%' }}>
-                    <Button variant="link">X</Button>
-                </View>
 
-                <View style={{ paddingLeft: '10%' }}>
-                    <View style={{ width: '80%' }}>
-                        <Text style={{ fontSize: 18, color: '#fff', fontWeight: '500' }}>Add your spaces</Text>
-                    </View>
-                </View>
 
-                <View style={{ paddingLeft: '4%', paddingTop: '10%', paddingBottom: 20 }}>
+                <View style={{ paddingLeft: '4%', paddingBottom: 20 }}>
 
                     <View style={{ flexDirection: 'column', width: '60%' }}>
                         <Input
@@ -107,6 +99,14 @@ class AddSpace extends Component {
                             />
                         </View>
 
+                        <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 7, alignItems: 'center' }}>
+                            <Text style={{ color: 'white', fontSize: 22 }}>Capacity:  </Text>
+                            <Input
+                                placeholder=' 0'
+                                leftIcon={{ name: 'people' }}
+                            />
+                        </View>
+
                         <View style={{ width: 350, alignItems: 'stretch', paddingTop: 20 }}>
 
                             <Availability />
@@ -115,7 +115,7 @@ class AddSpace extends Component {
 
                             <Equipment />
 
-                            <View style={{ flexDirection: 'row', paddingTop: '3%', paddingBottom:'3%' }}>
+                            <View style={{ flexDirection: 'row', paddingTop: '3%', paddingBottom: '3%' }}>
                                 <Icon color='#595959'
                                     size='30'
                                     name='photo' />
@@ -125,7 +125,7 @@ class AddSpace extends Component {
 
                             <SpaceTermsAndRules />
 
-                            <DepoistBank/>
+                            <DepoistBank />
 
 
                         </View>
@@ -136,7 +136,6 @@ class AddSpace extends Component {
 
                 </View>
 
-                <Button variant="success">Continue</Button>
 
             </LinearGradient>
         );

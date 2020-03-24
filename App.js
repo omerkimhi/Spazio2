@@ -5,6 +5,7 @@ import Register from './pages/Register.js';
 import AddSpace from './pages/AddSpace.js';
 import Test1 from './pages/Test1.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import AddSpaceModal from './Components/AddSpaceModal.js'
 
 export default function App() {
 
@@ -13,7 +14,7 @@ export default function App() {
   return (
     <View style={styles.container}>
        
-      <Home/>
+      <Register/>
       
     </View>
   );
