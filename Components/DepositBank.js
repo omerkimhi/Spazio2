@@ -9,7 +9,7 @@ class DepositBank extends Component {
     render() {
         return (
             <View>
-                <Accordion defaultActiveKey="0">
+                <Accordion>
                     <Card style={{ backgroundColor: 'transparent', borderColor: 'transparent' }}>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
                             <Text style={{ color: 'white', fontSize: 22 }}>Deposit Bank Account: </Text>

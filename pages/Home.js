@@ -13,6 +13,9 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import User from '../Classes/User';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Test1 from './Test1.js';
 
 
 
@@ -39,7 +42,7 @@ class Home extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
 
@@ -54,126 +57,129 @@ class Home extends Component {
     this.state = {
       Users: [],
       Email: "",
-      Password:""
+      Password: ""
     };
   }
 
   EmailChanged = (event) => {
     this.setState({ Email: event })
-}
+  }
   PasswordChanged = (event) => {
-  this.setState({ Password: event })
-}
+    this.setState({ Password: event })
+  }
 
-checkUser = () => {
-  let tempArr = this.state.Users;
+  checkUser = () => {
+    let tempArr = this.state.Users;
     console.log(this.state.Users);
     console.log(this.state.Email);
     console.log(this.state.Password);
-   
-    let userExsists=false;
-    
-for(var i=0;i<this.state.Users.length ;i++)
-{
-  
-  if(this.state.Email == this.state.Users[i].email)
-  {
-    console.log(this.state.Email);
-    console.log(this.state.Users[i].name);
-    userExsists=true;
-    if(this.state.Password == this.state.Users[i].password)
-    {
-      console.log("You Are logged in");
-      alert("You Are logged in");
-    }
-      else {
-        console.log("The password is incorrect")
-        alert("The password is incorrect");
+
+    let userExsists = false;
+
+    for (var i = 0; i < this.state.Users.length; i++) {
+
+      if (this.state.Email == this.state.Users[i].email) {
+        console.log(this.state.Email);
+        console.log(this.state.Users[i].name);
+        userExsists = true;
+        if (this.state.Password == this.state.Users[i].password) {
+          console.log("You Are logged in");
+          alert("You Are logged in");
+        }
+        else {
+          console.log("The password is incorrect")
+          alert("The password is incorrect");
+        }
       }
+    }
+    if (userExsists == false)
+      console.log("Invalid user")
   }
-}
-if(userExsists==false)
-    console.log("Invalid user")
-  }
+
+
+
+
+
 
   render() {
 
 
-  const logow = require("../assets/Images/LogoW.png");
+    const logow = require("../assets/Images/LogoW.png");
 
-  return (
-    <LinearGradient colors={["#056b60", "white"]} style={{ flex: 1 }}>
-      <View style={{ flexDirection: "row-reverse", marginRight: 5 }}>
-        <Button
-          title="X"
-          color="transparent"
-          onPress={() => {
-            alert("search");
-          }}
-        ></Button>
-      </View>
-      <View style={styles.container}>
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "flex-end",
-            marginTop: 38
-          }}
-        >
-          <Image source={logow} style={{ width: 100, height: 100 }} />
-          <View style={{ flexDirection: "column" }}>
-            <Text style={{ color: "white", fontSize: 18 }}>
-              
-            </Text>
-            <Text style={{ color: "white", fontSize: 40 }}>SPAZIO</Text>
-            <Text style={{ color: "white", fontSize: 18 }}>Workin' Spaces</Text>
-          </View>
+    return (
+      <LinearGradient colors={["#056b60", "white"]} style={{ flex: 1 }}>
+        <View style={{ flexDirection: "row-reverse", marginRight: 5 }}>
+          <Button
+            title="X"
+            color="transparent"
+            onPress={() => {
+              alert("search");
+            }}
+          ></Button>
         </View>
+        <View style={styles.container}>
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "flex-end",
+              marginTop: 38
+            }}
+          >
+            <Image source={logow} style={{ width: 100, height: 100 }} />
+            <View style={{ flexDirection: "column" }}>
+              <Text style={{ color: "white", fontSize: 18 }}>
 
-        <View style={{ marginTop: 30 }}>
-          <View style={{ marginLeft: 3 }}>
-            <Text style={{ color: "white" }}>Email adress:</Text>
-            <TextInput onChangeText={this.EmailChanged} 
-              style={{
-                height: 20,
-                width: "90%",
-                borderColor: "#fff",
-                borderBottomWidth: 1,
-                marginBottom: 10
-              }}
-            />
-            <Text style={{ color: "white" }}>Password:</Text>
-            <TextInput secureTextEntry={true} onChangeText={this.PasswordChanged}
-              style={{
-                height: 20,
-                width: "90%",
-                borderColor: "#fff",
-                borderBottomWidth: 1,
-                marginBottom: 10
-              }}
-            />
-          </View>
-
-          <View style={{ flexDirection: "column", marginHorizontal: 3 }}>
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <View>
-                <Button title="Register" color="#056b60"></Button>
-              </View>
-              <View>
-                <Button title="Log In" color="#056b60" onPress={this.checkUser}></Button>
-              </View>
-            </View>
-            <View style={{ marginTop: 5 }}>
-              <Button title="Continue with FaceBook" color="#3b5998"></Button>
+              </Text>
+              <Text style={{ color: "white", fontSize: 40 }}>SPAZIO</Text>
+              <Text style={{ color: "white", fontSize: 18 }}>Workin' Spaces</Text>
             </View>
           </View>
+
+          <View style={{ marginTop: 30 }}>
+            <View style={{ marginLeft: 3 }}>
+              <Text style={{ color: "white" }}>Email adress:</Text>
+              <TextInput onChangeText={this.EmailChanged}
+                style={{
+                  height: 20,
+                  width: "90%",
+                  borderColor: "#fff",
+                  borderBottomWidth: 1,
+                  marginBottom: 10
+                }}
+              />
+              <Text style={{ color: "white" }}>Password:</Text>
+              <TextInput secureTextEntry={true} onChangeText={this.PasswordChanged}
+                style={{
+                  height: 20,
+                  width: "90%",
+                  borderColor: "#fff",
+                  borderBottomWidth: 1,
+                  marginBottom: 10
+                }}
+              />
+            </View>
+
+            <View style={{ flexDirection: "column", marginHorizontal: 3 }}>
+              <View
+                style={{ flexDirection: "row", justifyContent: "space-between" }}
+              >
+                <View>
+                  
+                  <Button title="Register" color="#056b60"  ></Button>
+                </View>
+                <View>
+                  <Button title="Log In" color="#056b60" onPress={this.checkUser}></Button>
+                </View>
+              </View>
+              <View style={{ marginTop: 5 }}>
+                <Button title="Continue with FaceBook" color="#3b5998"></Button>
+              </View>
+            </View>
+          </View>
         </View>
-      </View>
-    </LinearGradient>
-  );
-}
+      </LinearGradient>
+    );
+  }
 }
 export default Home;
 

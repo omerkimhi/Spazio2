@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Button, TextInput  } from 'react-native';
 import Home from './pages/Home.js';

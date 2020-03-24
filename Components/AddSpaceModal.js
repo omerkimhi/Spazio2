@@ -20,17 +20,19 @@ export default function AddSpaceModal() {
 
     return (
         <>
-            <View style={{ alignItems: 'center'}} onClick={handleShow}>
+            <View style={{ alignItems: 'center' }} onClick={handleShow}>
                 <Image source={spaceI} style={{ width: 70, height: 70 }} />
                 <Text style={{ color: '#595959', fontSize: 18 }}>Add a space</Text>
             </View>
-            
+
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Add Space</Modal.Title>
                 </Modal.Header>
-                <Modal.Body><AddSpace /></Modal.Body>
+                <Modal.Body>
+                    <AddSpace />
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
