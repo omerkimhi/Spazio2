@@ -1,3 +1,10 @@
+import 'react-native-gesture-handler';
+
+
+import { NavigationContainer } from '@react-navigation/native';
+
+import { createStackNavigator } from '@react-navigation/stack';
+
 import React, { Component } from "react";
 import {
     StyleSheet,
@@ -8,25 +15,24 @@ import {
     TouchableHighlight
 } from "react-native";
 import { Button } from 'react-bootstrap';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 
-function HomeScreen() {
+
+
+function RegisterScreen() {
     return (
-        <View>
-            <Button title="Register" color="#056b60" onPress={() => navigation.navigate('Register')} ></Button>
-            
-        </View>
+        <Register />
     );
 }
+const Stack = createStackNavigator();
+
 export default function Test1() {
 
-    const Stack = createStackNavigator();
+
     return (
-        <NavigationContainer>
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        
+        <Stack.Navigator>
+            <Stack.Screen name="Home" component={HomeScreen} />
+            <Stack.Screen name="Register" component={RegisterScreen} />
+        </Stack.Navigator>
     )
 }

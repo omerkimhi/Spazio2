@@ -16,6 +16,7 @@ import User from '../Classes/User';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Test1 from './Test1.js';
+import Register from "./Register";
 
 
 
@@ -97,26 +98,16 @@ class Home extends Component {
   }
 
 
-
-
-
+  
 
   render() {
-
+    const Stack = createStackNavigator();
 
     const logow = require("../assets/Images/LogoW.png");
 
     return (
       <LinearGradient colors={["#056b60", "white"]} style={{ flex: 1 }}>
-        <View style={{ flexDirection: "row-reverse", marginRight: 5 }}>
-          <Button
-            title="X"
-            color="transparent"
-            onPress={() => {
-              alert("search");
-            }}
-          ></Button>
-        </View>
+        
         <View style={styles.container}>
           <View
             style={{
@@ -165,7 +156,11 @@ class Home extends Component {
               >
                 <View>
                   
-                  <Button title="Register" color="#056b60"  ></Button>
+                    
+                 
+                  <Button title="Register"  color="#056b60" onPress={() => {this.props.navigation.navigate('Register')}}></Button> 
+
+
                 </View>
                 <View>
                   <Button title="Log In" color="#056b60" onPress={this.checkUser}></Button>
@@ -187,7 +182,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding:60,
 
-    alignItems: "center"
+    
   }
 });
