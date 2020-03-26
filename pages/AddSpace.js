@@ -11,6 +11,8 @@ import SpaceTermsAndRules from '../Components/SpaceTermsAndRules.js'
 import { ButtonGroup, Button, InputGroup, FormControl } from 'react-bootstrap';
 import DepoistBank from '../Components/DepositBank.js'
 
+
+
 class AddSpace extends Component {
     constructor(props) {
         super(props);

@@ -42,8 +42,8 @@ const HomeStack = createStackNavigator();
 function HomeStackScreen() {
   return (
     <HomeStack.Navigator>
-      <HomeStack.Screen options={{headerShown:false}} name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Register" options={{headerStyle:{backgroundColor:'#056b60'}}} component={RegisterScreen} />
+      <HomeStack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
+      <HomeStack.Screen name="Register" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={RegisterScreen} />
     </HomeStack.Navigator>
   );
 }
@@ -59,9 +59,10 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Tab.Navigator>
+          <Tab.Screen name="Search" component={SearchScreen} />
           <Tab.Screen name="Log in" component={HomeStackScreen} />
-          
-          <Tab.Screen name="Search"  component={SearchScreen} />
+
+
         </Tab.Navigator>
         {/* <Register/> */}
 
