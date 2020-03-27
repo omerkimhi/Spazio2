@@ -3,6 +3,7 @@ import { Picker, ScrollView, StyleSheet, Text, View, TextInput, Image, Touchable
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { DropdownButton, Dropdown, ButtonGroup, Button, Accordion, Card } from 'react-bootstrap'
+import Address from '../Components/Address';
 
 
 
@@ -15,7 +16,7 @@ class SearchPage extends Component {
 
         return (
             <View style={{ flex: 1, paddingTop: 25, backgroundColor: '#fff' }}>
-               
+
                 <View style={{ alignItems: 'center' }}>
                     <View style={{ flexDirection: "row" }}>
                         <Text style={{ color: '#056b60', fontSize: 25, paddingBottom: 10 }}>Field </Text>
@@ -37,7 +38,22 @@ class SearchPage extends Component {
                             <ButtonGroup aria-label="Basic example">
 
                                 <Button variant="secondary">Near me</Button>
-                                <Button variant="secondary">By address</Button>
+                                <Accordion defaultActiveKey="0">
+                                    <Card style={{ backgroundColor: '#b2b2b2', borderColor: 'transparent' }}>
+                                        <Accordion.Toggle as={Card.Header} eventKey="0">
+                                            <Text style={{ color: 'white', fontSize: 22 }}>Address </Text>
+                                            <Icon color='#595959'
+                                                size='50'
+                                                name='caret-down' />
+                                        </Accordion.Toggle>
+                                        <Accordion.Collapse eventKey="0">
+                                            <Card.Body style={{ backgroundColor: '#fff'}}>
+                                                <Address />
+                                            </Card.Body>
+                                        </Accordion.Collapse>
+                                    </Card>
+
+                                </Accordion>
 
                             </ButtonGroup>
                         </View>
@@ -46,7 +62,7 @@ class SearchPage extends Component {
                             <Text style={{ color: '#056b60', fontSize: 25, paddingBottom: 2, alignSelf: 'center' }}>Time </Text>
                             <ButtonGroup aria-label="Basic example">
                                 <Button variant="secondary">Today</Button>
-                                <Button variant="secondary">By date</Button>
+                                <Button variant="secondary">By Date</Button>
 
                             </ButtonGroup>
 
