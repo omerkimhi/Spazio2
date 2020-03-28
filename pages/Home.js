@@ -10,7 +10,7 @@ import {
 } from "react-native";
 
 import { LinearGradient } from "expo-linear-gradient";
-import { Input } from "react-native-elements";
+import { Input, SocialIcon } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 import User from '../Classes/User';
 import { NavigationContainer } from '@react-navigation/native';
@@ -98,7 +98,7 @@ class Home extends Component {
   }
 
 
-  
+
 
   render() {
     const Stack = createStackNavigator();
@@ -107,7 +107,7 @@ class Home extends Component {
 
     return (
       <LinearGradient colors={["#056b60", "white"]} style={{ flex: 1 }}>
-        
+
         <View style={styles.container}>
           <View
             style={{
@@ -155,10 +155,10 @@ class Home extends Component {
                 style={{ flexDirection: "row", justifyContent: "space-between" }}
               >
                 <View>
-                  
-                    
-                 
-                  <Button title="Register"  color="#056b60" onPress={() => {this.props.navigation.navigate('Register')}}></Button> 
+
+
+
+                  <Button title="Register" color="#056b60" onPress={() => { this.props.navigation.navigate('Register') }}></Button>
 
 
                 </View>
@@ -167,7 +167,11 @@ class Home extends Component {
                 </View>
               </View>
               <View style={{ marginTop: 5 }}>
-                <Button title="Continue with FaceBook" color="#3b5998"></Button>
+                <SocialIcon
+                  title='Sign In With Facebook'
+                  button
+                  type='facebook'
+                />
               </View>
             </View>
           </View>
@@ -182,8 +186,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding:60,
+    padding: 60,
 
-    
+
   }
 });

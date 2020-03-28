@@ -73,7 +73,7 @@ class Address extends Component {
 
                             minimumCharactersCount={2}
                             highlightText
-                            Autocomplete data={this.Cityarray} valueExtractor={item => item} 
+                            Autocomplete data={{cities}.cities} valueExtractor={item => item} 
                             //here you put the array of the cities
                             rightContent
                             rightTextExtractor={item => item.properties}
