@@ -22,6 +22,16 @@ import Register from "./Register";
 
 class Home extends Component {
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Users: [],
+      Email: "",
+      Password: ""
+    };
+  }
+
   FetchGetUsers = () => {
     fetch(this.apiUrl, {
       method: "GET"
@@ -35,10 +45,12 @@ class Home extends Component {
             Users: result.map(
               item =>
                 new User(
+                  item.UserId,
                   item.Email,
                   item.Password,
                   item.UserName,
                   item.PhoneNumber,
+                  item.photo 
                 )
             )
           });
@@ -48,19 +60,11 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.apiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/spazioUser/";
+    this.apiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
     this.FetchGetUsers();
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      Users: [],
-      Email: "",
-      Password: ""
-    };
-  }
+  
 
   EmailChanged = (event) => {
     this.setState({ Email: event })
