@@ -73,7 +73,7 @@ class SearchPage extends Component {
   }
 
   FetchGetUsers = () => {
-    fetch(this.apiUrl, {
+    fetch(this.UsersApiUrl, {
       method: "GET"
     })
       .then(res => {
@@ -85,12 +85,12 @@ class SearchPage extends Component {
             Users: result.map(
               item =>
                 new User(
-                  item.UserId,
+                  item.Id,
                   item.Email,
                   item.Password,
                   item.UserName,
                   item.PhoneNumber,
-                  item.photo
+                  item.Photo
                 )
             )
           });
@@ -111,7 +111,7 @@ class SearchPage extends Component {
             Spaces: result.map(
               item =>
                 new Space(
-                  item.SpaceId,
+                  item.Id,
                   item.Name,
                   item.Field,
                   item.Price,
@@ -121,11 +121,11 @@ class SearchPage extends Component {
                   item.Capabillity,
                   item.Bank,
                   item.Branch,
-                  item.Image1,
-                  item.Image2,
-                  item.Image3,
-                  item.Image4,
-                  item.Image5,
+                  item.Imageurl1,
+                  item.Imageurl2,
+                  item.Imageurl3,
+                  item.Imageurl4,
+                  item.Imageurl5,
                   item.AccountNumber,
                   item.UserEmail
                 )
@@ -222,15 +222,28 @@ class SearchPage extends Component {
         result => {
           this.setState({
             FieldsEquipment: result.map(
-              item => new FieldEq(item.Id, item.Field, item.name)
+              item => new FieldEq(item.Id, item.Field, item.Name)
             )
           });
         },
         error => {}
       );
   };
+showData=() => {
+console.log(this.state.Users);
+console.log(this.state.Spaces);
+console.log(this.state.EquipmentList);
+console.log(this.state.Facilities);
+console.log(this.state.Availablities);
+console.log(this.state.FieldsEquipment);
 
+
+
+
+}
   render() {
+    
+
     return (
       <ScrollView style={{ flex: 1 }}>
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
@@ -376,7 +389,7 @@ class SearchPage extends Component {
                     inputContainerStyle={{color:'#056b60', borderColor:'#056b60', borderWidth:2, borderRadius:10}}
                     placeholder="Example: Sport"/> */}
             <View>
-              <Button block style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={this.showData}  style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>
