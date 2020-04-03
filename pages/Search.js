@@ -359,16 +359,16 @@ class SearchPage extends Component {
             }}
           >
             <Text style={{ fontSize: 17, color: "#056b60", fontWeight: "600" }}>
-              257{" "}
+              {this.state.Spaces.length}{" "}
             </Text>
             <Text style={{ fontSize: 17, fontWeight: "400" }}>
               Spaces registered{" "}
             </Text>
             <Text style={{ fontSize: 17, color: "#056b60", fontWeight: "600" }}>
-              2,376{" "}
+              {this.state.Users.length}{" "}
             </Text>
             <Text style={{ fontSize: 17, fontWeight: "400" }}>
-              Tenants registered
+              Users registered
             </Text>
           </View>
 
@@ -378,7 +378,7 @@ class SearchPage extends Component {
               Last added spaces
             </Text>
             <View style={{ paddingBottom: 10 }}>
-              <SpacesCarousel />
+              <SpacesCarousel Spaces={this.state.Spaces} />
             </View>
           </View>
         </View>
@@ -386,5 +386,6 @@ class SearchPage extends Component {
     );
   }
 }
+
 
 export default SearchPage;

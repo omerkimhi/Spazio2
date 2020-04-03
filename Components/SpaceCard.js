@@ -64,10 +64,9 @@ class SpaceCard extends Component {
 
                     <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                         <View >
-                            <Text style={{ fontSize: 15, color: "#696969" }}>1.2km From your loaction</Text>
+                            <Text style={{ fontSize: 15, color: "#696969" }}>Allenby 25, Tel-Aviv</Text>
                         </View>
                         <View style={{ flexDirection: "row" }}>
-                            <Text style={{ fontSize: 15, color: "#696969" }}> (183) </Text>
                             <Image source={starIconPNG} style={{ width: 17, height: 17, alignSelf: 'center' }} />
                             <Text style={{ fontSize: 15, color: "#696969" }}> 4.2</Text>
                         </View>

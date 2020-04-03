@@ -17,9 +17,32 @@ class SpacesCarousel extends Component {
 
 
     return (
-      <View style={{ height: 200, width: 350 }}>
+      // {
+      //   this.props.itemsInShop.map((item) =>
+      //     <CCItem key={item.id} item={item} addToCart={this.props.addToCart} inCart={false} />
+      //   )
+      // }
+      < View style={{ height: 200, width: 350 }}>
+
         <Carousel>
-          <Carousel.Item>
+          {this.props.Spaces.map((item) =>
+
+            <Carousel.Item>
+              <img
+                className="d-block w-100"
+                height='200'
+                src={item.image1}
+                alt="couldnt load photo"
+              />
+              <Carousel.Caption>
+                <h3>{item.name}</h3>
+
+              </Carousel.Caption>
+            </Carousel.Item>
+
+          )}
+          {/* <Carousel.Item>
+            
             <img
               className="d-block w-100"
               height='200'
@@ -57,9 +80,9 @@ class SpacesCarousel extends Component {
               <h3>third slide label</h3>
               <p>third slide description</p>
             </Carousel.Caption>
-          </Carousel.Item>
+          </Carousel.Item> */}
         </Carousel>
-      </View>
+      </View >
     );
   }
 }
