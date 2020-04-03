@@ -70,6 +70,7 @@ class SearchPage extends Component {
     this.FetchGetFacilities();
     this.FetchGetAvailabilities();
     this.FetchGetFieldsEq();
+    
   }
 
   FetchGetUsers = () => {
@@ -231,6 +232,8 @@ class SearchPage extends Component {
   };
 
   render() {
+    
+
     return (
       <ScrollView style={{ flex: 1 }}>
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
