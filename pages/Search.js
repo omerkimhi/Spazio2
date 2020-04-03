@@ -36,6 +36,9 @@ import Facility from "../Classes/Facility";
 import Availabillity from "../Classes/Availabillity";
 import FieldEq from "../Classes/FieldEq";
 
+
+
+
 class SearchPage extends Component {
   constructor(props) {
     super(props);
@@ -70,7 +73,7 @@ class SearchPage extends Component {
     this.FetchGetFacilities();
     this.FetchGetAvailabilities();
     this.FetchGetFieldsEq();
-    
+
   }
 
   FetchGetUsers = () => {
@@ -96,7 +99,7 @@ class SearchPage extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
   FetchGetSpaces = () => {
@@ -133,7 +136,7 @@ class SearchPage extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
   FetchGetEquipment = () => {
@@ -151,7 +154,7 @@ class SearchPage extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
   FetchGetFacilities = () => {
@@ -180,7 +183,7 @@ class SearchPage extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
   FetchGetAvailabilities = () => {
@@ -209,7 +212,7 @@ class SearchPage extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
   FetchGetFieldsEq = () => {
@@ -227,26 +230,26 @@ class SearchPage extends Component {
             )
           });
         },
-        error => {}
+        error => { }
       );
   };
-showData=() => {
-console.log(this.state.Users);
-console.log(this.state.Spaces);
-console.log(this.state.EquipmentList);
-console.log(this.state.Facilities);
-console.log(this.state.Availablities);
-console.log(this.state.FieldsEquipment);
+  showData = () => {
+    console.log(this.state.Users);
+    console.log(this.state.Spaces);
+    console.log(this.state.EquipmentList);
+    console.log(this.state.Facilities);
+    console.log(this.state.Availablities);
+    console.log(this.state.FieldsEquipment);
 
 
 
 
-}
+  }
   render() {
-    
+
 
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView style={{ flex: 1 }} >
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
           <View></View>
 
@@ -296,58 +299,6 @@ console.log(this.state.FieldsEquipment);
 
                 <AddressModal />
 
-                {/* <ButtonToolbar>
-                                    <ToggleButtonGroup type="radio" aria-label="Basic example" name="options" defaultValue={1}>
-                                        <ToggleButton variant="outline-secondary" value={1}>Near me</ToggleButton>
-                                        <ToggleButton variant="outline-secondary" value={2}>asd</ToggleButton>
-
-                                                    */}
-                {
-                  //if we'll decide do use accordion!!!
-                  /* <Accordion> 
-                                                <Card style={{ backgroundColor: '#b2b2b2', borderColor: 'transparent' }}>
-                                                    <Accordion.Toggle as={Card.Header} eventKey="0">
-                                                        <Text style={{ color: 'white' }}>Address </Text>
-                                                        <Icon color='#595959'
-                                                            size='50'
-                                                            name='caret-down' />
-                                                    </Accordion.Toggle>
-                                                    <Accordion.Collapse eventKey="0">
-                                                        <Card.Body style={{ backgroundColor: '#fff' }}>
-                                                            <Address />
-                                                        </Card.Body>
-                                                    </Accordion.Collapse>
-                                                </Card>
-
-                                            </Accordion> */
-                }
-
-                {/* 
-                                    </ToggleButtonGroup>
-                                </ButtonToolbar> */}
-
-                {/* 
-                            <ButtonGroup aria-label="Basic example">
-
-                                <Button variant="secondary">Near me</Button>
-                                <Accordion defaultActiveKey="0">
-                                    <Card style={{ backgroundColor: '#b2b2b2', borderColor: 'transparent' }}>
-                                        <Accordion.Toggle as={Card.Header} eventKey="0">
-                                            <Text style={{ color: 'white', fontSize: 22 }}>Address </Text>
-                                            <Icon color='#595959'
-                                                size='50'
-                                                name='caret-down' />
-                                        </Accordion.Toggle>
-                                        <Accordion.Collapse eventKey="0">
-                                            <Card.Body style={{ backgroundColor: '#fff' }}>
-                                                <Address />
-                                            </Card.Body>
-                                        </Accordion.Collapse>
-                                    </Card>
-
-                                </Accordion>
-
-                            </ButtonGroup> */}
               </View>
 
               <View style={{ alignItems: "center" }}>
@@ -390,7 +341,10 @@ console.log(this.state.FieldsEquipment);
                     inputContainerStyle={{color:'#056b60', borderColor:'#056b60', borderWidth:2, borderRadius:10}}
                     placeholder="Example: Sport"/> */}
             <View>
-              <Button onClick={this.showData}  style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
+                Show data
+              </Button>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed') }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>

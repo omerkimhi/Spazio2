@@ -15,6 +15,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AddSpaceModal from './Components/AddSpaceModal.js';
 import Search from './pages/Search.js';
 import SpaceCard from './Components/SpaceCard';
+import SearchFeed from './pages/SearchFeed';
+
 
 function HomeScreen({ navigation }) {
   return (
@@ -37,6 +39,15 @@ function RegisterScreen() {
   );
 }
 
+function SearchFeedScreen() {
+
+  return (
+
+    <SearchFeed />
+
+  );
+}
+
 const HomeStack = createStackNavigator();
 
 function HomeStackScreen() {
@@ -54,7 +65,7 @@ function SearchStackScreen() {
   return (
     <SearchStack.Navigator>
       <SearchStack.Screen options={{ headerShown: false }} name="Search" component={SearchScreen} />
-      <SearchStack.Screen name="Register" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={RegisterScreen} />
+      <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={SearchFeedScreen} />
     </SearchStack.Navigator>
   );
 }
@@ -71,7 +82,7 @@ export default function App() {
     <View style={styles.container}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Search" component={SearchScreen} />
+          <Tab.Screen name="Search" component={SearchStackScreen} />
           <Tab.Screen name="Log in" component={HomeStackScreen} />
 
 
