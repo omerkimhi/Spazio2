@@ -24,6 +24,7 @@
     "expo-linear-gradient": "~8.0.0",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
+    "react-async-script-loader": "^0.3.0",
     "react-bootstrap": "^1.0.0-beta.17",
     "react-country-region-selector": "^2.0.0",
     "react-dom": "~16.9.0",
@@ -43,7 +44,8 @@
     "react-native-smart-carousel": "^1.1.0",
     "react-native-tab-view": "^2.13.0",
     "react-native-web": "~0.11.7",
-    "react-native-xml2js": "^1.0.3"
+    "react-native-xml2js": "^1.0.3",
+    "react-places-autocomplete": "^7.2.1"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.0.0",

@@ -342,7 +342,7 @@ class SearchPage extends Component {
               <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
                 Show data
               </Button>
-              <Button onClick={() => { this.props.navigation.navigate('SearchFeed') }} style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', {spaces:this.state.Spaces}) }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>

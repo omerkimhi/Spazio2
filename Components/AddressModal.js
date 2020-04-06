@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { ToggleButton, ToggleButtonGroup, ButtonToolbar, Button, Modal } from 'react-bootstrap';
 import Address from './Address.js';
+import LocationSearchInput from './GoogleAddress.js';
+
 
 function MyVerticallyCenteredModal(props) {
     return (
