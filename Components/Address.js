@@ -8,8 +8,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 import { cities } from '../files/cities2';
 
+
 class Address extends Component {
-  
+
 
 
     constructor(props) {
@@ -41,17 +42,6 @@ class Address extends Component {
         const { scrollToInput, onDropdownClose, onDropdownShow } = this.props;
 
 
-        // let newCitiesArray=[];
-        // fetch('https://raw.githubusercontent.com/GabMic/israeli-cities-and-streets-list/master/israeli_street_and_cities_names.json')
-        //     .then(response => response.json())
-        //     .then((data) =>{console.log(data.streets);
-        //         data.streets.map((city)=>{
-        //             let temp=city["city_name"];
-        //         this.setState({Cityarray:this.state.Cityarray.concat([temp])})   
-        //         });})
-
-        //     .catch(error => console.log(error));
-
         return (
             <View style={styles.autocompletesContainer}>
 
@@ -73,7 +63,7 @@ class Address extends Component {
 
                             minimumCharactersCount={2}
                             highlightText
-                            Autocomplete data={{cities}.cities} valueExtractor={item => item} 
+                            Autocomplete data={{ cities }.cities} valueExtractor={item => item}
                             //here you put the array of the cities
                             rightContent
                             rightTextExtractor={item => item.properties}
@@ -98,7 +88,7 @@ class Address extends Component {
 
                             minimumCharactersCount={2}
                             highlightText
-                            Autocomplete data={this.Cityarray} valueExtractor={item => item} 
+                            Autocomplete data={this.Cityarray} valueExtractor={item => item}
                             //here you put the array of the streets
                             rightContent
                             rightTextExtractor={item => item.properties}

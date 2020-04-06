@@ -9,6 +9,7 @@ class Availability extends Component {
     render() {
         return (
             <View>
+                
                 <Accordion>
                     <Card style={{ backgroundColor: 'transparent', borderColor: 'transparent' }}>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
