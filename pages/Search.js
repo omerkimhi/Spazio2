@@ -29,6 +29,7 @@ import Address from "../Components/Address";
 import SpacesCarousel from "../Components/SpacesCarousel.js";
 import AddressModal from "../Components/AddressModal.js";
 
+//import classes
 import User from "../Classes/User";
 import Space from "../Classes/Space";
 import Equipment from "../Classes/Equipment";
@@ -240,11 +241,8 @@ class SearchPage extends Component {
     console.log(this.state.Facilities);
     console.log(this.state.Availablities);
     console.log(this.state.FieldsEquipment);
-
-
-
-
   }
+  
   render() {
 
 

@@ -15,8 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AddSpaceModal from './Components/AddSpaceModal.js';
 import Search from './pages/Search.js';
 import SpaceCard from './Components/SpaceCard';
-import SearchFeed from './pages/SearchFeed';
-
+import Navigator from './pages/Navigator';
 
 function HomeScreen({ navigation }) {
   return (
@@ -73,30 +72,22 @@ function SearchStackScreen() {
 
 const Tab = createMaterialTopTabNavigator();
 
+class App extends Component {
+constructor(props) {
+    super(props);
 
-export default function App() {
+    this.state = {
+     
+    };
+  }
 
-
+  render() {
 
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Search" component={SearchStackScreen} />
-          <Tab.Screen name="Log in" component={HomeStackScreen} />
-
-
-        </Tab.Navigator>
-
-
-
-
-      </NavigationContainer>
-
-
-    </View >
-  );
+    <Navigator></Navigator>
+  )};
 }
+export default App;
 
 const styles = StyleSheet.create({
   container: {
