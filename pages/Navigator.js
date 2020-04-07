@@ -78,7 +78,7 @@ function SearchStackScreen() {
 }
 
 
-const Tab = createMaterialTopTabNavigator();
+const Tab = createMaterialToexpTabNavigator();
 
 class App extends Component {
     constructor(props) {
