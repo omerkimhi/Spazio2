@@ -78,9 +78,9 @@ function SearchStackScreen() {
 }
 
 
-const Tab = createMaterialToexpTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
-class App extends Component {
+class Navigator extends Component {
     constructor(props) {
         super(props);
     
@@ -303,7 +303,7 @@ class App extends Component {
     </View >
   )};
 }
-export default App;
+export default Navigator;
 
 const styles = StyleSheet.create({
   container: {
