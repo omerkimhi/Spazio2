@@ -18,8 +18,17 @@ class Register extends Component {
             FirstName: "",
             LastName: "",
             PhoneNumber: "",
-            addedUsers: []
+            addedUsers: [],
+            spaceName: "",
+
         };
+    }
+
+    getSpaceData = (data) => {
+        this.setState({
+            spaceName: data
+        }, () => { console.log(this.state.spaceName) })
+
     }
 
     componentDidMount() {
@@ -107,7 +116,7 @@ class Register extends Component {
             <ScrollView>
                 <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
                     <View style={{ paddingTop: 35 }}>
-                       
+                    <Button color='#056b60' title='test' onPress={()=>{console.log(this.state.spaceName)}} />
                         {/* <View style={{ alignSelf: 'center', alignItems: 'center', height: '20%', flexDirection: 'row' }}>
                             <Image source={logow1} style={{ width: 50, height: 50 }} />
                             <Text style={{ color: 'white', fontSize: 20, alignSelf: 'center' }}>SPAZIO</Text>
@@ -173,7 +182,7 @@ class Register extends Component {
                                     <Image source={personI} style={{ width: 70, height: 70 }} />
                                     <Text style={{ color: '#595959', marginBottom: 20, fontSize: 18 }}>Add a photo</Text>
 
-                                    <AddSpaceModal />
+                                    <AddSpaceModal sendSpaceData={this.getSpaceData} />
 
                                 </View>
 

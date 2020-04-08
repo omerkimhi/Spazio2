@@ -16,6 +16,7 @@ import AddSpaceModal from '../Components/AddSpaceModal.js';
 import Search from '../pages/Search.js';
 import SpaceCard from '../Components/SpaceCard';
 import SearchFeed from '../pages/SearchFeed';
+import SpacePage from '../pages/SpacePage';
 
 //import classes
 import User from "../Classes/User";
@@ -46,11 +47,20 @@ function RegisterScreen() {
   );
 }
 
-function SearchFeedScreen() {
+function SearchFeedScreen({ navigation }) {
 
   return (
 
-    <SearchFeed />
+    <SearchFeed navigation={navigation} />
+
+  );
+}
+
+function SpacePageScreen() {
+
+  return (
+
+    <SpacePage />
 
   );
 }
@@ -73,6 +83,7 @@ function SearchStackScreen() {
     <SearchStack.Navigator>
       <SearchStack.Screen options={{ headerShown: false }} name="Search" component={SearchScreen} />
       <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={SearchFeedScreen} />
+      <SearchStack.Screen name="SpacePage" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={SpacePageScreen} />
     </SearchStack.Navigator>
   );
 }
@@ -80,230 +91,231 @@ function SearchStackScreen() {
 
 const Tab = createMaterialTopTabNavigator();
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          Users: [],
-          Spaces: [],
-          EquipmentList: [],
-          Facilities: [],
-          Availablities: [],
-          FieldsEquipment: []
-        };
-      }
-    
-      componentDidMount() {
-        this.UsersApiUrl =
-          "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
-        this.SpacesApiUrl =
-          "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Space/";
-        this.EquipmentApiUrl =
-          "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Equipment/";
-        this.FacilitiesApiUrl =
-          "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Facilities/";
-        this.AvailabilitiesApiUrl =
-          "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Availability/";
-        this.FieldEqApiUrl =
-          "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/FieldEq/";
-    
-        this.FetchGetUsers();
-        this.FetchGetSpaces();
-        this.FetchGetEquipment();
-        this.FetchGetFacilities();
-        this.FetchGetAvailabilities();
-        this.FetchGetFieldsEq();
-    
-      }
-    
-      FetchGetUsers = () => {
-        fetch(this.UsersApiUrl, {
-          method: "GET"
-        })
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                Users: result.map(
-                  item =>
-                    new User(
-                      item.Id,
-                      item.Email,
-                      item.Password,
-                      item.UserName,
-                      item.PhoneNumber,
-                      item.Photo
-                    )
+class Navigator extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Users: [],
+      Spaces: [],
+      EquipmentList: [],
+      Facilities: [],
+      Availablities: [],
+      FieldsEquipment: []
+    };
+  }
+
+  componentDidMount() {
+    this.UsersApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
+    this.SpacesApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Space/";
+    this.EquipmentApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Equipment/";
+    this.FacilitiesApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Facilities/";
+    this.AvailabilitiesApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Availability/";
+    this.FieldEqApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/FieldEq/";
+
+    this.FetchGetUsers();
+    this.FetchGetSpaces();
+    this.FetchGetEquipment();
+    this.FetchGetFacilities();
+    this.FetchGetAvailabilities();
+    this.FetchGetFieldsEq();
+
+  }
+
+  FetchGetUsers = () => {
+    fetch(this.UsersApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            Users: result.map(
+              item =>
+                new User(
+                  item.Id,
+                  item.Email,
+                  item.Password,
+                  item.UserName,
+                  item.PhoneNumber,
+                  item.Photo
                 )
-              });
-            },
-            error => { }
-          );
-      };
-      FetchGetSpaces = () => {
-        fetch(this.SpacesApiUrl, {
-          method: "GET"
-        })
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                Spaces: result.map(
-                  item =>
-                    new Space(
-                      item.Id,
-                      item.Name,
-                      item.Field,
-                      item.Price,
-                      item.City,
-                      item.Street,
-                      item.Number,
-                      item.Capabillity,
-                      item.Bank,
-                      item.Branch,
-                      item.Imageurl1,
-                      item.Imageurl2,
-                      item.Imageurl3,
-                      item.Imageurl4,
-                      item.Imageurl5,
-                      item.AccountNumber,
-                      item.UserEmail
-                    )
+            )
+          });
+        },
+        error => { }
+      );
+  };
+  FetchGetSpaces = () => {
+    fetch(this.SpacesApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            Spaces: result.map(
+              item =>
+                new Space(
+                  item.Id,
+                  item.Name,
+                  item.Field,
+                  item.Price,
+                  item.City,
+                  item.Street,
+                  item.Number,
+                  item.Capabillity,
+                  item.Bank,
+                  item.Branch,
+                  item.Imageurl1,
+                  item.Imageurl2,
+                  item.Imageurl3,
+                  item.Imageurl4,
+                  item.Imageurl5,
+                  item.AccountNumber,
+                  item.UserEmail
                 )
-              });
-            },
-            error => { }
-          );
-      };
-      FetchGetEquipment = () => {
-        fetch(this.EquipmentApiUrl, {
-          method: "GET"
-        })
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                EquipmentList: result.map(
-                  item => new Equipment(item.Id, item.Name, item.SpaceId)
+            )
+          });
+        },
+        error => { }
+      );
+  };
+  FetchGetEquipment = () => {
+    fetch(this.EquipmentApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            EquipmentList: result.map(
+              item => new Equipment(item.Id, item.Name, item.SpaceId)
+            )
+          });
+        },
+        error => { }
+      );
+  };
+  FetchGetFacilities = () => {
+    fetch(this.FacilitiesApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            Facilities: result.map(
+              item =>
+                new Facility(
+                  item.FacilityId,
+                  item.Parking,
+                  item.Toilet,
+                  item.Kitchen,
+                  item.Intercom,
+                  item.Accessible,
+                  item.AirCondition,
+                  item.Wifi,
+                  item.SpaceId
                 )
-              });
-            },
-            error => { }
-          );
-      };
-      FetchGetFacilities = () => {
-        fetch(this.FacilitiesApiUrl, {
-          method: "GET"
-        })
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                Facilities: result.map(
-                  item =>
-                    new Facility(
-                      item.FacilityId,
-                      item.Parking,
-                      item.Toilet,
-                      item.Kitchen,
-                      item.Intercom,
-                      item.Accessible,
-                      item.AirCondition,
-                      item.Wifi,
-                      item.SpaceId
-                    )
+            )
+          });
+        },
+        error => { }
+      );
+  };
+  FetchGetAvailabilities = () => {
+    fetch(this.AvailabilitiesApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            Availablities: result.map(
+              item =>
+                new Availabillity(
+                  item.Id,
+                  item.Sunday,
+                  item.Monday,
+                  item.Tuesday,
+                  item.Wednesday,
+                  item.Thursday,
+                  item.Friday,
+                  item.Saturday,
+                  item.SpaceId
                 )
-              });
-            },
-            error => { }
-          );
-      };
-      FetchGetAvailabilities = () => {
-        fetch(this.AvailabilitiesApiUrl, {
-          method: "GET"
-        })
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                Availablities: result.map(
-                  item =>
-                    new Availabillity(
-                      item.Id,
-                      item.Sunday,
-                      item.Monday,
-                      item.Tuesday,
-                      item.Wednesday,
-                      item.Thursday,
-                      item.Friday,
-                      item.Saturday,
-                      item.SpaceId
-                    )
-                )
-              });
-            },
-            error => { }
-          );
-      };
-      FetchGetFieldsEq = () => {
-        fetch(this.FieldEqApiUrl, {
-          method: "GET"
-        })
-          .then(res => {
-            return res.json();
-          })
-          .then(
-            result => {
-              this.setState({
-                FieldsEquipment: result.map(
-                  item => new FieldEq(item.Id, item.Field, item.Name)
-                )
-              });
-            },
-            error => { }
-          );
-      };
-      showData = () => {
-        console.log(this.state.Users);
-        console.log(this.state.Spaces);
-        console.log(this.state.EquipmentList);
-        console.log(this.state.Facilities);
-        console.log(this.state.Availablities);
-        console.log(this.state.FieldsEquipment);
-      }
+            )
+          });
+        },
+        error => { }
+      );
+  };
+  FetchGetFieldsEq = () => {
+    fetch(this.FieldEqApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            FieldsEquipment: result.map(
+              item => new FieldEq(item.Id, item.Field, item.Name)
+            )
+          });
+        },
+        error => { }
+      );
+  };
+  showData = () => {
+    console.log(this.state.Users);
+    console.log(this.state.Spaces);
+    console.log(this.state.EquipmentList);
+    console.log(this.state.Facilities);
+    console.log(this.state.Availablities);
+    console.log(this.state.FieldsEquipment);
+  }
   render() {
 
-  return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <Tab.Navigator>
-          <Tab.Screen name="Search" component={SearchStackScreen} />
-          <Tab.Screen name="Log in" component={HomeStackScreen} />
+    return (
+      <View style={styles.container}>
+        <NavigationContainer>
+          <Tab.Navigator>
+            <Tab.Screen name="Search" component={SearchStackScreen} />
+            <Tab.Screen name="Log in" component={HomeStackScreen} />
 
 
-        </Tab.Navigator>
+          </Tab.Navigator>
 
 
 
 
-      </NavigationContainer>
+        </NavigationContainer>
 
 
-    </View >
-  )};
+      </View >
+    )
+  };
 }
-export default App;
+export default Navigator;
 
 const styles = StyleSheet.create({
   container: {

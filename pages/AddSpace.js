@@ -18,7 +18,15 @@ class AddSpace extends Component {
         super(props);
 
         this.state = {
-            field: ' '
+            field: "",
+            spaceName: "",
+            spaceAddressCity: "",
+            spaceAddressStreet: "",
+            spaceAddressNumber: "",
+            spacePrice: 0,
+            spaceCapacity: 0,
+
+
 
         }
         this.updateFieldB = this.updateFieldB.bind(this);
@@ -41,6 +49,7 @@ class AddSpace extends Component {
     }
 
 
+
     render() {
 
 
@@ -55,6 +64,7 @@ class AddSpace extends Component {
 
                     <View style={{ flexDirection: 'column', width: '60%' }}>
                         <Input
+                            onChangeText={(value) => { this.setState({ spaceName: value }); console.log("space name: ", this.state.spaceName) }}
                             placeholder='Space name'
                             leftIcon={{ name: 'chevron-right' }}
                         />
@@ -63,18 +73,21 @@ class AddSpace extends Component {
                             <Text style={{ color: 'white', fontSize: 22 }}>Adress:  </Text>
                             <View style={{ flexDirection: 'column' }}>
                                 <Input
+                                    onChangeText={(value) => { this.setState({ spaceAddressCity: value }) }}
                                     containerStyle={{ width: 200 }}
                                     label="City"
                                     placeholder='Example: Tel Aviv'
                                     leftIcon={{ name: 'chevron-right' }}
                                 />
                                 <Input
+                                    onChangeText={(value) => { this.setState({ spaceAddressStreet: value }) }}
                                     containerStyle={{ width: 200 }}
                                     label="Street"
                                     placeholder='Example: Alenbi'
                                     leftIcon={{ name: 'chevron-right' }}
                                 />
                                 <Input
+                                    onChangeText={(value) => { this.setState({ spaceAddressNumber: value }) }}
                                     containerStyle={{ width: 85 }}
                                     label="Number"
                                     leftIcon={{ name: 'chevron-right' }}
@@ -96,6 +109,7 @@ class AddSpace extends Component {
                         <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 7, alignItems: 'center' }}>
                             <Text style={{ color: 'white', fontSize: 22 }}>Price:  </Text>
                             <Input
+                                onChangeText={(value) => { this.setState({ spacePrice: value }) }}
                                 placeholder='00.00 NIS/hr'
                                 leftIcon={{ name: 'chevron-right' }}
                             />
@@ -104,11 +118,14 @@ class AddSpace extends Component {
                         <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 7, alignItems: 'center' }}>
                             <Text style={{ color: 'white', fontSize: 22 }}>Capacity:  </Text>
                             <Input
+                                onChangeText={(value) => { this.setState({ spaceCapacity: value }) }}
                                 placeholder=' 0'
                                 leftIcon={{ name: 'people' }}
                             />
                         </View>
-
+                        <Button onClick={() => {
+                           this.props.handleSendData(this.state.spaceName)
+                        }}>test</Button>
                         <View style={{ width: 350, alignItems: 'stretch', paddingTop: 20 }}>
 
                             <Availability />
@@ -139,7 +156,7 @@ class AddSpace extends Component {
                 </View>
 
 
-            </LinearGradient>
+            </LinearGradient >
         );
     }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, ScrollView, TextInput, Button } from 'react-native';
+import { View, Text, ScrollView, TextInput, Button, TouchableHighlight } from 'react-native';
 
 import SpaceCard from '../Components/SpaceCard';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -24,10 +24,10 @@ class SearchFeed extends Component {
 
 
     render() {
-
+        console.log(this.props.Places)
         return (
             <ScrollView style={{ flex: 1 }} >
-
+                {/* <View><Text>{this.props.Places[0]}</Text></View> */}
                 <View style={{ backgroundColor: "#fff", }}>
 
                     <View style={{ padding: '3%', width: "100%", height: '30%', flexDirection: 'row' }}>
@@ -68,7 +68,10 @@ class SearchFeed extends Component {
 
                     <View style={{ alignItems: 'center' }}>
 
-                        <SpaceCard />
+                        <SpaceCard navigation={this.props.navigation} />
+
+
+
                         <SpaceCard />
                         <SpaceCard />
                         <SpaceCard />

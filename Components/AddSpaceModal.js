@@ -12,10 +12,15 @@ import AddSpace from '../pages/AddSpace.js'
 
 export default function AddSpaceModal() {
 
+    const handleSendData = (data) => {
+        this.props.sendSpaceData(data);
+    }
+
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
     const spaceI = require('../assets/Images/SpaceIcon.png');
 
     return (
@@ -31,7 +36,7 @@ export default function AddSpaceModal() {
                     <Modal.Title>Add Space</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddSpace />
+                    <AddSpace handleSendData={handleSendData} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
