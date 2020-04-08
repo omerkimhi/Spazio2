@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+/* import React, { Component } from 'react'
 import PlacesAutocomplete, {
     geocodeByAddress,
     getLatLng,
@@ -85,4 +85,4 @@ class LocationSearchInput extends React.Component {
     }
 }
 
-export default scriptLoader('https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places')(LocationSearchInput);
+export default scriptLoader('https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places')(LocationSearchInput); */
