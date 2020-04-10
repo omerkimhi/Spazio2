@@ -7,15 +7,25 @@ import { barbershop } from "../assets/Images/barbershop.jpg";
 import { artstudio } from "../assets/Images/artstudio.jpg";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import Space from "../Classes/Space";
+import Availabillity from "../Classes/Availabillity";
 
 class SpaceCard extends Component {
     constructor(props) {
         super(props);
     }
-
+    getHour() {
+        let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()];
+        for (let j = 0; j < this.props.Availablities.length; j++) {
+            if (this.props.Availablities[j].spaceId == this.props.space.spaceId - 5) {
+                return this.props.Availablities[j][weekday];
+            }
+        }
+    }
 
 
     render() {
+
 
         const starIcon = require("../assets/Images/starIcon.jpg");
         const starIconPNG = require("../assets/Images/starIconPNG.png");
@@ -23,6 +33,14 @@ class SpaceCard extends Component {
         const PilatesStudio = require("../assets/Images/pilates studio.jpg");
         const barbershop = require("../assets/Images/barbershop.jpg");
         const artstudio = require("../assets/Images/artstudio.jpg");
+
+        let pics = [];
+        let i;
+        for (i = 1; i < 6; i++) {
+            if (this.props.space["image" + i] != "")
+                pics.push({ "id": i, "imagePath": this.props.space["image" + i] });
+        }
+
 
         const datacarousel = [
             {
@@ -45,9 +63,12 @@ class SpaceCard extends Component {
         ];
 
 
+
+
         return (
 
-            <ScrollView style={{ width: '90%', backgroundColor: "#fff", flex: 1, borderColor: "#056b60", borderWidth: 2, marginBottom: "10%" }} ref={(c) => { this.parentScrollView = c; }}>
+            < ScrollView style={{ width: '90%', backgroundColor: "#fff", flex: 1, borderColor: "#056b60", borderWidth: 2, marginBottom: "10%" }
+            } ref={(c) => { this.parentScrollView = c; }}>
 
                 <View style={{ height: "60%", }}>
                     <Carousel
@@ -57,7 +78,7 @@ class SpaceCard extends Component {
                         navigation={true}
                         navigationColor={"#056b60"}
                         parentScrollViewRef={this.parentScrollView}
-                        data={datacarousel}
+                        data={pics}
                     />
 
                 </View>
@@ -66,7 +87,7 @@ class SpaceCard extends Component {
 
                         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
                             <View >
-                                <Text style={{ fontSize: 15, color: "#696969" }}>Allenby 25, Tel-Aviv</Text>
+                                <Text style={{ fontSize: 15, color: "#696969" }}>{this.props.space.street} {this.props.space.number}, {this.props.space.city}</Text>
                             </View>
                             <View style={{ flexDirection: "row" }}>
                                 <Image source={starIconPNG} style={{ width: 17, height: 17, alignSelf: 'center' }} />
@@ -75,19 +96,19 @@ class SpaceCard extends Component {
                         </View>
 
                         <View style={{ alignSelf: 'center', paddingTop: '3%', paddingBottom: '3%', paddingHorizontal: '5%', borderBottomColor: "#056b60", borderBottomWidth: 2 }}>
-                            <Text style={{ fontSize: 22, fontWeight: '500' }}>Zaki's Pilates Studio</Text>
+                            <Text style={{ fontSize: 22, fontWeight: '500' }}>{this.props.space.name}</Text>
                         </View>
 
                         <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: '3%' }}>
-                            <View><Text style={{ fontSize: 15, fontWeight: '500' }}>85 NIS/hr</Text></View>
+                            <View><Text style={{ fontSize: 15, fontWeight: '500' }}>{this.props.space.price} NIS/hr</Text></View>
 
-                            <View><Text style={{ fontSize: 15, fontWeight: '500' }}>16:00-21:00</Text></View>
+                            <View><Text style={{ fontSize: 15, fontWeight: '500' }}>{this.getHour()}</Text></View>
 
                             <View style={{ flexDirection: 'row' }}>
                                 <Icon style={{ alignSelf: 'center' }}
                                     size={15} color="black"
                                     name='users' />
-                                <Text style={{ fontSize: 15, fontWeight: '500' }}> 15</Text>
+                                <Text style={{ fontSize: 15, fontWeight: '500' }}> {this.props.space.capabillity}</Text>
                             </View>
                         </View>
                     </View>

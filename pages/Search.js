@@ -55,6 +55,7 @@ class SearchPage extends Component {
   }
 
   componentDidMount() {
+
     this.UsersApiUrl =
       "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
     this.SpacesApiUrl =
@@ -241,10 +242,13 @@ class SearchPage extends Component {
     console.log(this.state.Facilities);
     console.log(this.state.Availablities);
     console.log(this.state.FieldsEquipment);
+
   }
-  
+
+
   render() {
 
+    let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()]
 
     return (
       <ScrollView style={{ flex: 1 }} >
@@ -342,7 +346,7 @@ class SearchPage extends Component {
               <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
                 Show data
               </Button>
-              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', {spaces:this.state.Spaces}) }} style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { spacesTest: this.state.Spaces }) }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>
@@ -376,7 +380,7 @@ class SearchPage extends Component {
               Last added spaces
             </Text>
             <View style={{ paddingBottom: 10 }}>
-              <SpacesCarousel Spaces={this.state.Spaces} />
+              <SpacesCarousel navigation={this.props.navigation} Spaces={this.state.Spaces} />
             </View>
           </View>
         </View>

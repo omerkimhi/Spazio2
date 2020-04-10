@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableHighlight } from 'react-native';
 import { Carousel } from 'react-bootstrap';
 
 
@@ -28,59 +28,25 @@ class SpacesCarousel extends Component {
           {this.props.Spaces.map((item) =>
 
             <Carousel.Item>
-              <img
-                className="d-block w-100"
-                height='200'
-                src={item.image1}
-                alt="couldnt load photo"
-              />
+              <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage') }} underlayColor="white">
+                <View>
+                  <img
+                    className="d-block w-100"
+                    height='200'
+                    src={item.image1}
+                    alt="couldnt load photo"
+                  />
+                </View>
+              </TouchableHighlight>
               <Carousel.Caption>
+
                 <h3>{item.name}</h3>
 
               </Carousel.Caption>
             </Carousel.Item>
 
           )}
-          {/* <Carousel.Item>
-            
-            <img
-              className="d-block w-100"
-              height='200'
-              src={PilatesStudio}
-              alt="Third slide"
-            />
 
-            <Carousel.Caption>
-              <h3>first slide label</h3>
-              <p>first slide description</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              height='200'
-              src={barbershop}
-              alt="Third slide"
-            />
-
-            <Carousel.Caption>
-              <h3>second slide label</h3>
-              <p>second slide description</p>
-            </Carousel.Caption>
-          </Carousel.Item>
-          <Carousel.Item>
-            <img
-              className="d-block w-100"
-              height='200'
-              src={artstudio}
-              alt="Third slide"
-            />
-
-            <Carousel.Caption>
-              <h3>third slide label</h3>
-              <p>third slide description</p>
-            </Carousel.Caption>
-          </Carousel.Item> */}
         </Carousel>
       </View >
     );

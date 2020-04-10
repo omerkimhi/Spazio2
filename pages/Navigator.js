@@ -26,68 +26,9 @@ import Facility from "../Classes/Facility";
 import Availabillity from "../Classes/Availabillity";
 import FieldEq from "../Classes/FieldEq";
 
-function HomeScreen({ navigation }) {
-  return (
-    <Home navigation={navigation} />
-  );
-}
-
-function SearchScreen({ navigation }) {
-  return (
-    <Search navigation={navigation} />
-  );
-}
-
-
-function RegisterScreen() {
-  return (
-
-    <Register />
-
-  );
-}
-
-function SearchFeedScreen({ navigation }) {
-
-  return (
-
-    <SearchFeed navigation={navigation} />
-
-  );
-}
-
-function SpacePageScreen() {
-
-  return (
-
-    <SpacePage />
-
-  );
-}
-
 const HomeStack = createStackNavigator();
 
-function HomeStackScreen() {
-  return (
-    <HomeStack.Navigator>
-      <HomeStack.Screen options={{ headerShown: false }} name="Home" component={HomeScreen} />
-      <HomeStack.Screen name="Register" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={RegisterScreen} />
-    </HomeStack.Navigator>
-  );
-}
-
 const SearchStack = createStackNavigator();
-
-function SearchStackScreen() {
-  return (
-    <SearchStack.Navigator>
-      <SearchStack.Screen options={{ headerShown: false }} name="Search" component={SearchScreen} />
-      <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={SearchFeedScreen} />
-      <SearchStack.Screen name="SpacePage" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={SpacePageScreen} />
-    </SearchStack.Navigator>
-  );
-}
-
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -103,6 +44,9 @@ class Navigator extends Component {
       Availablities: [],
       FieldsEquipment: []
     };
+    this.FetchGetUsers = this.FetchGetUsers.bind(this);
+    this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
+
   }
 
   componentDidMount() {
@@ -293,14 +237,74 @@ class Navigator extends Component {
     console.log(this.state.Availablities);
     console.log(this.state.FieldsEquipment);
   }
+
+  HomeScreen = ({ navigation }) => {
+    return (
+      <Home navigation={navigation} />
+    );
+  }
+
+  SearchScreen = ({ navigation }) => {
+    this.FetchGetSpaces();
+    return (
+      <Search spacesTest={this.state.Spaces} navigation={navigation} />
+    );
+  }
+
+
+  RegisterScreen = () => {
+    return (
+
+      <Register />
+
+    );
+  }
+
+  SearchFeedScreen = ({ route, navigation }) => {
+
+    return (
+
+      <SearchFeed navigation={navigation} route={route} />
+
+    );
+  }
+
+  SpacePageScreen = ({ route, navigation }) => {
+
+    return (
+
+      <SpacePage navigation={navigation} route={route} />
+
+    );
+  }
+
+  HomeStackScreen = () => {
+    return (
+      <HomeStack.Navigator>
+        <HomeStack.Screen options={{ headerShown: false }} name="Home" component={this.HomeScreen} />
+        <HomeStack.Screen name="Register" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.RegisterScreen} />
+      </HomeStack.Navigator>
+    );
+  }
+
+  SearchStackScreen = () => {
+    return (
+      <SearchStack.Navigator>
+        <SearchStack.Screen options={{ headerShown: false }} name="Search" component={this.SearchScreen} />
+        <SearchStack.Screen test="test" name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SearchFeedScreen} />
+        <SearchStack.Screen name="SpacePage" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SpacePageScreen} />
+      </SearchStack.Navigator>
+    );
+  }
+
   render() {
 
     return (
       <View style={styles.container}>
         <NavigationContainer>
           <Tab.Navigator>
-            <Tab.Screen name="Search" component={SearchStackScreen} />
-            <Tab.Screen name="Log in" component={HomeStackScreen} />
+            <Tab.Screen name="Search" component={this.SearchStackScreen} />
+            <Tab.Screen name="Log in" component={this.HomeStackScreen} />
 
 
           </Tab.Navigator>

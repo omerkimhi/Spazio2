@@ -17,17 +17,96 @@ class SearchFeed extends Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            Spaces: [],
+            Availablities: [],
         };
     }
 
+    componentDidMount() {
+        this.SpacesApiUrl =
+            "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Space/";
+        this.AvailabilitiesApiUrl =
+            "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Availability/";
 
+        this.FetchGetSpaces();
+        this.FetchGetAvailabilities();
+    }
+
+    FetchGetSpaces = () => {
+        fetch(this.SpacesApiUrl, {
+            method: "GET"
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then(
+                result => {
+                    this.setState({
+                        Spaces: result.map(
+                            item =>
+                                new Space(
+                                    item.Id,
+                                    item.Name,
+                                    item.Field,
+                                    item.Price,
+                                    item.City,
+                                    item.Street,
+                                    item.Number,
+                                    item.Capabillity,
+                                    item.Bank,
+                                    item.Branch,
+                                    item.Imageurl1,
+                                    item.Imageurl2,
+                                    item.Imageurl3,
+                                    item.Imageurl4,
+                                    item.Imageurl5,
+                                    item.AccountNumber,
+                                    item.UserEmail
+                                )
+                        )
+                    });
+                },
+                error => { }
+            );
+    };
+
+    FetchGetAvailabilities = () => {
+        fetch(this.AvailabilitiesApiUrl, {
+            method: "GET"
+        })
+            .then(res => {
+                return res.json();
+            })
+            .then(
+                result => {
+                    this.setState({
+                        Availablities: result.map(
+                            item =>
+                                new Availabillity(
+                                    item.Id,
+                                    item.Sunday,
+                                    item.Monday,
+                                    item.Tuesday,
+                                    item.Wednesday,
+                                    item.Thursday,
+                                    item.Friday,
+                                    item.Saturday,
+                                    item.SpaceId
+                                )
+                        )
+                    });
+                },
+                error => { }
+            );
+    };
 
     render() {
-        console.log(this.props.Places)
+        const { spacesTest } = this.props.route.params;
+        console.log(spacesTest);
+        
         return (
             <ScrollView style={{ flex: 1 }} >
-                {/* <View><Text>{this.props.Places[0]}</Text></View> */}
+                
                 <View style={{ backgroundColor: "#fff", }}>
 
                     <View style={{ padding: '3%', width: "100%", height: '30%', flexDirection: 'row' }}>
@@ -68,15 +147,12 @@ class SearchFeed extends Component {
 
                     <View style={{ alignItems: 'center' }}>
 
-                        <SpaceCard navigation={this.props.navigation} />
 
+                        {
 
+                            this.state.Spaces.map((space) => <SpaceCard key={space.spaceId} navigation={this.props.navigation} space={space} Availablities={this.state.Availablities} />)
+                        }
 
-                        <SpaceCard />
-                        <SpaceCard />
-                        <SpaceCard />
-                        <SpaceCard />
-                        <SpaceCard />
 
 
                     </View>
