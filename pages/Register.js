@@ -107,7 +107,10 @@ class Register extends Component {
         }
     }
 
+
+
     render() {
+
         const logow1 = require('../assets/Images/LogoW.png');
         const personI = require('../assets/Images/PersonIcon.png');
         const spaceI = require('../assets/Images/SpaceIcon.png');
@@ -116,7 +119,7 @@ class Register extends Component {
             <ScrollView>
                 <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
                     <View style={{ paddingTop: 35 }}>
-                    <Button color='#056b60' title='test' onPress={()=>{console.log(this.state.spaceName)}} />
+                        <Button title="test" onPress={()=>console.log(this.state.spaceName)} />
                         {/* <View style={{ alignSelf: 'center', alignItems: 'center', height: '20%', flexDirection: 'row' }}>
                             <Image source={logow1} style={{ width: 50, height: 50 }} />
                             <Text style={{ color: 'white', fontSize: 20, alignSelf: 'center' }}>SPAZIO</Text>

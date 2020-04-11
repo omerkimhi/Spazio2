@@ -34,6 +34,14 @@ class AddSpace extends Component {
         this.updateFieldA = this.updateFieldA.bind(this);
     }
 
+    onChangeText = (text) => {
+        this.props.sendSpaceData(text)
+    }
+
+    test = () => {
+        console.log("success");
+    }
+
     updateFieldB() {
         this.setState({ field: 'Beauty' });
 
@@ -64,9 +72,10 @@ class AddSpace extends Component {
 
                     <View style={{ flexDirection: 'column', width: '60%' }}>
                         <Input
-                            onChangeText={(value) => { this.setState({ spaceName: value }); console.log("space name: ", this.state.spaceName) }}
+                            // onChangeText={(value) => { this.setState({ spaceName: value }), () => this.props.sendSpaceData("test") }}
                             placeholder='Space name'
                             leftIcon={{ name: 'chevron-right' }}
+                            onChangeText={text => this.onChangeText(text)}
                         />
 
                         <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 20, alignItems: 'center' }}>
@@ -123,9 +132,7 @@ class AddSpace extends Component {
                                 leftIcon={{ name: 'people' }}
                             />
                         </View>
-                        <Button onClick={() => {
-                           this.props.handleSendData(this.state.spaceName)
-                        }}>test</Button>
+
                         <View style={{ width: 350, alignItems: 'stretch', paddingTop: 20 }}>
 
                             <Availability />
@@ -136,7 +143,7 @@ class AddSpace extends Component {
 
                             <View style={{ flexDirection: 'row', paddingTop: '3%', paddingBottom: '3%' }}>
                                 <Icon color='#595959'
-                                    size='30'
+                                    size={30}
                                     name='photo' />
 
                                 <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}>Add space pictures</Text>

@@ -9,18 +9,18 @@ class Availability extends Component {
     render() {
         return (
             <View>
-                
+
                 <Accordion>
                     <Card style={{ backgroundColor: 'transparent', borderColor: 'transparent' }}>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
                             <Text style={{ color: 'white', fontSize: 22 }}>Availability: </Text>
                             <Icon color='#595959'
-                                size='50'
+                                size={30}
                                 name='caret-down' />
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-                                <Table hover size="sm" style={{textAlign: "center"}}>
+                                <Table hover size="sm" style={{ textAlign: "center" }}>
                                     <thead >
                                         <tr>
                                             <th>Day</th>

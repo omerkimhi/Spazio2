@@ -89,7 +89,8 @@ class Home extends Component {
         userExsists = true;
         if (this.state.Password == this.state.Users[i].password) {
           console.log("You Are logged in");
-          alert("You Are logged in");
+         
+          this.props.checkLogged(true, this.state.Users[i]);
         }
         else {
           console.log("The password is incorrect")
@@ -159,12 +160,7 @@ class Home extends Component {
                 style={{ flexDirection: "row", justifyContent: "space-between" }}
               >
                 <View>
-
-
-
                   <Button title="Register" color="#056b60" onPress={() => { this.props.navigation.navigate('Register') }}></Button>
-
-
                 </View>
                 <View>
                   <Button title="Log In" color="#056b60" onPress={this.checkUser}></Button>

@@ -17,6 +17,7 @@ import Search from '../pages/Search.js';
 import SpaceCard from '../Components/SpaceCard';
 import SearchFeed from '../pages/SearchFeed';
 import SpacePage from '../pages/SpacePage';
+import PersonalArea from '../pages/PersonalArea';
 
 //import classes
 import User from "../Classes/User";
@@ -30,6 +31,8 @@ const HomeStack = createStackNavigator();
 
 const SearchStack = createStackNavigator();
 
+const PersonalStack = createStackNavigator();
+
 const Tab = createMaterialTopTabNavigator();
 
 class Navigator extends Component {
@@ -42,11 +45,22 @@ class Navigator extends Component {
       EquipmentList: [],
       Facilities: [],
       Availablities: [],
-      FieldsEquipment: []
+      FieldsEquipment: [],
+      isLogged: false,
+      userLogged: null
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
     this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
 
+  }
+
+  checkLogged = (isLog, user) => {
+    if (isLog) {
+      this.setState({
+        isLogged: true,
+        userLogged: user
+      }, () => { console.log(this.state.isLogged) })
+    }
   }
 
   componentDidMount() {
@@ -239,8 +253,18 @@ class Navigator extends Component {
   }
 
   HomeScreen = ({ navigation }) => {
+
     return (
-      <Home navigation={navigation} />
+
+      <Home navigation={navigation} checkLogged={this.checkLogged} />
+    );
+  }
+
+  PersonalScreen = ({ navigation }) => {
+
+    return (
+
+      <PersonalArea user={this.state.userLogged} navigation={navigation} />
     );
   }
 
@@ -297,24 +321,36 @@ class Navigator extends Component {
     );
   }
 
-  render() {
+  PersonalStackScreen = () => {
+    return (
+      <HomeStack.Navigator>
+        <HomeStack.Screen options={{ headerShown: false }} name="Personal Area" component={this.PersonalScreen} />
+        <HomeStack.Screen name="Register" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.RegisterScreen} />
+      </HomeStack.Navigator>
+    );
+  }
 
+  render() {
+    if (this.state.isLogged) {
+      return (
+        <View style={styles.container}>
+          <NavigationContainer>
+            <Tab.Navigator>
+              <Tab.Screen name="Search" component={this.SearchStackScreen} />
+              <Tab.Screen name="Personal Area" component={this.PersonalStackScreen} />
+            </Tab.Navigator>
+          </NavigationContainer>
+        </View >
+      )
+    }
     return (
       <View style={styles.container}>
         <NavigationContainer>
           <Tab.Navigator>
             <Tab.Screen name="Search" component={this.SearchStackScreen} />
             <Tab.Screen name="Log in" component={this.HomeStackScreen} />
-
-
           </Tab.Navigator>
-
-
-
-
         </NavigationContainer>
-
-
       </View >
     )
   };

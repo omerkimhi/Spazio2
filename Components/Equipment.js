@@ -14,7 +14,7 @@ class Equipment extends Component {
                         <Accordion.Toggle as={Card.Header} eventKey="0">
                             <Text style={{ color: 'white', fontSize: 22 }}>Equipment: </Text>
                             <Icon color='#595959'
-                                size='50'
+                                size={30}
                                 name='caret-down' />
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">

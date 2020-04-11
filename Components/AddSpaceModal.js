@@ -1,16 +1,17 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useRef } from "react";
 import {
     StyleSheet,
     Text,
     View,
     TextInput,
     Image,
-    TouchableHighlight
+    TouchableHighlight,
+    RefreshControl
 } from "react-native";
 import { Button, Modal } from 'react-bootstrap';
 import AddSpace from '../pages/AddSpace.js'
 
-export default function AddSpaceModal() {
+export default function AddSpaceModal(props) {
 
     const handleSendData = (data) => {
         this.props.sendSpaceData(data);
@@ -22,6 +23,8 @@ export default function AddSpaceModal() {
     const handleShow = () => setShow(true);
 
     const spaceI = require('../assets/Images/SpaceIcon.png');
+
+
 
     return (
         <>
@@ -36,7 +39,7 @@ export default function AddSpaceModal() {
                     <Modal.Title>Add Space</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <AddSpace handleSendData={handleSendData} />
+                    <AddSpace sendSpaceData={props.sendSpaceData} handleSendData={handleSendData} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
