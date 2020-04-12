@@ -33,7 +33,7 @@ class Home extends Component {
   }
 
   FetchGetUsers = () => {
-    fetch(this.apiUrl, {
+    fetch(this.UsersApiUrl, {
       method: "GET"
     })
       .then(res => {
@@ -45,12 +45,12 @@ class Home extends Component {
             Users: result.map(
               item =>
                 new User(
-                  item.UserId,
+                  item.Id,
                   item.Email,
                   item.Password,
                   item.UserName,
                   item.PhoneNumber,
-                  item.photo 
+                  item.Photo
                 )
             )
           });
@@ -60,11 +60,12 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.apiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
+    this.UsersApiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
     this.FetchGetUsers();
+
   }
 
-  
+
 
   EmailChanged = (event) => {
     this.setState({ Email: event })
@@ -89,7 +90,7 @@ class Home extends Component {
         userExsists = true;
         if (this.state.Password == this.state.Users[i].password) {
           console.log("You Are logged in");
-         
+          console.log(this.state.Users[i]);
           this.props.checkLogged(true, this.state.Users[i]);
         }
         else {
@@ -109,7 +110,7 @@ class Home extends Component {
     const Stack = createStackNavigator();
 
     const logow = require("../assets/Images/LogoW.png");
-
+    
     return (
       <LinearGradient colors={["#056b60", "white"]} style={{ flex: 1 }}>
 

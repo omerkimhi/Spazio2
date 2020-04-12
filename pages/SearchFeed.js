@@ -100,13 +100,17 @@ class SearchFeed extends Component {
             );
     };
 
+    spaceSelected = (spaceName, spaceCity, spaceStreet, spaceNum) => {
+        this.props.spaceSelected([spaceName, spaceCity, spaceStreet, spaceNum]);
+    }
+
     render() {
         const { spacesTest } = this.props.route.params;
         console.log(spacesTest);
-        
+
         return (
             <ScrollView style={{ flex: 1 }} >
-                
+
                 <View style={{ backgroundColor: "#fff", }}>
 
                     <View style={{ padding: '3%', width: "100%", height: '30%', flexDirection: 'row' }}>
@@ -150,7 +154,7 @@ class SearchFeed extends Component {
 
                         {
 
-                            this.state.Spaces.map((space) => <SpaceCard key={space.spaceId} navigation={this.props.navigation} space={space} Availablities={this.state.Availablities} />)
+                            this.state.Spaces.map((space) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={this.state.Availablities} />)
                         }
 
 

@@ -9,6 +9,7 @@ import { PilatesStudio } from "../assets/Images/pilates studio.jpg";
 import { barbershop } from "../assets/Images/barbershop.jpg";
 import { artstudio } from "../assets/Images/artstudio.jpg";
 
+import Space from "../Classes/Space";
 import FieldEq from "../Classes/FieldEq";
 import Facility from "../Classes/Facility";
 import Equipment from "../Classes/Equipment";
@@ -56,6 +57,7 @@ class SpacePage extends Component {
             orderFrom: 0,
             orderTo: 5,
             availa: [],
+            spaceSelected: ""
         };
     }
 
@@ -71,6 +73,11 @@ class SpacePage extends Component {
         this.FetchGetFieldsEq();
         this.FetchGetFacilities();
         this.FetchGetEquipment();
+
+        const { Space } = this.props.route.params;
+        this.setState({
+            spaceSelected: Space
+        })
 
     }
 
@@ -200,11 +207,20 @@ class SpacePage extends Component {
             }
         ];
 
+        let pics = [];
+        let i;
+        for (i = 1; i < 6; i++) {
+            if (this.state.spaceSelected["image" + i] != "")
+                pics.push({ "id": i, "imagePath": this.state.spaceSelected["image" + i] });
+        }
+        console.log(this.state.spaceSelected);
+        console.log(pics);
 
 
         return (
 
             <ScrollView style={{ flexDirection: 'column', backgroundColor: "#fff", flex: 1, marginBottom: "10%" }} ref={(c) => { this.parentScrollView = c; }}>
+
                 <View style={{ height: "20%" }}>
                     <Carousel
 
@@ -213,7 +229,7 @@ class SpacePage extends Component {
                         navigation={true}
                         navigationColor={"#056b60"}
                         parentScrollViewRef={this.parentScrollView}
-                        data={datacarousel}
+                        data={pics}
                     />
 
                 </View>

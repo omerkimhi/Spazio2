@@ -57,17 +57,18 @@ class SearchPage extends Component {
   componentDidMount() {
 
     this.UsersApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
-    this.SpacesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Space/";
-    this.EquipmentApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Equipment/";
-    this.FacilitiesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Facilities/";
-    this.AvailabilitiesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Availability/";
-    this.FieldEqApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/FieldEq/";
+    "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
+  this.SpacesApiUrl =
+    "http://proj.ruppin.ac.il/igroup17/prod/api/space";
+  this.EquipmentApiUrl =
+    "http://proj.ruppin.ac.il/igroup17/prod/api/Equipment/";
+  this.FacilitiesApiUrl =
+    "http://proj.ruppin.ac.il/igroup17/prod/api/Facilities/";
+  this.AvailabilitiesApiUrl =
+    "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
+  this.FieldEqApiUrl =
+    "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
+
 
     this.FetchGetUsers();
     this.FetchGetSpaces();

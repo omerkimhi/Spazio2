@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef } from "react";
+import React, { Component, useRef } from "react";
 import {
     StyleSheet,
     Text,
@@ -11,45 +11,75 @@ import {
 import { Button, Modal } from 'react-bootstrap';
 import AddSpace from '../pages/AddSpace.js'
 
-export default function AddSpaceModal(props) {
+import Space from "../Classes/Space";
 
-    const handleSendData = (data) => {
+
+
+class AddSpaceModal extends Component {
+    constructor(props) {
+        super(props);
+        this.child = React.createRef();
+        this.state = {
+            show: false
+        };
+    }
+
+
+
+
+    handleSendData = (data) => {
         this.props.sendSpaceData(data);
     }
 
-    const [show, setShow] = useState(false);
+    setShow = (status) => {
+        this.setState({
+            show: status
+        });
+    }
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    handleClose = () => this.setShow(false);
+    handleShow = () => this.setShow(true);
 
-    const spaceI = require('../assets/Images/SpaceIcon.png');
+    onClickChild = () => {
+        this.child.current.saveChanges();
+    }
+
+    getSpacesAdded = (space) => {
+        this.props.getSpacesAdded(space);
+    }
+
+    render() {
+        const spaceI = require('../assets/Images/SpaceIcon.png');
 
 
 
-    return (
-        <>
-            <View style={{ alignItems: 'center' }} onClick={handleShow}>
-                <Image source={spaceI} style={{ width: 70, height: 70 }} />
-                <Text style={{ color: '#595959', fontSize: 18 }}>Add a space</Text>
-            </View>
+        return (
+            <>
+                <View style={{ alignItems: 'center' }} onClick={this.handleShow}>
+                    <Image source={spaceI} style={{ width: 70, height: 70 }} />
+                    <Text style={{ color: '#595959', fontSize: 18 }}>Add a space</Text>
+                </View>
 
 
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add Space</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <AddSpace sendSpaceData={props.sendSpaceData} handleSendData={handleSendData} />
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
-                        Close
+                <Modal show={this.state.show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Space</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <AddSpace ref={this.child} getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.props.sendSpaceData} handleSendData={this.handleSendData} />
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Close
             </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                        <Button variant="primary" onClick={this.onClickChild}>
+                            Save Changes
             </Button>
-                </Modal.Footer>
-            </Modal>
-        </>
-    );
+                    </Modal.Footer>
+                </Modal>
+            </>
+        );
+    }
 }
+
+export default AddSpaceModal;

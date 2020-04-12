@@ -4,7 +4,7 @@ import { ScrollView, StyleSheet, Text, View, Button, TextInput, Image, Touchable
 import { LinearGradient } from 'expo-linear-gradient';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import AddSpaceModal from '../Components/AddSpaceModal.js'
+import AddSpaceModal from '../Components/AddSpaceModal.js';
 
 class Register extends Component {
 
@@ -107,7 +107,9 @@ class Register extends Component {
         }
     }
 
-
+    getSpacesAdded = (newSpace) => {
+        console.log("added to register: ", newSpace);
+    }
 
     render() {
 
@@ -119,7 +121,7 @@ class Register extends Component {
             <ScrollView>
                 <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
                     <View style={{ paddingTop: 35 }}>
-                        <Button title="test" onPress={()=>console.log(this.state.spaceName)} />
+                        <Button title="test" onPress={() => console.log(this.state.spaceName)} />
                         {/* <View style={{ alignSelf: 'center', alignItems: 'center', height: '20%', flexDirection: 'row' }}>
                             <Image source={logow1} style={{ width: 50, height: 50 }} />
                             <Text style={{ color: 'white', fontSize: 20, alignSelf: 'center' }}>SPAZIO</Text>
@@ -185,7 +187,7 @@ class Register extends Component {
                                     <Image source={personI} style={{ width: 70, height: 70 }} />
                                     <Text style={{ color: '#595959', marginBottom: 20, fontSize: 18 }}>Add a photo</Text>
 
-                                    <AddSpaceModal sendSpaceData={this.getSpaceData} />
+                                    <AddSpaceModal getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.getSpaceData} />
 
                                 </View>
 

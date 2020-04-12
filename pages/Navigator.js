@@ -35,6 +35,8 @@ const PersonalStack = createStackNavigator();
 
 const Tab = createMaterialTopTabNavigator();
 
+const DetailsIcon = require("../assets/Images/detailsIcon.jpg");
+
 class Navigator extends Component {
   constructor(props) {
     super(props);
@@ -47,7 +49,8 @@ class Navigator extends Component {
       Availablities: [],
       FieldsEquipment: [],
       isLogged: false,
-      userLogged: null
+      userLogged: null,
+      spaceSelected: []
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
     this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
@@ -63,19 +66,25 @@ class Navigator extends Component {
     }
   }
 
+  spaceSelectedFunc = (spaceselected) => {
+    this.setState({
+      spaceSelected: spaceselected
+    })
+  }
+
   componentDidMount() {
     this.UsersApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
     this.SpacesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Space/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/space";
     this.EquipmentApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Equipment/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/Equipment/";
     this.FacilitiesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Facilities/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/Facilities/";
     this.AvailabilitiesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Availability/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
     this.FieldEqApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/FieldEq/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
 
     this.FetchGetUsers();
     this.FetchGetSpaces();
@@ -112,6 +121,7 @@ class Navigator extends Component {
         error => { }
       );
   };
+
   FetchGetSpaces = () => {
     fetch(this.SpacesApiUrl, {
       method: "GET"
@@ -255,8 +265,7 @@ class Navigator extends Component {
   HomeScreen = ({ navigation }) => {
 
     return (
-
-      <Home navigation={navigation} checkLogged={this.checkLogged} />
+      <Home navigation={navigation} Users={this.state.Users} checkLogged={this.checkLogged} />
     );
   }
 
@@ -288,7 +297,7 @@ class Navigator extends Component {
 
     return (
 
-      <SearchFeed navigation={navigation} route={route} />
+      <SearchFeed spaceSelected={this.spaceSelectedFunc} navigation={navigation} route={route} />
 
     );
   }
@@ -297,7 +306,7 @@ class Navigator extends Component {
 
     return (
 
-      <SpacePage navigation={navigation} route={route} />
+      <SpacePage  navigation={navigation} route={route} />
 
     );
   }
@@ -311,12 +320,19 @@ class Navigator extends Component {
     );
   }
 
+  setSpaceHeader = () => {
+    return (<View style={{ alignContent: 'center' }}>
+      <Text>{this.state.spaceSelected[0]}</Text>
+      <Text style={{ fontSize: 13 }}>{this.state.spaceSelected[2]} {this.state.spaceSelected[3]}, {this.state.spaceSelected[1]}</Text>
+    </View>)
+  }
+
   SearchStackScreen = () => {
     return (
       <SearchStack.Navigator>
         <SearchStack.Screen options={{ headerShown: false }} name="Search" component={this.SearchScreen} />
         <SearchStack.Screen test="test" name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SearchFeedScreen} />
-        <SearchStack.Screen name="SpacePage" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SpacePageScreen} />
+        <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerStyle: { backgroundColor: '#056b60' } }} name="SpacePage" component={this.SpacePageScreen} />
       </SearchStack.Navigator>
     );
   }
@@ -331,6 +347,7 @@ class Navigator extends Component {
   }
 
   render() {
+    this.FetchGetUsers();
     if (this.state.isLogged) {
       return (
         <View style={styles.container}>

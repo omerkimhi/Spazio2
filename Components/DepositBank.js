@@ -6,6 +6,20 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
 class DepositBank extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            bank: "",
+            branch: "",
+            number: ""
+        }
+    }
+
+
+
+
     render() {
         return (
             <View>
@@ -21,21 +35,24 @@ class DepositBank extends Component {
                             <Card.Body>
                                 <View style={{ flexDirection: 'column', paddingTop: 3, alignItems: 'center' }}>
 
-                                        <Input
+                                    <Input
                                         label="Bank Number"
-                                            placeholder="Example: 'Leumi'"
-                                            leftIcon={{ name: 'chevron-right' }}
-                                        />
-                                
-                                        <Input
+                                        placeholder="Example: 'Leumi'"
+                                        leftIcon={{ name: 'chevron-right' }}
+                                        onChangeText={(value) => { this.props.sendBankDetails("bank", value) }}
+                                    />
+
+                                    <Input
                                         label="Branch Number"
-                                            leftIcon={{ name: 'chevron-right' }}
-                                        />
-                         
-                                        <Input
+                                        leftIcon={{ name: 'chevron-right' }}
+                                        onChangeText={(value) => { this.props.sendBankDetails("branch", value) }}
+                                    />
+
+                                    <Input
                                         label="Account Number"
-                                            leftIcon={{ name: 'chevron-right' }}
-                                        />
+                                        leftIcon={{ name: 'chevron-right' }}
+                                        onChangeText={(value) => { this.props.sendBankDetails("number", value) }}
+                                    />
 
                                 </View>
 

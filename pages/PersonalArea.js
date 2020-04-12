@@ -6,7 +6,8 @@ import {
     Button,
     TextInput,
     Image,
-    TouchableHighlight
+    TouchableHighlight,
+    ScrollView
 } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -23,22 +24,118 @@ class PersonalArea extends Component {
         super(props);
 
         this.state = {
-
+            user: this.props.user
         };
     }
 
 
 
+
     render() {
+        const DetailsIcon = require("../assets/Images/detailsIcon.jpg");
 
-        const Zaki = require("../assets/Images/Zaki.jpg");
-
-        console.log(this.props.user);
         return (
-            <View style={{ flex: 1, paddingTop: '10%', paddingHorizontal: '10%', alignItems: 'center' }}>
-                <Image source={this.props.photo} style={{ width: 100, height: 100, borderRadius: 100 / 2, borderColor: '#056b60', borderWidth: 3 }} />
-                <Text style={{ paddingTop: '2%', fontWeight: '500', fontSize: 15 }}>Hello {this.props.user.fullName}</Text>
-            </View>
+            <ScrollView style={{ flex: 1 }} >
+                <View style={{ paddingTop: '5%', paddingHorizontal: '10%', alignItems: 'center' }}>
+                    <View>
+                        <Image source={this.state.user.photo} style={{ width: 130, height: 130, borderRadius: 130 / 2, borderColor: '#056b60', borderWidth: 3 }} />
+                        <Text style={{ paddingTop: '2%', fontWeight: '500', fontSize: 16 }}>Hello, {this.props.user.fullName}</Text>
+                    </View>
+
+                    <View style={{ flexDirection: 'row', paddingVertical: '5%' }}>
+                        <Text style={{ fontSize: 18 }}>Your next order is: </Text>
+                        <Text style={{ fontSize: 18, color: '#056b60', fontWeight: '500' }}>Zaki's Pilates Studio</Text>
+                    </View>
+                    <View style={{ alignSelf: 'flex-start', flexDirection: 'column' }}>
+                        <View style={{ flexDirection: 'row', paddingTop: '5%' }}>
+                            <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
+                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                    <Icon
+
+                                        name='user'
+                                        size={40}
+                                        color='#595959'
+                                    />
+                                </View>
+                                <Text>My details</Text>
+                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                            </View>
+
+                            <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '3%' }}>
+                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                    <Icon
+
+                                        name='calendar-check-o'
+                                        size={35}
+                                        color='#595959'
+                                    />
+                                </View>
+                                <Text>My orders</Text>
+                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                            </View>
+
+                            <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
+                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                    <Icon
+
+                                        name='cog'
+                                        size={40}
+                                        color='#595959'
+                                    />
+                                </View>
+                                <Text>Settings</Text>
+                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                            </View>
+
+                        </View>
+
+                        <View style={{ flexDirection: 'row', paddingTop: '10%' }}>
+                            <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
+                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                    <Icon
+
+                                        name='heart'
+                                        size={35}
+                                        color='#595959'
+                                    />
+                                </View>
+                                <Text>My Favorites</Text>
+                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                            </View>
+
+                            <View style={{ alignItems: 'center', flexDirection: 'column', }}>
+                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                    <Icon
+
+                                        name='home'
+                                        size={40}
+                                        color='#595959'
+                                    />
+                                </View>
+                                <Text>My spaces</Text>
+                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                            </View>
+
+                            <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
+                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                    <Icon
+
+                                        name='question'
+                                        size={40}
+                                        color='#595959'
+                                    />
+                                </View>
+                                <Text>Help&About</Text>
+                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                            </View>
+
+                        </View>
+
+
+
+                    </View>
+                </View>
+            </ScrollView>
         );
     }
 }

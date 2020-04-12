@@ -9,8 +9,9 @@ import Facilities from '../Components/Facilities.js';
 import Equipment from '../Components/Equipment.js';
 import SpaceTermsAndRules from '../Components/SpaceTermsAndRules.js'
 import { ButtonGroup, Button, InputGroup, FormControl } from 'react-bootstrap';
-import DepoistBank from '../Components/DepositBank.js'
+import DepoistBank from '../Components/DepositBank.js';
 
+import Space from "../Classes/Space";
 
 
 class AddSpace extends Component {
@@ -18,6 +19,7 @@ class AddSpace extends Component {
         super(props);
 
         this.state = {
+            spaceId: 0,
             field: "",
             spaceName: "",
             spaceAddressCity: "",
@@ -25,8 +27,15 @@ class AddSpace extends Component {
             spaceAddressNumber: "",
             spacePrice: 0,
             spaceCapacity: 0,
-
-
+            spaceBank: "",
+            spaceBranch: "",
+            spaceAccount: "",
+            spaceImage1: "",
+            spaceImage2: "",
+            spaceImage3: "",
+            spaceImage4: "",
+            spaceImage5: "",
+            spaceUserEmail: ""
 
         }
         this.updateFieldB = this.updateFieldB.bind(this);
@@ -56,7 +65,39 @@ class AddSpace extends Component {
         this.setState({ field: 'Art' });
     }
 
+    saveChanges = () => {
+        let spaceAdded = new Space(this.state.spaceId,
+            this.state.spaceName,
+            this.state.field,
+            this.state.spacePrice,
+            this.state.spaceAddressCity,
+            this.state.spaceAddressStreet,
+            this.state.spaceAddressNumber,
+            this.state.spaceCapacity,
+            this.state.spaceBank,
+            this.state.spaceBranch,
+            this.state.spaceImage1,
+            this.state.spaceImage2,
+            this.state.spaceImage3,
+            this.state.spaceImage4,
+            this.state.spaceImage5,
+            this.state.spaceAccount,
+            this.state.spaceUserEmail);
 
+        this.props.getSpacesAdded(spaceAdded)
+    }
+
+    sendBankDetails = (kind, value) => {
+        if (kind == "bank") {
+            this.setState({ spaceBank: value })
+        }
+        if (kind == "branch") {
+            this.setState({ spaceBranch: value })
+        }
+        else {
+            this.setState({ spaceAccount: value })
+        }
+    }
 
     render() {
 
@@ -75,7 +116,7 @@ class AddSpace extends Component {
                             // onChangeText={(value) => { this.setState({ spaceName: value }), () => this.props.sendSpaceData("test") }}
                             placeholder='Space name'
                             leftIcon={{ name: 'chevron-right' }}
-                            onChangeText={text => this.onChangeText(text)}
+                            onChangeText={(value) => { this.setState({ spaceName: value }) }}
                         />
 
                         <View style={{ paddingLeft: 8, flexDirection: 'row', paddingTop: 20, alignItems: 'center' }}>
@@ -151,7 +192,7 @@ class AddSpace extends Component {
 
                             <SpaceTermsAndRules />
 
-                            <DepoistBank />
+                            <DepoistBank sendBankDetails={this.sendBankDetails} />
 
 
                         </View>
