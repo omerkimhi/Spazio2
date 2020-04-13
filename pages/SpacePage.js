@@ -5,6 +5,9 @@ import Carousel from 'react-native-smart-carousel';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { FormCheck, Button } from 'react-bootstrap';
 
+import DateSelector from '../Components/DateSelector';
+import CalendarPicker from 'react-native-calendar-picker';
+ 
 import { PilatesStudio } from "../assets/Images/pilates studio.jpg";
 import { barbershop } from "../assets/Images/barbershop.jpg";
 import { artstudio } from "../assets/Images/artstudio.jpg";
@@ -57,8 +60,10 @@ class SpacePage extends Component {
             orderFrom: 0,
             orderTo: 5,
             availa: [],
-            spaceSelected: ""
+            spaceSelected: "",
+            selectedStartDate: null,
         };
+        this.onDateChange = this.onDateChange.bind(this);
     }
 
 
@@ -177,8 +182,16 @@ class SpacePage extends Component {
 
     }
 
+    onDateChange(date) {
+        this.setState({
+            selectedStartDate: date,
+        });
+    }
 
     render() {
+
+        const { selectedStartDate } = this.state;
+        const startDate = selectedStartDate ? selectedStartDate.toString() : '';
 
         const starIcon = require("../assets/Images/starIcon.jpg");
         const starIconPNG = require("../assets/Images/starIconPNG.png");
@@ -335,12 +348,10 @@ class SpacePage extends Component {
 
                 <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
                     <Text style={{ fontSize: 22, fontWeight: '600' }}>Order</Text>
+
+                    <Text>Pick a date: </Text>
+                    
                     <View>
-                        <Text>Pick a day: </Text>
-                        <Picker style={{ height: 30, width: 120 }}
-                            onValueChange={(itemValue, itemIndex) => this.setSelectedValue(itemValue, itemIndex)} >
-                            {Availability.map((day) => <Picker.Item label={day.day} value={day.day} />)}
-                        </Picker>
                         <Text>From: </Text>
                         <Picker style={{ height: 30, width: 120 }} >
                             {

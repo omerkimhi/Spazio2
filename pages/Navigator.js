@@ -18,6 +18,7 @@ import SpaceCard from '../Components/SpaceCard';
 import SearchFeed from '../pages/SearchFeed';
 import SpacePage from '../pages/SpacePage';
 import PersonalArea from '../pages/PersonalArea';
+import OrderSpace from '../pages/OrderSpace';
 
 //import classes
 import User from "../Classes/User";
@@ -26,6 +27,7 @@ import Equipment from "../Classes/Equipment";
 import Facility from "../Classes/Facility";
 import Availabillity from "../Classes/Availabillity";
 import FieldEq from "../Classes/FieldEq";
+
 
 const HomeStack = createStackNavigator();
 
@@ -306,7 +308,16 @@ class Navigator extends Component {
 
     return (
 
-      <SpacePage  navigation={navigation} route={route} />
+      <SpacePage navigation={navigation} route={route} />
+
+    );
+  }
+
+  OrderSpacePageScreen = ({ route, navigation }) => {
+
+    return (
+
+      <OrderSpace navigation={navigation} route={route} />
 
     );
   }
@@ -327,12 +338,21 @@ class Navigator extends Component {
     </View>)
   }
 
+  setOrderSpaceHeader = () => {
+    return (<View style={{ alignContent: 'center' }}>
+      <Text>{this.state.spaceSelected[0]}</Text>
+      <Text style={{ fontSize: 13 }}>{this.state.spaceSelected[2]} {this.state.spaceSelected[3]}, {this.state.spaceSelected[1]}</Text>
+
+    </View>)
+  }
+
   SearchStackScreen = () => {
     return (
       <SearchStack.Navigator>
         <SearchStack.Screen options={{ headerShown: false }} name="Search" component={this.SearchScreen} />
-        <SearchStack.Screen test="test" name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SearchFeedScreen} />
+        <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SearchFeedScreen} />
         <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerStyle: { backgroundColor: '#056b60' } }} name="SpacePage" component={this.SpacePageScreen} />
+        <SearchStack.Screen options={{ title: this.setOrderSpaceHeader(), headerStyle: { backgroundColor: '#056b60' } }} name="OrderPage" component={this.OrderSpacePageScreen} />
       </SearchStack.Navigator>
     );
   }

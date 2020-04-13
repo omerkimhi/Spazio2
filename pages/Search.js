@@ -51,6 +51,7 @@ class SearchPage extends Component {
       Facilities: [],
       Availablities: [],
       FieldsEquipment: []
+
     };
   }
 
@@ -254,7 +255,7 @@ class SearchPage extends Component {
     return (
       <ScrollView style={{ flex: 1 }} >
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
-          <View></View>
+          
 
           <View style={{ alignItems: "center", paddingBottom: 25 }}>
             <View style={{}}>
