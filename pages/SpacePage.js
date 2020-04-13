@@ -7,7 +7,7 @@ import { FormCheck, Button } from 'react-bootstrap';
 
 import DateSelector from '../Components/DateSelector';
 import CalendarPicker from 'react-native-calendar-picker';
- 
+
 import { PilatesStudio } from "../assets/Images/pilates studio.jpg";
 import { barbershop } from "../assets/Images/barbershop.jpg";
 import { artstudio } from "../assets/Images/artstudio.jpg";
@@ -350,7 +350,7 @@ class SpacePage extends Component {
                     <Text style={{ fontSize: 22, fontWeight: '600' }}>Order</Text>
 
                     <Text>Pick a date: </Text>
-                    
+
                     <View>
                         <Text>From: </Text>
                         <Picker style={{ height: 30, width: 120 }} >
@@ -367,7 +367,7 @@ class SpacePage extends Component {
 
 
                     </View>
-
+                    
                 </View>
                 <Button onClick={this.showData} style={{ paddingBottom: 0, backgroundColor: "#056b60" }}>
                     Order

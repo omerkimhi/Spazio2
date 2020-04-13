@@ -100,8 +100,8 @@ class SearchFeed extends Component {
             );
     };
 
-    spaceSelected = (spaceName, spaceCity, spaceStreet, spaceNum) => {
-        this.props.spaceSelected([spaceName, spaceCity, spaceStreet, spaceNum]);
+    spaceSelected = (space) => {
+        this.props.spaceSelected(space);
     }
 
     render() {

@@ -82,7 +82,7 @@ class SpaceCard extends Component {
                     />
 
                 </View>
-                <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage', { Space: this.props.space }); this.props.spaceSelected(this.props.space.name, this.props.space.city, this.props.space.street, this.props.space.number) }} underlayColor="white">
+                <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage', { Space: this.props.space }); this.props.spaceSelected(this.props.space) }} underlayColor="white">
                     <View style={{ width: "100%", height: "40%", padding: "2%" }}>
 
                         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
