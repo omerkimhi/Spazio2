@@ -98,7 +98,11 @@ class SearchPage extends Component {
                   item.Password,
                   item.UserName,
                   item.PhoneNumber,
-                  item.Photo
+                  item.Photo,
+                  item.SpaceOwner,
+                  item.Visits,
+                  item.Rank
+
                 )
             )
           });
@@ -135,7 +139,12 @@ class SearchPage extends Component {
                   item.Imageurl4,
                   item.Imageurl5,
                   item.AccountNumber,
-                  item.UserEmail
+                  item.UserEmail,
+                  item.Description,
+                  item.TermsOfUse,
+                  item.Rank,
+                  item.Uploadtime
+
                 )
             )
           });
