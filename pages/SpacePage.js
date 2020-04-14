@@ -79,11 +79,21 @@ class SpacePage extends Component {
         this.FetchGetFacilities();
         this.FetchGetEquipment();
 
-        const { Space } = this.props.route.params;
+        const { Space, Availablities } = this.props.route.params;
         this.setState({
-            spaceSelected: Space
-        })
+            spaceSelected: Space,
+            availa: Availablities
+        }, () => { console.log(this.state.availa) })
 
+
+    }
+
+    showAvailability = () => {
+
+
+        return (
+            this.state.availa.map((item, key) => <Text>{item.Day}: {item.val}</Text>)
+        )
     }
 
     FetchGetFieldsEq = () => {
@@ -178,8 +188,6 @@ class SpacePage extends Component {
             this.setState({ availa: availab })
         })
 
-
-
     }
 
     onDateChange(date) {
@@ -190,35 +198,12 @@ class SpacePage extends Component {
 
     render() {
 
+
         const { selectedStartDate } = this.state;
         const startDate = selectedStartDate ? selectedStartDate.toString() : '';
 
         const starIcon = require("../assets/Images/starIcon.jpg");
         const starIconPNG = require("../assets/Images/starIconPNG.png");
-
-        const PilatesStudio = require("../assets/Images/pilates studio.jpg");
-        const barbershop = require("../assets/Images/barbershop.jpg");
-        const artstudio = require("../assets/Images/artstudio.jpg");
-
-        const datacarousel = [
-            {
-                "id": 1,
-
-                "imagePath": PilatesStudio,
-            },
-            {
-                "id": 2,
-
-
-                "imagePath": barbershop,
-            },
-            {
-                "id": 3,
-
-
-                "imagePath": artstudio,
-            }
-        ];
 
         let pics = [];
         let i;
@@ -230,101 +215,102 @@ class SpacePage extends Component {
         console.log(pics);
 
 
+
         return (
+            <View style={{ flex: 1, }}>
+                <ScrollView style={{ flexDirection: 'column', backgroundColor: "#fff", marginBottom: "10%" }} ref={(c) => { this.parentScrollView = c; }}>
 
-            <ScrollView style={{ flexDirection: 'column', backgroundColor: "#fff", flex: 1, marginBottom: "10%" }} ref={(c) => { this.parentScrollView = c; }}>
-
-                <View style={{ height: "20%" }}>
-                    <Carousel
+                    <View style={{ height: 200 }}>
+                        <Carousel
 
 
-                        align={'center'}
-                        navigation={true}
-                        navigationColor={"#056b60"}
-                        parentScrollViewRef={this.parentScrollView}
-                        data={pics}
-                    />
+                            align={'center'}
+                            navigation={true}
+                            navigationColor={"#056b60"}
+                            parentScrollViewRef={this.parentScrollView}
+                            data={pics}
+                        />
 
-                </View>
+                    </View>
 
-                <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: "100%", paddingTop: "1%", paddingBottom: '1%', paddingHorizontal: '5%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <View>
-                        <View style={{ flexDirection: 'row', }}>
-                            <Icon style={{ marginTop: 2 }}
-                                size={15} color="#056b60"
-                                name='check-square' />
-                            <Text style={{ fontWeight: '600', fontSize: 15 }}>  Verified space</Text>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: "100%", paddingTop: "1%", paddingBottom: '1%', paddingHorizontal: '5%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                        <View>
+                            <View style={{ flexDirection: 'row', }}>
+                                <Icon style={{ marginTop: 2 }}
+                                    size={15} color="#056b60"
+                                    name='check-square' />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}>  Verified space</Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', paddingTop: '5%' }}>
+                                <Icon style={{ marginTop: 2 }}
+                                    size={15} color="#056b60"
+                                    name='handshake-o' />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}> Immediate confirmation</Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', paddingTop: '5%' }}>
+                                <Icon style={{ marginTop: 2 }}
+                                    size={15} color="#056b60"
+                                    name='users' />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}> Max {this.state.spaceSelected.capabillity} people</Text>
+                            </View>
                         </View>
 
-                        <View style={{ flexDirection: 'row', paddingTop: '5%' }}>
-                            <Icon style={{ marginTop: 2 }}
-                                size={15} color="#056b60"
-                                name='handshake-o' />
-                            <Text style={{ fontWeight: '600', fontSize: 15 }}> Immediate confirmation</Text>
-                        </View>
+                        <View>
+                            <View style={{ flexDirection: 'row', }}>
+                                <Image source={starIconPNG} style={{ marginTop: 1, width: 17, height: 17, alignSelf: 'center' }} />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}> 4.2</Text>
+                            </View>
 
-                        <View style={{ flexDirection: 'row', paddingTop: '5%' }}>
-                            <Icon style={{ marginTop: 2 }}
-                                size={15} color="#056b60"
-                                name='users' />
-                            <Text style={{ fontWeight: '600', fontSize: 15 }}> Max 15 people</Text>
+                            <View style={{ flexDirection: 'row', paddingTop: '7%' }}>
+                                <Icon style={{ marginTop: 2 }}
+                                    size={15} color="#056b60"
+                                    name='map-marker' />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}> Show on map</Text>
+                            </View>
+
+                            <View style={{ flexDirection: 'row', paddingTop: '7%' }}>
+                                <Icon style={{ marginTop: 2 }}
+                                    size={15} color="#056b60"
+                                    name='calendar-check-o' />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}> Self check in</Text>
+                            </View>
+
                         </View>
                     </View>
 
-                    <View>
-                        <View style={{ flexDirection: 'row', }}>
-                            <Image source={starIconPNG} style={{ marginTop: 1, width: 17, height: 17, alignSelf: 'center' }} />
-                            <Text style={{ fontWeight: '600', fontSize: 15 }}> 4.3</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', paddingTop: '7%' }}>
-                            <Icon style={{ marginTop: 2 }}
-                                size={15} color="#056b60"
-                                name='map-marker' />
-                            <Text style={{ fontWeight: '600', fontSize: 15 }}> Show on map</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', paddingTop: '7%' }}>
-                            <Icon style={{ marginTop: 2 }}
-                                size={15} color="#056b60"
-                                name='calendar-check-o' />
-                            <Text style={{ fontWeight: '600', fontSize: 15 }}> Self check in</Text>
-                        </View>
-
+                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 22, fontWeight: '600' }}>Description</Text>
+                        <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>In zaki's Pilates studio everybody feels at home. You're invited to rent our comfortable space and...</Text>
                     </View>
-                </View>
 
-                <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <Text style={{ fontSize: 22, fontWeight: '600' }}>Description</Text>
-                    <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>In zaki's Pilates studio everybody feels at home. You're invited to rent our comfortable space and...</Text>
-                </View>
-
-                <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <Text style={{ fontSize: 22, fontWeight: '600' }}>Availability</Text>
-                    <View style={{ paddingLeft: '2%' }}>
-                        {Availability.map((ava) =>
-                            <Text style={{ paddingTop: "1%" }}>{ava.day}: {ava.from}:00-{ava.to}:00</Text>
-                        )}
-
+                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 22, fontWeight: '600' }}>Availability</Text>
+                        <View style={{ paddingLeft: '2%' }}>
+                            {/* {Availability.map((ava) =>
+                                <Text style={{ paddingTop: "1%" }}>{ava.day}: {ava.from}:00-{ava.to}:00</Text>
+                            )} */}
+                            {this.showAvailability()}
+                        </View>
                     </View>
-                </View>
 
-                <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <Text style={{ fontSize: 22, fontWeight: '600' }}>Equipment</Text>
-                    {this.state.EquipmentList.map((item) => {
-                        return (item.spaceId === 7) ? (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
-                            <Icon style={{ marginTop: 2 }}
-                                size={15} color="#056b60"
-                                name='check-circle-o' />
-                            <Text> {item.name}</Text>
-                        </View>) : null
-                    })}
-                </View>
-                <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <Text style={{ fontSize: 22, fontWeight: '600' }}>Facilities</Text>
+                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 22, fontWeight: '600' }}>Equipment</Text>
+                        {this.state.EquipmentList.map((item) => {
+                            return (item.spaceId === 7) ? (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
+                                <Icon style={{ marginTop: 2 }}
+                                    size={15} color="#056b60"
+                                    name='check-circle-o' />
+                                <Text> {item.name}</Text>
+                            </View>) : null
+                        })}
+                    </View>
+                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 22, fontWeight: '600' }}>Facilities</Text>
 
 
-                    {/* {console.log(this.state.Facilities)}
+                        {/* {console.log(this.state.Facilities)}
 
                     {this.state.Facilities.map((item, value) => {
                         return !(item.parking) ? (
@@ -338,42 +324,21 @@ class SpacePage extends Component {
                     })} */}
 
 
-                </View>
-
-                <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <Text style={{ fontSize: 22, fontWeight: '600' }}>Space's terms & rules</Text>
-                    <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>Here will be the terms and rules</Text>
-                    <FormCheck label="I've read and accept the terms and rules" />
-                </View>
-
-                <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                    <Text style={{ fontSize: 22, fontWeight: '600' }}>Order</Text>
-
-                    <Text>Pick a date: </Text>
-
-                    <View>
-                        <Text>From: </Text>
-                        <Picker style={{ height: 30, width: 120 }} >
-                            {
-                                this.state.availa.map((from) => <Picker.Item label={from.toString()} value={from} />)
-                            }
-                        </Picker>
-                        <Text>To: </Text>
-                        <Picker style={{ height: 30, width: 120 }} >
-                            {
-                                this.state.availa.map((to) => <Picker.Item label={to.toString()} value={to} />)
-                            }
-                        </Picker>
-
-
                     </View>
-                    
-                </View>
-                <Button onClick={this.showData} style={{ paddingBottom: 0, backgroundColor: "#056b60" }}>
-                    Order
-              </Button>
-            </ScrollView >
 
+                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                        <Text style={{ fontSize: 22, fontWeight: '600' }}>Space's terms & rules</Text>
+                        <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>Here will be the terms and rules</Text>
+                        <FormCheck label="I've read and accept the terms and rules" />
+                    </View>
+
+                </ScrollView >
+                <View style={{ position: 'absolute', width: '100%', bottom: 0, height: '12%' }}>
+                    <Button onClick={() => { this.props.navigation.navigate('OrderPage') }} style={{ height: '100%', paddingBottom: 0, backgroundColor: "red" }}>
+                        ORDER      THIS      SPACE      NOW!
+              </Button>
+                </View>
+            </View>
         );
     }
 }

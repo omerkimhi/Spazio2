@@ -23,6 +23,22 @@ class SpaceCard extends Component {
         }
     }
 
+    showAvailability = () => {
+        let availabilities = [];
+        let spaceAvailabilities = [];
+        for (let i = 0; i < this.props.Availablities.length; i++) {
+            if (this.props.Availablities[i].spaceId + 5 == this.props.space.spaceId) {
+                spaceAvailabilities = this.props.Availablities[i];
+            }
+        }
+        Object.keys(spaceAvailabilities).map((item, value) => {
+            let val = spaceAvailabilities[item];
+            if (item != "spaceId" && item != "id")
+                availabilities.push({ "Day": item, "val": val })
+        });
+        return availabilities
+    }
+
 
     render() {
 
@@ -82,7 +98,7 @@ class SpaceCard extends Component {
                     />
 
                 </View>
-                <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage', { Space: this.props.space }); this.props.spaceSelected(this.props.space) }} underlayColor="white">
+                <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage', { Space: this.props.space, Availablities: this.showAvailability() }); this.props.spaceSelected(this.props.space) }} underlayColor="white">
                     <View style={{ width: "100%", height: "40%", padding: "2%" }}>
 
                         <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>

@@ -345,7 +345,7 @@ class Navigator extends Component {
   setSpaceRightHeader = () => {
     return (
       <View style={{ flexDirection: 'row-reverse', }}>
-        <TouchableHighlight style={{ marginRight: '10%' }} onPress={() => { console.log("User: ", this.state.userLogged.userId, "Space: ", this.state.spaceSelected.spaceId) }}>
+        <TouchableHighlight style={{ marginRight: '20%' }} onPress={() => { console.log("User: ", this.state.userLogged.userId, "Space: ", this.state.spaceSelected.spaceId) }}>
           <View>
             <Icon
               name='heart'
@@ -354,28 +354,20 @@ class Navigator extends Component {
             />
           </View>
         </TouchableHighlight>
-        <View style={{ marginRight: '15%' }}>
-          <Button title="ORDER NOW" color={"black"} style={{ backgroundColor: 'transparent' }} />
-        </View>
+
       </View>)
   }
 
 
-  setOrderSpaceHeader = () => {
-    return (<View style={{ alignContent: 'center' }}>
-      <Text>{this.state.spaceSelected[0]}</Text>
-      <Text style={{ fontSize: 13 }}>{this.state.spaceSelected[2]} {this.state.spaceSelected[3]}, {this.state.spaceSelected[1]}</Text>
 
-    </View>)
-  }
 
   SearchStackScreen = () => {
     return (
       <SearchStack.Navigator>
         <SearchStack.Screen options={{ headerShown: false }} name="Search" component={this.SearchScreen} />
         <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SearchFeedScreen} />
-        <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerRight: () => this.setSpaceRightHeader(), headerStyle: { backgroundColor: '#056b60' } }} name="SpacePage" component={this.SpacePageScreen} />
-        <SearchStack.Screen options={{ title: this.setOrderSpaceHeader(), headerStyle: { backgroundColor: '#056b60' } }} name="OrderPage" component={this.OrderSpacePageScreen} />
+        <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerRight: () => this.setSpaceRightHeader(), headerStyle: { height: 47, backgroundColor: '#056b60' } }} name="SpacePage" component={this.SpacePageScreen} />
+        <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerRight: () => this.setSpaceRightHeader(), headerStyle: { height: 47, backgroundColor: '#056b60' } }} name="OrderPage" component={this.OrderSpacePageScreen} />
       </SearchStack.Navigator>
     );
   }

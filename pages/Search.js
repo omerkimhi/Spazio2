@@ -54,21 +54,22 @@ class SearchPage extends Component {
 
     };
   }
+  
 
   componentDidMount() {
 
     this.UsersApiUrl =
-    "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
-  this.SpacesApiUrl =
-    "http://proj.ruppin.ac.il/igroup17/prod/api/space";
-  this.EquipmentApiUrl =
-    "http://proj.ruppin.ac.il/igroup17/prod/api/Equipment/";
-  this.FacilitiesApiUrl =
-    "http://proj.ruppin.ac.il/igroup17/prod/api/Facilities/";
-  this.AvailabilitiesApiUrl =
-    "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
-  this.FieldEqApiUrl =
-    "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
+      "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
+    this.SpacesApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/prod/api/space";
+    this.EquipmentApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/prod/api/Equipment/";
+    this.FacilitiesApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/prod/api/Facilities/";
+    this.AvailabilitiesApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
+    this.FieldEqApiUrl =
+      "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
 
 
     this.FetchGetUsers();
@@ -264,7 +265,7 @@ class SearchPage extends Component {
     return (
       <ScrollView style={{ flex: 1 }} >
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
-          
+
 
           <View style={{ alignItems: "center", paddingBottom: 25 }}>
             <View style={{}}>

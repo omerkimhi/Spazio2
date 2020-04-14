@@ -12,15 +12,21 @@ class OrderSpace extends Component {
     constructor(props) {
         super(props);
     }
+    checkAvailability(itemValue, itemIndex) {
+
+    }
 
     render() {
 
 
         return (
 
-            < ScrollView style={{ backgroundColor: "#fff", flex: 1, }} ref={(c) => { this.parentScrollView = c; }}>
+            < ScrollView style={{ backgroundColor: "#fff", flex: 1, }} >
                 <View>
-                    <DateSelector />
+
+                    <View style={{ top: 2 }}>
+                        <DateSelector />
+                    </View>
                 </View>
             </ScrollView >
 
