@@ -111,7 +111,7 @@ class SpaceCard extends Component {
                             </View>
                         </View>
 
-                        <View style={{ alignSelf: 'center', paddingTop: '3%', paddingBottom: '3%', paddingHorizontal: '5%', borderBottomColor: "#056b60", borderBottomWidth: 2 }}>
+                        <View style={{ alignSelf: 'center',  paddingTop: '3%', paddingBottom: '3%', paddingHorizontal: '5%', borderBottomColor: "#056b60", borderBottomWidth: 2 }}>
                             <Text style={{ fontSize: 22, fontWeight: '500' }}>{this.props.space.name}</Text>
                         </View>
 
