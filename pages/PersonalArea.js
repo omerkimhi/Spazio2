@@ -27,39 +27,12 @@ class PersonalArea extends Component {
 
         this.state = {
             user: this.props.user,
-            favourites:[]
+            
         };
     }
-    getFavouritesSpaces = () =>
-    {
-            var num = this.state.user.userId;
-            var favouritesApiUrl = `http://proj.ruppin.ac.il/igroup17/prod/api/favourite/${num}`;
-            
-            fetch(favouritesApiUrl, {
-              method: "GET"
-            })
-              .then(res => {
-                 return res.json();
-              })
-              .then(
-                result => {
-                  this.setState({
-                    favourites: result.map(
-                      item =>
-                      item                            
-                        
-                    )
-                  });
-                },
-                error => { }
-              );
-
-          };
     
-      showFavourites = () => {
-        console.log(this.state.favourites);
-
-      }
+    
+     
 
 
     render() {
@@ -120,21 +93,21 @@ class PersonalArea extends Component {
 
                         </View>
 
-                        <View  style={{ flexDirection: 'row', paddingTop: '10%' }}>
-                            <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
-                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
-                                <TouchableOpacity onPress={this.getFavouritesSpaces()}>
-                                   <Icon
+                        <View style={{ flexDirection: 'row', paddingTop: '10%' }}>
+                            <TouchableHighlight onPress={() => this.props.navigation.navigate('Favorites')}>
+                                <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
+                                    <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+                                        <Icon
 
-                                        name='heart'
-                                        size={35}
-                                        color='#595959'
-                                    />
-                                     </TouchableOpacity>
+                                            name='heart'
+                                            size={35}
+                                            color='#595959'
+                                        />
+                                    </View>
+                                    <Text>My Favorites</Text>
+                                    <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
                                 </View>
-                                <Text>My Favorites</Text>
-                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
-                            </View>
+                            </TouchableHighlight>
 
                             <View style={{ alignItems: 'center', flexDirection: 'column', }}>
                                 <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
@@ -161,7 +134,7 @@ class PersonalArea extends Component {
                                 <Text>Help&About</Text>
                                 <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
                             </View>
-                            <Button onPress={this.showFavourites()}>showFavourites</Button>
+                            
 
                         </View>
 

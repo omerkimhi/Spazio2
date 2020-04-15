@@ -20,6 +20,7 @@ import SearchFeed from '../pages/SearchFeed';
 import SpacePage from '../pages/SpacePage';
 import PersonalArea from '../pages/PersonalArea';
 import OrderSpace from '../pages/OrderSpace';
+import FavoriteSpaces from '../pages/Personal Area Pages/FavoriteSpaces.js';
 
 //import classes
 import User from "../Classes/User";
@@ -41,6 +42,9 @@ const Tab = createMaterialTopTabNavigator();
 
 const DetailsIcon = require("../assets/Images/detailsIcon.jpg");
 
+const spacesIdTest = [6, 7, 8, 10, 11];
+
+
 class Navigator extends Component {
   constructor(props) {
     super(props);
@@ -54,8 +58,8 @@ class Navigator extends Component {
       FieldsEquipment: [],
       isLogged: false,
       userLogged: null,
-      spaceSelected: ""
-      
+      spaceSelected: "",
+      FavoriteSpaces:[]
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
     this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
@@ -66,11 +70,38 @@ class Navigator extends Component {
     if (isLog) {
       this.setState({
         isLogged: true,
-        userLogged: user
-      }, () => { console.log(this.state.userLogged.userId) })
+        userLogged: user,
+        
+      }, () => { this.getFavouritesSpaces(this.state.userLogged.userId); })
     }
   }
 
+  getFavouritesSpaces = (num) =>
+    {
+            
+            var favouritesApiUrl = `http://proj.ruppin.ac.il/igroup17/prod/api/favourite/${num}`;
+            
+            fetch(favouritesApiUrl, {
+              method: "GET"
+            })
+              .then(res => {
+                 return res.json();
+              })
+              .then(
+                result => {
+                  this.setState({
+                    FavoriteSpaces: result.map(
+                      item =>
+                      item                            
+                        
+                    )
+
+                  },()=> console.log(this.state.FavoriteSpaces));
+                },
+                error => { }
+              );
+
+          };
   spaceSelectedFunc = (spaceselected) => {
     this.setState({
       spaceSelected: spaceselected
@@ -314,9 +345,9 @@ class Navigator extends Component {
   }
 
   SearchScreen = ({ navigation }) => {
-    this.FetchGetSpaces();
+
     return (
-      <Search spacesTest={this.state.Spaces} navigation={navigation} />
+      <Search Spaces={this.state.Spaces} navigation={navigation} />
     );
   }
 
@@ -392,10 +423,28 @@ class Navigator extends Component {
       </View>)
   }
 
+  checkFavorites = () => {
+    let favSpaces = [];
+    this.state.Spaces.map((space) => {
+      spacesIdTest.map((num) => {
+        if (num == space.spaceId) {
+          favSpaces.push(space);
+        }
+      })
+    });
+    return (favSpaces);
+  }
 
+  FavoritesSpaceslScreen = () => {
+    this.checkFavorites();
+    return (
+      <FavoriteSpaces Spaces={this.checkFavorites()} />
+    )
+  }
 
 
   SearchStackScreen = () => {
+
     return (
       <SearchStack.Navigator>
         <SearchStack.Screen options={{ headerShown: false }} name="Search" component={this.SearchScreen} />
@@ -408,37 +457,42 @@ class Navigator extends Component {
 
   PersonalStackScreen = () => {
     return (
-      <HomeStack.Navigator>
-        <HomeStack.Screen options={{ headerShown: false }} name="Personal Area" component={this.PersonalScreen} />
-        <HomeStack.Screen name="Register" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.RegisterScreen} />
-      </HomeStack.Navigator>
+      <PersonalStack.Navigator>
+        <PersonalStack.Screen options={{ headerShown: false }} name="Personal Area" component={this.PersonalScreen} />
+        <PersonalStack.Screen options={{ headerStyle: { backgroundColor: '#056b60' } }} name="Favorites" component={this.FavoritesSpaceslScreen} />
+
+      </PersonalStack.Navigator>
     );
   }
 
   render() {
-    this.FetchGetUsers();
-    if (this.state.isLogged) {
+    if (this.state.Spaces.length == 0) {
+      return (<Text style={{ fontSize: 30, fontWeight: '500', alignSelf: 'center', marginTop: 180 }}>loading..</Text>)
+    }
+    else {
+      if (this.state.isLogged) {
+        return (
+          <View style={styles.container}>
+            <NavigationContainer>
+              <Tab.Navigator>
+                <Tab.Screen name="Search" component={this.SearchStackScreen} />
+                <Tab.Screen name="Personal Area" component={this.PersonalStackScreen} />
+              </Tab.Navigator>
+            </NavigationContainer>
+          </View >
+        )
+      }
       return (
         <View style={styles.container}>
           <NavigationContainer>
             <Tab.Navigator>
               <Tab.Screen name="Search" component={this.SearchStackScreen} />
-              <Tab.Screen name="Personal Area" component={this.PersonalStackScreen} />
+              <Tab.Screen name="Log in" component={this.HomeStackScreen} />
             </Tab.Navigator>
           </NavigationContainer>
         </View >
       )
     }
-    return (
-      <View style={styles.container}>
-        <NavigationContainer>
-          <Tab.Navigator>
-            <Tab.Screen name="Search" component={this.SearchStackScreen} />
-            <Tab.Screen name="Log in" component={this.HomeStackScreen} />
-          </Tab.Navigator>
-        </NavigationContainer>
-      </View >
-    )
   };
 }
 export default Navigator;

@@ -157,12 +157,17 @@ class SpacePage extends Component {
             if (this.state.spaceSelected["image" + i] != "")
                 pics.push({ "id": i, "imagePath": this.state.spaceSelected["image" + i] });
         }
-        console.log(this.state.spaceSelected);
+
         console.log(pics);
 
+        if (this.state.spaceSelected == "") {
+            return (<Text>loading..</Text>)
 
-
+        }
+        else
+            console.log("space selected: ", this.state.spaceSelected);
         return (
+
             <View style={{ flex: 1, }}>
                 <ScrollView style={{ flexDirection: 'column', backgroundColor: "#fff", marginBottom: "10%" }} ref={(c) => { this.parentScrollView = c; }}>
 
@@ -228,7 +233,7 @@ class SpacePage extends Component {
 
                     <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 22, fontWeight: '600' }}>Description</Text>
-                        <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>In zaki's Pilates studio everybody feels at home. You're invited to rent our comfortable space and...</Text>
+                        <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>{this.state.spaceSelected.description}</Text>
                     </View>
 
                     <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
