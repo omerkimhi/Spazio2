@@ -57,7 +57,8 @@ class Navigator extends Component {
       FieldsEquipment: [],
       isLogged: false,
       userLogged: null,
-      spaceSelected: ""
+      spaceSelected: "",
+      FavoriteSpaces:[]
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
     this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
@@ -68,7 +69,8 @@ class Navigator extends Component {
     if (isLog) {
       this.setState({
         isLogged: true,
-        userLogged: user
+        userLogged: user,
+        
       }, () => { console.log(this.state.userLogged.userId) })
     }
   }

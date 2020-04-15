@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { View, Button, Text, ScrollView, Image, TouchableHighlight } from 'react-native';
+import { Platform, StyleSheet, View, Button, Text, ScrollView, Image, TouchableHighlight } from 'react-native';
 
-
-
-class FavoriteSpaces extends Component {
+export default class FavoriteSpaces extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +11,19 @@ class FavoriteSpaces extends Component {
 
 
     render() {
-        console.log(this.props.Spaces)
+
+        let cards = [];
+
+        // this.props.Spaces.map((space) => {
+        //     cards.push({
+        //         id: space.spaceId,
+        //         title: space.name,
+        //         picture: Imageurl1,
+        //         content: <Tex>space.name</Tex>
+        //     })
+        // })
+
+        console.log("Favorite spaces: ", this.props.Spaces)
         return (
             <View>
                 <Text>
@@ -26,4 +36,3 @@ class FavoriteSpaces extends Component {
 
 
 
-export default FavoriteSpaces;
