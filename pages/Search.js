@@ -54,7 +54,7 @@ class SearchPage extends Component {
 
     };
   }
-  
+
 
   componentDidMount() {
 
@@ -112,46 +112,9 @@ class SearchPage extends Component {
       );
   };
   FetchGetSpaces = () => {
-    fetch(this.SpacesApiUrl, {
-      method: "GET"
+    this.setState({
+      Spaces: this.props.Spaces
     })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            Spaces: result.map(
-              item =>
-                new Space(
-                  item.Id,
-                  item.Name,
-                  item.Field,
-                  item.Price,
-                  item.City,
-                  item.Street,
-                  item.Number,
-                  item.Capabillity,
-                  item.Bank,
-                  item.Branch,
-                  item.Imageurl1,
-                  item.Imageurl2,
-                  item.Imageurl3,
-                  item.Imageurl4,
-                  item.Imageurl5,
-                  item.AccountNumber,
-                  item.UserEmail,
-                  item.Description,
-                  item.TermsOfUse,
-                  item.Rank,
-                  item.Uploadtime
-
-                )
-            )
-          });
-        },
-        error => { }
-      );
   };
   FetchGetEquipment = () => {
     fetch(this.EquipmentApiUrl, {
