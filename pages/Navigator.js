@@ -29,6 +29,7 @@ import Equipment from "../Classes/Equipment";
 import Facility from "../Classes/Facility";
 import Availabillity from "../Classes/Availabillity";
 import FieldEq from "../Classes/FieldEq";
+import Favourite from "../Classes/Favourite";
 
 
 const HomeStack = createStackNavigator();
@@ -71,10 +72,36 @@ class Navigator extends Component {
         isLogged: true,
         userLogged: user,
         
-      }, () => { console.log(this.state.userLogged.userId) })
+      }, () => { this.getFavouritesSpaces(this.state.userLogged.userId); })
     }
   }
 
+  getFavouritesSpaces = (num) =>
+    {
+            
+            var favouritesApiUrl = `http://proj.ruppin.ac.il/igroup17/prod/api/favourite/${num}`;
+            
+            fetch(favouritesApiUrl, {
+              method: "GET"
+            })
+              .then(res => {
+                 return res.json();
+              })
+              .then(
+                result => {
+                  this.setState({
+                    FavoriteSpaces: result.map(
+                      item =>
+                      item                            
+                        
+                    )
+
+                  },()=> console.log(this.state.FavoriteSpaces));
+                },
+                error => { }
+              );
+
+          };
   spaceSelectedFunc = (spaceselected) => {
     this.setState({
       spaceSelected: spaceselected
@@ -276,6 +303,32 @@ class Navigator extends Component {
     console.log(this.state.FieldsEquipment);
   }
 
+  addFavourite = (userId,spaceId) => {
+    var favourite = new Favourite(userId,spaceId);
+    var apiUrl="http://proj.ruppin.ac.il/igroup17/prod/api/favourite/";
+    fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(favourite),
+      headers: new Headers({
+        "Content-type": "application/json; charset=UTF-8"
+
+        //very important to add the 'charset=UTF-8'!!!!
+      })
+    })
+      .then(res => {
+        console.log("res=", res , res.json());
+        return res.json();
+      })
+      .then(
+        result => {
+          console.log("fetch POST= ", result);
+        },
+        error => {
+          console.log("err post=", error);
+        }
+      );
+  }
+
   HomeScreen = ({ navigation }) => {
 
     return (
@@ -356,7 +409,8 @@ class Navigator extends Component {
   setSpaceRightHeader = () => {
     return (
       <View style={{ flexDirection: 'row-reverse', }}>
-        <TouchableHighlight style={{ marginRight: '20%' }} onPress={() => { console.log("User: ", this.state.userLogged.userId, "Space: ", this.state.spaceSelected.spaceId) }}>
+        <TouchableHighlight style={{ marginRight: '20%' }} onPress={() => { console.log("User: ", this.state.userLogged.userId, "Space: ", this.state.spaceSelected.spaceId);
+      this.addFavourite(this.state.userLogged.userId,this.state.spaceSelected.spaceId); }}>
           <View>
             <Icon
               name='heart'

@@ -6,12 +6,14 @@ import {
     Button,
     TextInput,
     Image,
+    TouchableOpacity,
     TouchableHighlight,
     ScrollView
 } from "react-native";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 import User from '../Classes/User';
+import Favourite from '../Classes/Favourite';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -24,11 +26,13 @@ class PersonalArea extends Component {
         super(props);
 
         this.state = {
-            user: this.props.user
+            user: this.props.user,
+            
         };
     }
-
-
+    
+    
+     
 
 
     render() {
@@ -130,6 +134,7 @@ class PersonalArea extends Component {
                                 <Text>Help&About</Text>
                                 <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
                             </View>
+                            
 
                         </View>
 
