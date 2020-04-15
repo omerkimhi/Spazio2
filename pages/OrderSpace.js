@@ -60,9 +60,12 @@ class OrderSpace extends Component {
     }
 
     OrderPlace = () => {
-        let price = this.state.spaceSelected.price * (Number(this.state.timeSelected.end.substring(0, this.state.timeSelected.end.indexOf(":"))) - Number(this.state.timeSelected.start.substring(0, this.state.timeSelected.start.indexOf(":"))))
-        console.log("The date is: ", this.state.dateSelected, " The hours are: ", this.state.timeSelected);
-        console.log("the price is: ", price);
+
+        console.log("The date is: ", this.state.dateSelected);
+        console.log("The hours are: ", this.state.timeSelected)
+        console.log("the price is: ", this.state.price);
+        console.log("ths spaceID is: ", this.state.spaceSelected.spaceId);
+        console.log("the user logged ID is: ", this.props.userLogged.userId)
 
     }
 

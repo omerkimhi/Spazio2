@@ -323,7 +323,7 @@ class Navigator extends Component {
 
     return (
 
-      <OrderSpace navigation={navigation} route={route} />
+      <OrderSpace userLogged={this.state.userLogged} navigation={navigation} route={route} />
 
     );
   }
