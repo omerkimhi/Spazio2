@@ -16,33 +16,33 @@ export default class DateSelector extends Component {
   }
 
   onDateChange(date) {
+
     this.setState({
       selectedStartDate: date,
-    });
+    }, () => this.props.checkAvailability(this.state.selectedStartDate));
   }
+
+  checkAvailability = () => {
+    console.log("Day: ", this.state.selectedStartDate.format('dddd'))
+  }
+
   render() {
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const { selectedStartDate } = this.state;
     const startDate = selectedStartDate ? selectedStartDate.toString() : '';
-    console.log(selectedStartDate)
+
     return (
-      <View style={styles.container}>
+      <View style={{ backgroundColor: '#FFFFFF', flex: 1, }}>
         <CalendarPicker
+
           onDateChange={this.onDateChange}
         />
 
-        <View>
+        {/* <View style={{ left: '2%' }}>
           <Text>SELECTED DATE:{startDate}</Text>
-        </View>
+        </View> */}
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-
-  },
-});

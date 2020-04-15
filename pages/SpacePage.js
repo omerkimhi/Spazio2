@@ -18,35 +18,6 @@ import Facility from "../Classes/Facility";
 import Equipment from "../Classes/Equipment";
 
 
-const Availability = [{
-    day: 'Sunday',
-    from: '11',
-    to: '12'
-}, {
-    day: 'Monday',
-    from: '15',
-    to: '19'
-}, {
-    day: 'Tuesday',
-    from: '11',
-    to: '15'
-}, {
-    day: 'Wednesday',
-    from: '18',
-    to: '19'
-}, {
-    day: 'Thursday',
-    from: '8',
-    to: '12'
-}, {
-    day: 'Friday',
-    from: '18',
-    to: '19'
-}, {
-    day: 'Saturday',
-    from: '18',
-    to: '20'
-}];
 
 class SpacePage extends Component {
 
@@ -56,14 +27,12 @@ class SpacePage extends Component {
             Facilities: [],
             FieldsEquipment: [],
             EquipmentList: [],
-            orderDay: 'sunday',
-            orderFrom: 0,
-            orderTo: 5,
+
             availa: [],
             spaceSelected: "",
-            selectedStartDate: null,
+
         };
-        this.onDateChange = this.onDateChange.bind(this);
+
     }
 
 
@@ -89,10 +58,8 @@ class SpacePage extends Component {
     }
 
     showAvailability = () => {
-
-
         return (
-            this.state.availa.map((item, key) => <Text>{item.Day}: {item.val}</Text>)
+            this.state.availa.map((item, key) => <Text style={{ textTransform: 'capitalize' }}>{item.Day}: {item.val}</Text>)
         )
     }
 
@@ -173,28 +140,7 @@ class SpacePage extends Component {
     // }
 
 
-    setSelectedValue(itemValue, itemIndex) {
 
-        this.setState({
-            orderDay: itemValue,
-            orderFrom: Availability[itemIndex].from,
-            orderTo: Availability[itemIndex].to
-
-        }, () => {
-            let availab = [];
-            for (let i = this.state.orderFrom; i <= this.state.orderTo; i++) {
-                availab.push(i);
-            }
-            this.setState({ availa: availab })
-        })
-
-    }
-
-    onDateChange(date) {
-        this.setState({
-            selectedStartDate: date,
-        });
-    }
 
     render() {
 
@@ -334,7 +280,7 @@ class SpacePage extends Component {
 
                 </ScrollView >
                 <View style={{ position: 'absolute', width: '100%', bottom: 0, height: '12%' }}>
-                    <Button onClick={() => { this.props.navigation.navigate('OrderPage') }} style={{ height: '100%', paddingBottom: 0, backgroundColor: "red" }}>
+                    <Button onClick={() => { this.props.navigation.navigate('OrderPage', { Space: this.state.spaceSelected, Availablity: this.state.availa }) }} style={{ height: '100%', paddingBottom: 0, backgroundColor: "red" }}>
                         ORDER      THIS      SPACE      NOW!
               </Button>
                 </View>

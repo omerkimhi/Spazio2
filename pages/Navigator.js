@@ -154,7 +154,12 @@ class Navigator extends Component {
                   item.Imageurl4,
                   item.Imageurl5,
                   item.AccountNumber,
-                  item.UserEmail
+                  item.UserEmail,
+                  item.Description,
+                  item.TermsOfUse,
+                  item.Rank,
+                  item.Uploadtime
+
                 )
             )
           });
