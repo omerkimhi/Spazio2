@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component, useRef } from "react";
 import {
     StyleSheet,
     Text,
@@ -18,9 +18,13 @@ class AddressModal extends Component {
         super(props);
 
         this.state = {
-            show: false
+            show: false,
+            City: "",
+            Street: "",
+            Number: ""
         }
     }
+
 
 
     setShow = (status) => {
@@ -32,7 +36,17 @@ class AddressModal extends Component {
     handleClose = () => this.setShow(false);
     handleShow = () => this.setShow(true);
 
+    getData = (stateName, value) => {
 
+        this.setState({
+            [stateName]: value
+        })
+    }
+
+    saveChanges = () => {
+        this.props.getAddress(this.state.City, this.state.Street, this.state.Number)
+        this.handleClose();
+    };
 
 
     render() {
@@ -63,11 +77,11 @@ class AddressModal extends Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Address />
+                        <Address sendData={this.getData} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>Close</Button>
-                        <Button variant="primary" onClick={this.handleClose}>Save changes</Button>
+                        <Button variant="primary" onClick={this.saveChanges}>Save changes</Button>
 
                     </Modal.Footer>
                 </Modal>

@@ -52,10 +52,11 @@ class SearchPage extends Component {
       Facilities: [],
       Availablities: [],
       FieldsEquipment: [],
-      AddressCity:"",
-      addressStreet:"",
-      addressNumber:""
-
+      AddressCity: "",
+      addressStreet: "",
+      addressNumber: "",
+      SpacesToShow: [],
+      hasFiltered: false
     };
     this.updateFieldB = this.updateFieldB.bind(this);
     this.updateFieldS = this.updateFieldS.bind(this);
@@ -85,19 +86,72 @@ class SearchPage extends Component {
     this.FetchGetFacilities();
     this.FetchGetAvailabilities();
     this.FetchGetFieldsEq();
+    this.setState({
+      SpacesToShow: this.props.Spaces
+    })
+
+  }
+
+  getAddress = (c, s, n) => {
+
+    if (c != "") {
+      this.setState({
+        hasFiltered: true,
+        SpacesToShow: this.state.SpacesToShow.filter(item => item.city == c)
+      })
+
+      // if (this.state.hasFiltered == true) {
+      //   this.setState({
+      //     hasFiltered: true,
+      //     SpacesToShow: this.state.SpacesToShow.filter(function (item) {
+      //       return item.city == c
+      //     }, () => (console.log(this.state.SpacesToShow)))
+      //   })
+      // }
+      // else {
+      //   this.setState({
+      //     hasFiltered: true,
+      //     SpacesToShow: this.props.Spaces.filter(function (item) {
+      //       return item.city == c
+      //     }, () => (console.log(this.state.SpacesToShow)))
+      //   })
+      // }
+    }
+    if (n != "") {
+      this.setState({
+        hasFiltered: true,
+        SpacesToShow: this.state.SpacesToShow.filter(item => item.number == n)
+      })
+    }
+    if (s != "") {
+      this.setState({
+        hasFiltered: true,
+        SpacesToShow: this.state.SpacesToShow.filter(item => item.street == s)
+      })
+    }
+
+
+  }
+
+  serachFilter = (field) => {
+    console.log(this.state.SpacesToShow)
+    this.setState({
+      hasFiltered: true,
+      SpacesToShow: this.state.SpacesToShow.filter(item => item.field == field)
+    }, () => console.log(this.state.SpacesToShow))
 
   }
 
   updateFieldB() {
-    this.setState({ field: 'Beauty' }, () => console.log(this.state.field));
+    this.setState({ field: 'Beauty', }, this.serachFilter("Beauty"));
   }
 
   updateFieldS() {
-    this.setState({ field: 'Sport' }, () => console.log(this.state.field));
+    this.setState({ field: 'Sport' }, this.serachFilter("Sport"));
   }
 
   updateFieldA() {
-    this.setState({ field: 'Art' }, () => console.log(this.state.field));
+    this.setState({ field: 'Art' }, this.serachFilter("Art"));
   }
 
   FetchGetUsers = () => {
@@ -153,6 +207,8 @@ class SearchPage extends Component {
         error => { }
       );
   };
+
+
   FetchGetFacilities = () => {
     fetch(this.FacilitiesApiUrl, {
       method: "GET"
@@ -239,9 +295,23 @@ class SearchPage extends Component {
 
   }
 
+  whatToShow = () => {
+    if (this.state.hasFiltered == true) {
+      return this.state.SpacesToShow
+    } else return this.state.Spaces
+  }
+
+  LastAddedSpaces = () => {
+    let temp = [];
+    for (let i = this.props.Spaces.length - 1; i > this.props.Spaces.length - 6; i--) {
+      temp.push(this.props.Spaces[i])
+    }
+    return (temp)
+  }
+
 
   render() {
-    
+    this.LastAddedSpaces();
     let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()]
 
     return (
@@ -293,7 +363,7 @@ class SearchPage extends Component {
                   Location{" "}
                 </Text>
 
-                <AddressModal />
+                <AddressModal getAddress={this.getAddress} />
 
               </View>
 
@@ -340,7 +410,7 @@ class SearchPage extends Component {
               <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
                 Show data
               </Button>
-              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { spacesTest: this.state.Spaces }) }} style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow() }) }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>
@@ -374,7 +444,7 @@ class SearchPage extends Component {
               Last added spaces
             </Text>
             <View style={{ paddingBottom: 10 }}>
-              <SpacesCarousel navigation={this.props.navigation} Spaces={this.state.Spaces} />
+              <SpacesCarousel navigation={this.props.navigation} Spaces={this.LastAddedSpaces()} />
             </View>
           </View>
         </View>

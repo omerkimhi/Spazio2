@@ -11,22 +11,29 @@ import { cities } from '../files/cities2';
 
 class Address extends Component {
 
-
-
     constructor(props) {
         super(props);
 
         this.state = {
             Cityarray: [],
-            Streetarray: []
-
+            Streetarray: [],
+            City: "",
+            Street: "",
+            Number: ""
         };
+    }
+
+
+
+    sendData = (stateName, value) => {
+        this.props.sendData(stateName, value)
     }
 
     handleSelectItem(item, index) {
         const { onDropdownClose } = this.props;
         onDropdownClose();
         console.log(item);
+        this.sendData("City", item)
     }
 
 
@@ -45,7 +52,7 @@ class Address extends Component {
         return (
             <View style={styles.autocompletesContainer}>
 
-                <SafeAreaView>
+                {/* <SafeAreaView>
                     {autocompletes.map(() => (
                         <Autocomplete
                             placeholder="City"
@@ -69,7 +76,7 @@ class Address extends Component {
                             rightTextExtractor={item => item.properties}
                         />
                     ))}
-                </SafeAreaView>
+                </SafeAreaView> */}
                 {/* <SafeAreaView>
                     {autocompletes.map(() => (
                         <Autocomplete
@@ -98,14 +105,22 @@ class Address extends Component {
 
                 <Input
                     containerStyle={{ width: 300 }}
+                    label="City"
+                    leftIcon={{ name: 'chevron-right' }}
+                    onChangeText={(value) => { this.setState({ Street: value }, this.sendData("City", value)) }}
+                />
+                <Input
+                    containerStyle={{ width: 300 }}
                     label="Street"
                     leftIcon={{ name: 'chevron-right' }}
+                    onChangeText={(value) => { this.setState({ Street: value }, this.sendData("Street", value)) }}
                 />
 
                 <Input
                     containerStyle={{ width: 100 }}
                     label="Number"
                     leftIcon={{ name: 'chevron-right' }}
+                    onChangeText={(value) => { this.setState({ Number: value }, this.sendData("Number", value)) }}
                 />
 
 

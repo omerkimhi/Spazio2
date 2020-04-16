@@ -105,8 +105,8 @@ class SearchFeed extends Component {
     }
 
     render() {
-        const { spacesTest } = this.props.route.params;
-        console.log(spacesTest);
+        const { SpacesToShow } = this.props.route.params;
+        
 
         return (
             <ScrollView style={{ flex: 1 }} >
@@ -154,7 +154,7 @@ class SearchFeed extends Component {
 
                         {
 
-                            this.state.Spaces.map((space) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={this.state.Availablities} />)
+                            SpacesToShow.map((space) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={this.state.Availablities} />)
                         }
 
 
