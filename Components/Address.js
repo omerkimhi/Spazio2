@@ -70,7 +70,7 @@ class Address extends Component {
                         />
                     ))}
                 </SafeAreaView>
-                <SafeAreaView>
+                {/* <SafeAreaView>
                     {autocompletes.map(() => (
                         <Autocomplete
                             placeholder="Street"
@@ -88,13 +88,20 @@ class Address extends Component {
 
                             minimumCharactersCount={2}
                             highlightText
-                            Autocomplete data={this.Cityarray} valueExtractor={item => item}
+                            
                             //here you put the array of the streets
                             rightContent
                             rightTextExtractor={item => item.properties}
                         />
                     ))}
-                </SafeAreaView>
+                </SafeAreaView> */}
+
+                <Input
+                    containerStyle={{ width: 300 }}
+                    label="Street"
+                    leftIcon={{ name: 'chevron-right' }}
+                />
+
                 <Input
                     containerStyle={{ width: 100 }}
                     label="Number"

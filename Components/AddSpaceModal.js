@@ -41,6 +41,7 @@ class AddSpaceModal extends Component {
     handleShow = () => this.setShow(true);
 
     onClickChild = () => {
+        this.handleClose();
         this.child.current.saveChanges();
     }
 

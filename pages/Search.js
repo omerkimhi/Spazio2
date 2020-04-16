@@ -45,14 +45,21 @@ class SearchPage extends Component {
     super(props);
 
     this.state = {
+      field: "",
       Users: [],
       Spaces: [],
       EquipmentList: [],
       Facilities: [],
       Availablities: [],
-      FieldsEquipment: []
+      FieldsEquipment: [],
+      AddressCity:"",
+      addressStreet:"",
+      addressNumber:""
 
     };
+    this.updateFieldB = this.updateFieldB.bind(this);
+    this.updateFieldS = this.updateFieldS.bind(this);
+    this.updateFieldA = this.updateFieldA.bind(this);
   }
 
 
@@ -79,6 +86,18 @@ class SearchPage extends Component {
     this.FetchGetAvailabilities();
     this.FetchGetFieldsEq();
 
+  }
+
+  updateFieldB() {
+    this.setState({ field: 'Beauty' }, () => console.log(this.state.field));
+  }
+
+  updateFieldS() {
+    this.setState({ field: 'Sport' }, () => console.log(this.state.field));
+  }
+
+  updateFieldA() {
+    this.setState({ field: 'Art' }, () => console.log(this.state.field));
   }
 
   FetchGetUsers = () => {
@@ -222,7 +241,7 @@ class SearchPage extends Component {
 
 
   render() {
-
+    
     let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()]
 
     return (
@@ -249,13 +268,13 @@ class SearchPage extends Component {
                   aria-label="Basic example"
                   name="options"
                 >
-                  <ToggleButton variant="outline-secondary" value={1}>
+                  <ToggleButton variant="outline-secondary" value={1} onClick={this.updateFieldB}>
                     Beauty
                   </ToggleButton>
-                  <ToggleButton variant="outline-secondary" value={2}>
+                  <ToggleButton variant="outline-secondary" value={2} onClick={this.updateFieldS}>
                     Sport
                   </ToggleButton>
-                  <ToggleButton variant="outline-secondary" value={3}>
+                  <ToggleButton variant="outline-secondary" value={3} onClick={this.updateFieldA}>
                     Art
                   </ToggleButton>
                 </ToggleButtonGroup>

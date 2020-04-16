@@ -21,6 +21,7 @@ class Register extends Component {
             PhoneNumber: "",
             addedUsers: [],
             spaceName: "",
+            spaceOwner:false
 
         };
     }
@@ -109,6 +110,9 @@ class Register extends Component {
     }
 
     getSpacesAdded = (newSpace, Avail, Fac, Eq) => {
+        this.setState({
+            spaceOwner:true
+        })
         console.log("added to register: ", newSpace, Avail, Fac, Eq);
     }
 
@@ -123,7 +127,7 @@ class Register extends Component {
             <ScrollView>
                 <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
                     <View style={{ paddingTop: 35 }}>
-                        <Button title="test" onPress={() => console.log(this.state.spaceName)} />
+                       
                         {/* <View style={{ alignSelf: 'center', alignItems: 'center', height: '20%', flexDirection: 'row' }}>
                             <Image source={logow1} style={{ width: 50, height: 50 }} />
                             <Text style={{ color: 'white', fontSize: 20, alignSelf: 'center' }}>SPAZIO</Text>

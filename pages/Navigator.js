@@ -371,7 +371,7 @@ class Navigator extends Component {
 
     return (
 
-      <SearchFeed spaceSelected={this.spaceSelectedFunc} navigation={navigation} route={route} />
+      <SearchFeed  spaceSelected={this.spaceSelectedFunc} navigation={navigation} route={route} />
 
     );
   }
@@ -479,7 +479,7 @@ class Navigator extends Component {
   }
 
   render() {
-    if (this.state.Spaces.length == 0 && this.state.FieldsEquipment.length == 0) {
+    if (this.state.Spaces.length == 0 || this.state.FieldsEquipment.length == 0) {
       return (<Text style={{ fontSize: 30, fontWeight: '500', alignSelf: 'center', marginTop: 180 }}>loading..</Text>)
     }
     else {
@@ -495,7 +495,7 @@ class Navigator extends Component {
           </View >
         )
       }
-    
+
       return (
         <View style={styles.container}>
           <NavigationContainer>
