@@ -5,24 +5,23 @@ import { View, Text, TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input } from 'react-native-elements';
 
-class SpaceTermsAndRules extends Component {
+class SpaceDescription extends Component {
     render() {
         return (
             <View>
                 <Accordion>
                     <Card style={{ backgroundColor: 'transparent', borderColor: 'transparent' }}>
                         <Accordion.Toggle as={Card.Header} eventKey="0">
-                            <Text style={{ color: 'black', fontSize: 22 }}>Space Terms&Rules: </Text>
+                            <Text style={{ color: 'black', fontSize: 22 }}>Description: </Text>
                             <Icon color='#595959'
                                 size={30}
                                 name='caret-down' />
                         </Accordion.Toggle>
                         <Accordion.Collapse eventKey="0">
                             <Card.Body>
-
                                 <TextInput
-                                    onChangeText={(value) => { this.props.getData(value, "Terms") }}
-                                    style={{ height: 80, width: 300, borderColor: 'gray', borderWidth: 1 }} multiline={true} placeholder="Write your terms and rules here.." />
+                                    onChangeText={(value) => { this.props.getData(value, "Description") }}
+                                    style={{ height: 80, width: 300, borderColor: 'gray', borderWidth: 1 }} multiline={true} placeholder="Write your space decription here.." />
                             </Card.Body>
                         </Accordion.Collapse>
                     </Card>
@@ -34,4 +33,4 @@ class SpaceTermsAndRules extends Component {
 }
 
 
-export default SpaceTermsAndRules;
+export default SpaceDescription;

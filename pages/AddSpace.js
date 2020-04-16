@@ -10,14 +10,17 @@ import Equipment from '../Components/Equipment.js';
 import SpaceTermsAndRules from '../Components/SpaceTermsAndRules.js'
 import { ButtonGroup, Button, InputGroup, FormControl } from 'react-bootstrap';
 import DepoistBank from '../Components/DepositBank.js';
+import SpaceDescription from '../Components/SpaceDescription.js'
+
 
 import Space from "../Classes/Space";
-
+import Availabillity from "../Classes/Availabillity";
+import FieldEq from "../Classes/FieldEq";
 
 class AddSpace extends Component {
     constructor(props) {
         super(props);
-
+        this.Eq = React.createRef();
         this.state = {
             spaceId: 0,
             field: "",
@@ -35,7 +38,14 @@ class AddSpace extends Component {
             spaceImage3: "",
             spaceImage4: "",
             spaceImage5: "",
-            spaceUserEmail: ""
+            spaceUserEmail: "",
+            Availability: [],
+            Facilities: [],
+            Equipment: [],
+            FieldEquipment: [],
+            Description: "",
+            Terms: "",
+
 
         }
         this.updateFieldB = this.updateFieldB.bind(this);
@@ -43,26 +53,52 @@ class AddSpace extends Component {
         this.updateFieldA = this.updateFieldA.bind(this);
     }
 
+    onchangeField = (field) => {
+        let tempArray = [];
+        this.props.FieldsEquipment.map((item) => {
+            if (item.field == field) {
+                tempArray.push(item.name)
+            }
+        });
+        this.setState({
+            FieldEquipment: tempArray
+        }, () => { this.Eq.current.getEq(this.state.FieldEquipment); })
+    }
+
+
+
+    getAvailability = (ava) => {
+        this.setState({
+            Availability: ava
+        })
+    }
+
+
+
+    getData = (data, name) => {
+        this.setState({
+            [name]: data
+        }, () => console.log(this.state[name]))
+    }
+
     onChangeText = (text) => {
         this.props.sendSpaceData(text)
     }
 
-    test = () => {
-        console.log("success");
-    }
+
 
     updateFieldB() {
-        this.setState({ field: 'Beauty' });
+        this.setState({ field: 'Beauty' }, this.onchangeField('Beauty'));
 
     }
 
 
     updateFieldS() {
-        this.setState({ field: 'Sport' });
+        this.setState({ field: 'Sport' }, this.onchangeField('Sport'));
     }
 
     updateFieldA() {
-        this.setState({ field: 'Art' });
+        this.setState({ field: 'Art' }, this.onchangeField('Art'));
     }
 
     saveChanges = () => {
@@ -82,9 +118,13 @@ class AddSpace extends Component {
             this.state.spaceImage4,
             this.state.spaceImage5,
             this.state.spaceAccount,
-            this.state.spaceUserEmail);
+            this.state.spaceUserEmail,
+            this.state.Description,
+            this.state.Terms);
 
-        this.props.getSpacesAdded(spaceAdded)
+
+
+        this.props.getSpacesAdded(spaceAdded, this.state.Availability, this.state.Facilities, this.state.Equipment)
     }
 
     sendBankDetails = (kind, value) => {
@@ -102,6 +142,7 @@ class AddSpace extends Component {
     render() {
 
 
+
         const { field } = this.state
 
         return (
@@ -113,7 +154,6 @@ class AddSpace extends Component {
 
                     <View style={{ flexDirection: 'column', width: '60%' }}>
                         <Input
-                            // onChangeText={(value) => { this.setState({ spaceName: value }), () => this.props.sendSpaceData("test") }}
                             placeholder='Space name'
                             leftIcon={{ name: 'chevron-right' }}
                             onChangeText={(value) => { this.setState({ spaceName: value }) }}
@@ -176,11 +216,13 @@ class AddSpace extends Component {
 
                         <View style={{ width: 350, alignItems: 'stretch', paddingTop: 20 }}>
 
-                            <Availability />
+                            <SpaceDescription getData={this.getData} />
 
-                            <Facilities />
+                            <Availability getAvailability={this.getAvailability} />
 
-                            <Equipment />
+                            <Facilities getData={this.getData} />
+
+                            <Equipment ref={this.Eq} getData={this.getData} names={this.state.FieldEquipment} />
 
                             <View style={{ flexDirection: 'row', paddingTop: '3%', paddingBottom: '3%' }}>
                                 <Icon color='#595959'
@@ -190,7 +232,7 @@ class AddSpace extends Component {
                                 <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}>Add space pictures</Text>
                             </View>
 
-                            <SpaceTermsAndRules />
+                            <SpaceTermsAndRules getData={this.getData} />
 
                             <DepoistBank sendBankDetails={this.sendBankDetails} />
 

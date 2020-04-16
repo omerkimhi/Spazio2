@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, View, Button, TextInput, Image, Touchable
 import { LinearGradient } from 'expo-linear-gradient';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
 import AddSpaceModal from '../Components/AddSpaceModal.js';
 
 class Register extends Component {
@@ -107,8 +108,8 @@ class Register extends Component {
         }
     }
 
-    getSpacesAdded = (newSpace) => {
-        console.log("added to register: ", newSpace);
+    getSpacesAdded = (newSpace, Avail, Fac, Eq) => {
+        console.log("added to register: ", newSpace, Avail, Fac, Eq);
     }
 
     render() {
@@ -116,6 +117,7 @@ class Register extends Component {
         const logow1 = require('../assets/Images/LogoW.png');
         const personI = require('../assets/Images/PersonIcon.png');
         const spaceI = require('../assets/Images/SpaceIcon.png');
+
 
         return (
             <ScrollView>
@@ -187,7 +189,7 @@ class Register extends Component {
                                     <Image source={personI} style={{ width: 70, height: 70 }} />
                                     <Text style={{ color: '#595959', marginBottom: 20, fontSize: 18 }}>Add a photo</Text>
 
-                                    <AddSpaceModal getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.getSpaceData} />
+                                    <AddSpaceModal FieldsEquipment={this.props.FieldsEquipment} getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.getSpaceData} />
 
                                 </View>
 

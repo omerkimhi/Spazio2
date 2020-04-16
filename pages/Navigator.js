@@ -59,7 +59,8 @@ class Navigator extends Component {
       isLogged: false,
       userLogged: null,
       spaceSelected: "",
-      FavoriteSpaces: []
+      FavoriteSpaces: [],
+      addedFav: false
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
     this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
@@ -283,6 +284,7 @@ class Navigator extends Component {
 
             )
 
+
           }, () => console.log(this.state.FavoriteSpaces));
         },
         error => { }
@@ -307,28 +309,31 @@ class Navigator extends Component {
   addFavourite = (userId, spaceId) => {
     var favourite = new Favourite(userId, spaceId);
     var apiUrl = "http://proj.ruppin.ac.il/igroup17/prod/api/favourite/";
-    fetch(apiUrl, {
-      method: "POST",
-      body: JSON.stringify(favourite),
-      headers: new Headers({
-        "Content-type": "application/json; charset=UTF-8"
+    this.setState({ addedFav: true }, () => {
+      fetch(apiUrl, {
+        method: "POST",
+        body: JSON.stringify(favourite),
+        headers: new Headers({
+          "Content-type": "application/json; charset=UTF-8"
 
-        //very important to add the 'charset=UTF-8'!!!!
+          //very important to add the 'charset=UTF-8'!!!!
+        })
       })
-    })
-      .then(res => {
-        console.log("res=", res, res.json());
-        return res.json();
-      })
-      .then(
-        result => {
-          console.log("fetch POST= ", result);
-          this.getFavouritesSpaces(this.state.userLogged.userId);
-        },
-        error => {
-          console.log("err post=", error);
-        }
-      );
+        .then(res => {
+          console.log("res=", res, res.json());
+          return res.json();
+        })
+        .then(
+          result => {
+            console.log("fetch POST= ", result);
+            this.getFavouritesSpaces(this.state.userLogged.userId);
+          },
+          error => {
+            console.log("err post=", error);
+          }
+        )
+    }
+    )
   }
 
   HomeScreen = ({ navigation }) => {
@@ -357,7 +362,7 @@ class Navigator extends Component {
   RegisterScreen = () => {
     return (
 
-      <Register />
+      <Register FieldsEquipment={this.state.FieldsEquipment} />
 
     );
   }
@@ -440,10 +445,12 @@ class Navigator extends Component {
   }
 
   FavoritesSpaceslScreen = ({ route, navigation }) => {
-    this.checkFavorites();
+
     return (
       <FavoriteSpaces Spaces={this.checkFavorites()} navigation={navigation} route={route} />
     )
+
+
   }
 
 
@@ -460,6 +467,7 @@ class Navigator extends Component {
   }
 
   PersonalStackScreen = () => {
+
     return (
       <PersonalStack.Navigator>
         <PersonalStack.Screen options={{ headerShown: false }} name="Personal Area" component={this.PersonalScreen} />
@@ -467,10 +475,11 @@ class Navigator extends Component {
 
       </PersonalStack.Navigator>
     );
+
   }
 
   render() {
-    if (this.state.Spaces.length == 0) {
+    if (this.state.Spaces.length == 0 && this.state.FieldsEquipment.length == 0) {
       return (<Text style={{ fontSize: 30, fontWeight: '500', alignSelf: 'center', marginTop: 180 }}>loading..</Text>)
     }
     else {
@@ -486,6 +495,7 @@ class Navigator extends Component {
           </View >
         )
       }
+    
       return (
         <View style={styles.container}>
           <NavigationContainer>

@@ -44,8 +44,8 @@ class AddSpaceModal extends Component {
         this.child.current.saveChanges();
     }
 
-    getSpacesAdded = (space) => {
-        this.props.getSpacesAdded(space);
+    getSpacesAdded = (space, Avail, Fac, Eq) => {
+        this.props.getSpacesAdded(space, Avail, Fac, Eq);
     }
 
     render() {
@@ -66,7 +66,7 @@ class AddSpaceModal extends Component {
                         <Modal.Title>Add Space</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <AddSpace ref={this.child} getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.props.sendSpaceData} handleSendData={this.handleSendData} />
+                        <AddSpace ref={this.child} FieldsEquipment={this.props.FieldsEquipment} getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.props.sendSpaceData} handleSendData={this.handleSendData} />
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>

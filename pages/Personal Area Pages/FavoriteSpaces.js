@@ -101,7 +101,7 @@ export default class FavoriteSpaces extends Component {
         console.log("Favorite spaces: ", this.props.Spaces);
 
         if (this.state.listData.length == 0) {
-            return (<Text>loading..</Text>)
+            return (<Text>You didn't like any space yet</Text>)
         }
         else {
             console.log("listdata: ", this.state.listData)
