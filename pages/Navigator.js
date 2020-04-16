@@ -59,7 +59,7 @@ class Navigator extends Component {
       isLogged: false,
       userLogged: null,
       spaceSelected: "",
-      FavoriteSpaces:[]
+      FavoriteSpaces: []
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
     this.FetchGetSpaces = this.FetchGetSpaces.bind(this);;
@@ -71,42 +71,11 @@ class Navigator extends Component {
       this.setState({
         isLogged: true,
         userLogged: user,
-        
+
       }, () => { this.getFavouritesSpaces(this.state.userLogged.userId); })
     }
   }
 
-  getFavouritesSpaces = (num) =>
-    {
-            
-            var favouritesApiUrl = `http://proj.ruppin.ac.il/igroup17/prod/api/favourite/${num}`;
-            
-            fetch(favouritesApiUrl, {
-              method: "GET"
-            })
-              .then(res => {
-                 return res.json();
-              })
-              .then(
-                result => {
-                  this.setState({
-                    FavoriteSpaces: result.map(
-                      item =>
-                      item                            
-                        
-                    )
-
-                  },()=> console.log(this.state.FavoriteSpaces));
-                },
-                error => { }
-              );
-
-          };
-  spaceSelectedFunc = (spaceselected) => {
-    this.setState({
-      spaceSelected: spaceselected
-    })
-  }
 
   componentDidMount() {
     this.UsersApiUrl =
@@ -294,6 +263,38 @@ class Navigator extends Component {
         error => { }
       );
   };
+
+  getFavouritesSpaces = (num) => {
+
+    var favouritesApiUrl = `http://proj.ruppin.ac.il/igroup17/prod/api/favourite/${num}`;
+
+    fetch(favouritesApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            FavoriteSpaces: result.map(
+              item =>
+                item
+
+            )
+
+          }, () => console.log(this.state.FavoriteSpaces));
+        },
+        error => { }
+      );
+
+  };
+  spaceSelectedFunc = (spaceselected) => {
+    this.setState({
+      spaceSelected: spaceselected
+    })
+  };
+
   showData = () => {
     console.log(this.state.Users);
     console.log(this.state.Spaces);
@@ -303,9 +304,9 @@ class Navigator extends Component {
     console.log(this.state.FieldsEquipment);
   }
 
-  addFavourite = (userId,spaceId) => {
-    var favourite = new Favourite(userId,spaceId);
-    var apiUrl="http://proj.ruppin.ac.il/igroup17/prod/api/favourite/";
+  addFavourite = (userId, spaceId) => {
+    var favourite = new Favourite(userId, spaceId);
+    var apiUrl = "http://proj.ruppin.ac.il/igroup17/prod/api/favourite/";
     fetch(apiUrl, {
       method: "POST",
       body: JSON.stringify(favourite),
@@ -316,12 +317,13 @@ class Navigator extends Component {
       })
     })
       .then(res => {
-        console.log("res=", res , res.json());
+        console.log("res=", res, res.json());
         return res.json();
       })
       .then(
         result => {
           console.log("fetch POST= ", result);
+          this.getFavouritesSpaces(this.state.userLogged.userId);
         },
         error => {
           console.log("err post=", error);
@@ -409,8 +411,10 @@ class Navigator extends Component {
   setSpaceRightHeader = () => {
     return (
       <View style={{ flexDirection: 'row-reverse', }}>
-        <TouchableHighlight style={{ marginRight: '20%' }} onPress={() => { console.log("User: ", this.state.userLogged.userId, "Space: ", this.state.spaceSelected.spaceId);
-      this.addFavourite(this.state.userLogged.userId,this.state.spaceSelected.spaceId); }}>
+        <TouchableHighlight style={{ marginRight: '20%' }} onPress={() => {
+          console.log("User: ", this.state.userLogged.userId, "Space: ", this.state.spaceSelected.spaceId);
+          this.addFavourite(this.state.userLogged.userId, this.state.spaceSelected.spaceId);
+        }}>
           <View>
             <Icon
               name='heart'
@@ -426,7 +430,7 @@ class Navigator extends Component {
   checkFavorites = () => {
     let favSpaces = [];
     this.state.Spaces.map((space) => {
-      spacesIdTest.map((num) => {
+      this.state.FavoriteSpaces.map((num) => {
         if (num == space.spaceId) {
           favSpaces.push(space);
         }
@@ -435,10 +439,10 @@ class Navigator extends Component {
     return (favSpaces);
   }
 
-  FavoritesSpaceslScreen = () => {
+  FavoritesSpaceslScreen = ({ route, navigation }) => {
     this.checkFavorites();
     return (
-      <FavoriteSpaces Spaces={this.checkFavorites()} />
+      <FavoriteSpaces Spaces={this.checkFavorites()} navigation={navigation} route={route} />
     )
   }
 
