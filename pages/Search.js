@@ -28,6 +28,7 @@ import {
 import Address from "../Components/Address";
 import SpacesCarousel from "../Components/SpacesCarousel.js";
 import AddressModal from "../Components/AddressModal.js";
+import DateModal from "../Components/DateModal";
 
 //import classes
 import User from "../Classes/User";
@@ -148,10 +149,38 @@ class SearchPage extends Component {
 
   }
 
+  getHour(day) {
+    let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][day];
+
+
+    return weekday
+  }
+
   whatToShow = () => {
+    let day = this.getHour(new Date().getDay());
+    console.log("today is: ", today)
     if (this.state.hasFiltered == true) {
-      return this.state.SpacesToShow
-    } else return this.state.Spaces
+      let tempArray = [];
+      this.state.SpacesToShow.map((space) => {
+        this.state.Availablities.map((ava) => {
+          if (ava.spaceId == space.spaceId && ava[day] != "00:00-00:00") {
+            tempArray.push(space);
+          }
+        })
+      })
+      return tempArray
+    }
+    else {
+      let tempArray = [];
+      this.state.Spaces.map((space) => {
+        this.state.Availablities.map((ava) => {
+          if (ava.spaceId == space.spaceId) {
+            tempArray.push(space);
+          }
+        })
+      })
+      return tempArray
+    }
   }
 
   LastAddedSpaces = () => {
@@ -164,6 +193,7 @@ class SearchPage extends Component {
 
 
   render() {
+    this.getHour();
     this.LastAddedSpaces();
     let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()]
 
@@ -231,8 +261,8 @@ class SearchPage extends Component {
                 >
                   Time{" "}
                 </Text>
-
-                <ButtonToolbar>
+                <DateModal Availablities={this.state.Availablities} />
+                {/* <ButtonToolbar>
                   <ToggleButtonGroup
                     type="radio"
                     aria-label="Basic example"
@@ -246,7 +276,7 @@ class SearchPage extends Component {
                       By Date
                     </ToggleButton>
                   </ToggleButtonGroup>
-                </ButtonToolbar>
+                </ButtonToolbar> */}
               </View>
             </View>
 

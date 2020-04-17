@@ -17,7 +17,7 @@ class SpaceCard extends Component {
     getHour() {
         let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()];
         for (let j = 0; j < this.props.Availablities.length; j++) {
-            if (this.props.Availablities[j].spaceId == this.props.space.spaceId - 5) {
+            if (this.props.Availablities[j].spaceId == this.props.space.spaceId) {
                 return this.props.Availablities[j][weekday];
             }
         }
@@ -27,7 +27,7 @@ class SpaceCard extends Component {
         let availabilities = [];
         let spaceAvailabilities = [];
         for (let i = 0; i < this.props.Availablities.length; i++) {
-            if (this.props.Availablities[i].spaceId + 5 == this.props.space.spaceId) {
+            if (this.props.Availablities[i].spaceId == this.props.space.spaceId) {
                 spaceAvailabilities = this.props.Availablities[i];
             }
         }
@@ -111,7 +111,7 @@ class SpaceCard extends Component {
                             </View>
                         </View>
 
-                        <View style={{ alignSelf: 'center',  paddingTop: '3%', paddingBottom: '3%', paddingHorizontal: '5%', borderBottomColor: "#056b60", borderBottomWidth: 2 }}>
+                        <View style={{ alignSelf: 'center', paddingTop: '3%', paddingBottom: '3%', paddingHorizontal: '5%', borderBottomColor: "#056b60", borderBottomWidth: 2 }}>
                             <Text style={{ fontSize: 22, fontWeight: '500' }}>{this.props.space.name}</Text>
                         </View>
 

@@ -32,37 +32,10 @@ class Home extends Component {
     };
   }
 
-  FetchGetUsers = () => {
-    fetch(this.UsersApiUrl, {
-      method: "GET"
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            Users: result.map(
-              item =>
-                new User(
-                  item.Id,
-                  item.Email,
-                  item.Password,
-                  item.UserName,
-                  item.PhoneNumber,
-                  item.Photo
-                )
-            )
-          });
-        },
-        error => { }
-      );
-  };
 
   componentDidMount() {
-    this.UsersApiUrl = "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/User/";
-    this.FetchGetUsers();
 
+    this.setState({ Users: this.props.Users })
   }
 
 
@@ -110,7 +83,7 @@ class Home extends Component {
     const Stack = createStackNavigator();
 
     const logow = require("../assets/Images/LogoW.png");
-    
+
     return (
       <LinearGradient colors={["#056b60", "white"]} style={{ flex: 1 }}>
 

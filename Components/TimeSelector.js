@@ -24,9 +24,10 @@ class TimeSelector extends Component {
     }
 
     timeChangeHandler(time) {
+        this.props.timeSelectedChanged(time);
         this.setState({
             value: time
-        }, this.props.timeSelectedChanged(this.state.value));
+        });
     }
 
     changeCompleteHandler(time) {
@@ -40,7 +41,7 @@ class TimeSelector extends Component {
         if (this.props.hoursOfDaySelected != "") {
             min = this.props.hoursOfDaySelected.substring(0, 5);
             max = this.props.hoursOfDaySelected.substring(6, 11);
-            console.log(min, max)
+            
         }
 
 

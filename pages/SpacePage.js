@@ -38,21 +38,14 @@ class SpacePage extends Component {
 
 
     componentDidMount() {
-        this.FieldEqApiUrl =
-            "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/FieldEq/";
-        this.FacilitiesApiUrl =
-            "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Facilities/";
-        this.EquipmentApiUrl =
-            "http://proj.ruppin.ac.il/igroup17/Mobile/project/api/Equipment/";
-
-        this.FetchGetFieldsEq();
-        this.FetchGetFacilities();
-        this.FetchGetEquipment();
-
+     
         const { Space, Availablities } = this.props.route.params;
         this.setState({
             spaceSelected: Space,
-            availa: Availablities
+            availa: Availablities,
+            EquipmentList: this.props.EquipmentList,
+            Facilities: this.props.Facilities,
+            FieldsEquipment: this.props.FieldsEquipment
         }, () => { console.log(this.state.availa) })
 
 
@@ -64,81 +57,6 @@ class SpacePage extends Component {
         )
     }
 
-    FetchGetFieldsEq = () => {
-        fetch(this.FieldEqApiUrl, {
-            method: "GET"
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(
-                result => {
-                    this.setState({
-                        FieldsEquipment: result.map(
-                            item => new FieldEq(item.Id, item.Field, item.Name)
-                        )
-                    });
-                },
-                error => { }
-            );
-    };
-
-    FetchGetFacilities = () => {
-        fetch(this.FacilitiesApiUrl, {
-            method: "GET"
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(
-                result => {
-                    this.setState({
-                        Facilities: result.map(
-                            item =>
-                                new Facility(
-                                    item.FacilityId,
-                                    item.Parking,
-                                    item.Toilet,
-                                    item.Kitchen,
-                                    item.Intercom,
-                                    item.Accessible,
-                                    item.AirCondition,
-                                    item.Wifi,
-                                    item.SpaceId
-                                )
-                        )
-                    });
-                },
-                error => { }
-            );
-    };
-    FetchGetEquipment = () => {
-        fetch(this.EquipmentApiUrl, {
-            method: "GET"
-        })
-            .then(res => {
-                return res.json();
-            })
-            .then(
-                result => {
-                    this.setState({
-                        EquipmentList: result.map(
-                            item => new Equipment(item.Id, item.Name, item.SpaceId)
-                        )
-                    });
-                },
-                error => { }
-            );
-    };
-
-    // GetFieldsEq() {
-    //     return (
-    //         this.state.FieldsEquipment.map((item) => {
-    //             { item.field === 'Sport' ? <Text>Hello this is Test Execution </Text> : <Text>Hello else </Text> }
-    //         })
-
-    //     )
-    // }
 
     checkFacilities = () => {
 

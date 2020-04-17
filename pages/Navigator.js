@@ -387,7 +387,10 @@ class Navigator extends Component {
 
     return (
 
-      <SpacePage navigation={navigation} route={route} />
+      <SpacePage navigation={navigation} route={route}
+        Facilities={this.state.Facilities}
+        FieldsEquipment={this.state.FieldsEquipment}
+        EquipmentList={this.state.EquipmentList} />
 
     );
   }
@@ -466,7 +469,7 @@ class Navigator extends Component {
     return (
       <SearchStack.Navigator>
         <SearchStack.Screen options={{ headerShown: false }} name="Search" component={this.SearchScreen} />
-        <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60' } }} component={this.SearchFeedScreen} />
+        <SearchStack.Screen name="SearchFeed" options={{ headerStyle: { backgroundColor: '#056b60', height: 47, } }} component={this.SearchFeedScreen} />
         <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerRight: () => this.setSpaceRightHeader(), headerStyle: { height: 47, backgroundColor: '#056b60' } }} name="SpacePage" component={this.SpacePageScreen} />
         <SearchStack.Screen options={{ title: this.setSpaceHeader(), headerRight: () => this.setSpaceRightHeader(), headerStyle: { height: 47, backgroundColor: '#056b60' } }} name="OrderPage" component={this.OrderSpacePageScreen} />
       </SearchStack.Navigator>

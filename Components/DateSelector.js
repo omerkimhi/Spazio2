@@ -22,9 +22,7 @@ export default class DateSelector extends Component {
     }, () => this.props.checkAvailability(this.state.selectedStartDate));
   }
 
-  checkAvailability = () => {
-    console.log("Day: ", this.state.selectedStartDate.format('dddd'))
-  }
+  
 
   render() {
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
