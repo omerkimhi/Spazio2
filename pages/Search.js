@@ -80,14 +80,15 @@ class SearchPage extends Component {
       "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
 
 
-    this.FetchGetUsers();
-    this.FetchGetSpaces();
-    this.FetchGetEquipment();
-    this.FetchGetFacilities();
-    this.FetchGetAvailabilities();
-    this.FetchGetFieldsEq();
+
     this.setState({
-      SpacesToShow: this.props.Spaces
+      SpacesToShow: this.props.Spaces,
+      Spaces: this.props.Spaces,
+      Availablities: this.props.Availablities,
+      EquipmentList: this.props.EquipmentList,
+      Users: this.props.Users,
+      Facilities: this.props.Facilities,
+      FieldsEquipment: this.props.FieldsEquipment
     })
 
   }
@@ -99,23 +100,6 @@ class SearchPage extends Component {
         hasFiltered: true,
         SpacesToShow: this.state.SpacesToShow.filter(item => item.city == c)
       })
-
-      // if (this.state.hasFiltered == true) {
-      //   this.setState({
-      //     hasFiltered: true,
-      //     SpacesToShow: this.state.SpacesToShow.filter(function (item) {
-      //       return item.city == c
-      //     }, () => (console.log(this.state.SpacesToShow)))
-      //   })
-      // }
-      // else {
-      //   this.setState({
-      //     hasFiltered: true,
-      //     SpacesToShow: this.props.Spaces.filter(function (item) {
-      //       return item.city == c
-      //     }, () => (console.log(this.state.SpacesToShow)))
-      //   })
-      // }
     }
     if (n != "") {
       this.setState({
@@ -154,137 +138,6 @@ class SearchPage extends Component {
     this.setState({ field: 'Art' }, this.serachFilter("Art"));
   }
 
-  FetchGetUsers = () => {
-    fetch(this.UsersApiUrl, {
-      method: "GET"
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            Users: result.map(
-              item =>
-                new User(
-                  item.Id,
-                  item.Email,
-                  item.Password,
-                  item.UserName,
-                  item.PhoneNumber,
-                  item.Photo,
-                  item.SpaceOwner,
-                  item.Visits,
-                  item.Rank
-
-                )
-            )
-          });
-        },
-        error => { }
-      );
-  };
-  FetchGetSpaces = () => {
-    this.setState({
-      Spaces: this.props.Spaces
-    })
-  };
-  FetchGetEquipment = () => {
-    fetch(this.EquipmentApiUrl, {
-      method: "GET"
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            EquipmentList: result.map(
-              item => new Equipment(item.Id, item.Name, item.SpaceId)
-            )
-          });
-        },
-        error => { }
-      );
-  };
-
-
-  FetchGetFacilities = () => {
-    fetch(this.FacilitiesApiUrl, {
-      method: "GET"
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            Facilities: result.map(
-              item =>
-                new Facility(
-                  item.FacilityId,
-                  item.Parking,
-                  item.Toilet,
-                  item.Kitchen,
-                  item.Intercom,
-                  item.Accessible,
-                  item.AirCondition,
-                  item.Wifi,
-                  item.SpaceId
-                )
-            )
-          });
-        },
-        error => { }
-      );
-  };
-  FetchGetAvailabilities = () => {
-    fetch(this.AvailabilitiesApiUrl, {
-      method: "GET"
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            Availablities: result.map(
-              item =>
-                new Availabillity(
-                  item.Id,
-                  item.Sunday,
-                  item.Monday,
-                  item.Tuesday,
-                  item.Wednesday,
-                  item.Thursday,
-                  item.Friday,
-                  item.Saturday,
-                  item.SpaceId
-                )
-            )
-          });
-        },
-        error => { }
-      );
-  };
-  FetchGetFieldsEq = () => {
-    fetch(this.FieldEqApiUrl, {
-      method: "GET"
-    })
-      .then(res => {
-        return res.json();
-      })
-      .then(
-        result => {
-          this.setState({
-            FieldsEquipment: result.map(
-              item => new FieldEq(item.Id, item.Field, item.Name)
-            )
-          });
-        },
-        error => { }
-      );
-  };
   showData = () => {
     console.log(this.state.Users);
     console.log(this.state.Spaces);
@@ -410,7 +263,7 @@ class SearchPage extends Component {
               <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
                 Show data
               </Button>
-              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow() }) }} style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow(), Availablities: this.state.Availablities }) }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>

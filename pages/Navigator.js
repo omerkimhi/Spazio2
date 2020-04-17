@@ -354,7 +354,14 @@ class Navigator extends Component {
   SearchScreen = ({ navigation }) => {
 
     return (
-      <Search Spaces={this.state.Spaces} navigation={navigation} />
+      <Search
+        Availablities={this.state.Availablities}
+        EquipmentList={this.state.EquipmentList}
+        Spaces={this.state.Spaces}
+        Users={this.state.Users}
+        Facilities={this.state.Facilities}
+        FieldsEquipment={this.state.FieldsEquipment}
+        navigation={navigation} />
     );
   }
 
@@ -371,7 +378,7 @@ class Navigator extends Component {
 
     return (
 
-      <SearchFeed  spaceSelected={this.spaceSelectedFunc} navigation={navigation} route={route} />
+      <SearchFeed spaceSelected={this.spaceSelectedFunc} navigation={navigation} route={route} />
 
     );
   }
@@ -478,8 +485,19 @@ class Navigator extends Component {
 
   }
 
+  
+
+  isLoading = () => {
+    return (this.state.Spaces.length == 0
+       || this.state.FieldsEquipment.length == 0
+       || this.state.Facilities.length == 0
+       || this.state.Users.length == 0
+       || this.state.Availablities.length == 0
+       || this.state.EquipmentList.length == 0)
+  }
+
   render() {
-    if (this.state.Spaces.length == 0 || this.state.FieldsEquipment.length == 0) {
+    if (this.isLoading()) {
       return (<Text style={{ fontSize: 30, fontWeight: '500', alignSelf: 'center', marginTop: 180 }}>loading..</Text>)
     }
     else {

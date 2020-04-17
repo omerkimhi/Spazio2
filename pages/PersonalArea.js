@@ -27,12 +27,12 @@ class PersonalArea extends Component {
 
         this.state = {
             user: this.props.user,
-            
+
         };
     }
-    
-    
-     
+
+
+
 
 
     render() {
@@ -105,7 +105,7 @@ class PersonalArea extends Component {
                                         />
                                     </View>
                                     <Text>My Favorites</Text>
-                                    <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+
                                 </View>
                             </TouchableHighlight>
 
@@ -134,7 +134,7 @@ class PersonalArea extends Component {
                                 <Text>Help&About</Text>
                                 <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
                             </View>
-                            
+
 
                         </View>
 
