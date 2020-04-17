@@ -34,8 +34,9 @@ export default class DateSelector extends Component {
     return (
       <View style={{ backgroundColor: '#FFFFFF', flex: 1, }}>
         <CalendarPicker
-
+          selectedDayColor={"#056b60"}
           onDateChange={this.onDateChange}
+          minDate={new Date()}
         />
 
         {/* <View style={{ left: '2%' }}>

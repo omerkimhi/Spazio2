@@ -12,7 +12,7 @@ class TimeSelector extends Component {
         this.state = {
             value: {
                 start: "00:00",
-                end: "23:59",
+                end: "00:00",
 
             }
         }

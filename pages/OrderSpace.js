@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Button, Text, ScrollView, Image, TouchableHighlight } from 'react-native';
+import { FormCheck } from 'react-bootstrap';
+
 import DateSelector from '../Components/DateSelector';
 import CalendarPicker from 'react-native-calendar-picker';
 import TimeSelector from '../Components/TimeSelector';
@@ -22,7 +24,8 @@ class OrderSpace extends Component {
             hoursOfDaySelected: "",
             timeSelected: "",
             dateSelected: "",
-            price: 0
+            price: 0,
+            readTerms: false
         }
     }
     checkAvailability = (day) => {
@@ -92,12 +95,17 @@ class OrderSpace extends Component {
                             <Text style={{ fontSize: 20, fontWeight: '600', bottom: '3%' }}>Choose hours:</Text>
                             <TimeSelector timeSelectedChanged={this.timeSelectedChanged} hoursOfDaySelected={this.state.hoursOfDaySelected} />
                         </View>
-                        <View style={{ top: '15%' }}>
+                        <View style={{ top: '5%', }}>
                             <Text>Total price is: {this.state.price}</Text>
                         </View>
+                        <View style={{ marginTop: '8%', paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderTopColor: "#d9d9d9", borderTopWidth: 1 }}>
+                            <Text style={{ fontSize: 22, fontWeight: '600' }}>Space's terms & rules</Text>
+                            <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>{this.state.spaceSelected.termsOfUse}</Text>
+                            <FormCheck style={{ fontSize: 13, fontWeight: 'bolder' }} type="radio" onClick={() => this.setState({ readTerms: true })} label="I've read and accept the terms and rules" />
+                        </View>
 
-                        <View style={{ top: '15%' }}>
-                            <Button title="Order" onPress={() => this.OrderPlace()} />
+                        <View style={{ top: '3%' }}>
+                            <Button disabled={!this.state.readTerms} title="Order" onPress={() => this.OrderPlace()} />
                         </View>
 
                     </View>

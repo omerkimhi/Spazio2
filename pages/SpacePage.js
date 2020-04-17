@@ -27,6 +27,7 @@ class SpacePage extends Component {
             Facilities: [],
             FieldsEquipment: [],
             EquipmentList: [],
+            Facilities: [],
 
             availa: [],
             spaceSelected: "",
@@ -139,12 +140,26 @@ class SpacePage extends Component {
     //     )
     // }
 
+    checkFacilities = () => {
 
+        let fac = [];
+        let val = ""
+
+
+        Object.keys(this.state.Facilities[0]).map((item, value) => {
+            val = this.state.Facilities[0][item];
+            if (val == true)
+                fac.push({ "Facility": item, "val": val })
+        });
+
+        return fac
+    }
 
 
     render() {
-
-
+        let facili = [];
+        if (this.state.Facilities.length != 0) { facili = this.checkFacilities() }
+        console.log("fac: ", facili)
         const { selectedStartDate } = this.state;
         const startDate = selectedStartDate ? selectedStartDate.toString() : '';
 
@@ -224,8 +239,8 @@ class SpacePage extends Component {
                             <View style={{ flexDirection: 'row', paddingTop: '7%' }}>
                                 <Icon style={{ marginTop: 2 }}
                                     size={15} color="#056b60"
-                                    name='calendar-check-o' />
-                                <Text style={{ fontWeight: '600', fontSize: 15 }}> Self check in</Text>
+                                    name='shekel' />
+                                <Text style={{ fontWeight: '600', fontSize: 15 }}> {this.state.spaceSelected.price} NIS/hr</Text>
                             </View>
 
                         </View>
@@ -249,39 +264,31 @@ class SpacePage extends Component {
                     <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 22, fontWeight: '600' }}>Equipment</Text>
                         {this.state.EquipmentList.map((item) => {
-                            return (item.spaceId === 7) ? (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
+                            return (item.spaceId === this.state.spaceSelected.spaceId) ? (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
                                 <Icon style={{ marginTop: 2 }}
                                     size={15} color="#056b60"
                                     name='check-circle-o' />
                                 <Text> {item.name}</Text>
                             </View>) : null
-                        })}
+                        }
+                        )}
                     </View>
-                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
+                    <View style={{ marginBottom: '5%', paddingTop: "5%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 22, fontWeight: '600' }}>Facilities</Text>
 
-
-                        {/* {console.log(this.state.Facilities)}
-
-                    {this.state.Facilities.map((item, value) => {
-                        return !(item.parking) ? (
-
-                            <View style={{ flexDirection: 'row', paddingTop: '1%' }}>
+                        {facili.map((item) => {
+                            return (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
                                 <Icon style={{ marginTop: 2 }}
                                     size={15} color="#056b60"
                                     name='check-circle-o' />
-                                <Text> sdf</Text>
-                            </View>) : null
-                    })} */}
-
+                                <Text> {item.Facility}</Text>
+                            </View>)
+                        }
+                        )}
 
                     </View>
 
-                    <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
-                        <Text style={{ fontSize: 22, fontWeight: '600' }}>Space's terms & rules</Text>
-                        <Text style={{ paddingTop: "1%", fontSize: 15, fontWeight: '400', paddingLeft: '2%' }}>Here will be the terms and rules</Text>
-                        <FormCheck label="I've read and accept the terms and rules" />
-                    </View>
+
 
                 </ScrollView >
                 <View style={{ position: 'absolute', width: '100%', bottom: 0, height: '12%' }}>
