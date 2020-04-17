@@ -3,11 +3,11 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
+import Loader from 'react-native-mask-loader';
 import Icon from "react-native-vector-icons/FontAwesome";
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, TouchableHighlight } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, View, Button, TextInput, TouchableHighlight } from 'react-native';
 import Home from '../pages/Home.js';
 import Register from '../pages/Register.js';
 import AddSpace from '../pages/AddSpace.js';
@@ -485,21 +485,27 @@ class Navigator extends Component {
 
   }
 
-  
+
 
   isLoading = () => {
     return (this.state.Spaces.length == 0
-       || this.state.FieldsEquipment.length == 0
-       || this.state.Facilities.length == 0
-       || this.state.Users.length == 0
-       || this.state.Availablities.length == 0
-       || this.state.EquipmentList.length == 0)
+      || this.state.FieldsEquipment.length == 0
+      || this.state.Facilities.length == 0
+      || this.state.Users.length == 0
+      || this.state.Availablities.length == 0
+      || this.state.EquipmentList.length == 0)
   }
 
   render() {
     if (this.isLoading()) {
-      return (<Text style={{ fontSize: 30, fontWeight: '500', alignSelf: 'center', marginTop: 180 }}>loading..</Text>)
+      return (
+        <View style={styles.horizontal}>
+          <ActivityIndicator size="large" color="#056b60" />
+        </View>
+      )
     }
+
+
     else {
       if (this.state.isLogged) {
         return (
@@ -536,4 +542,11 @@ const styles = StyleSheet.create({
 
 
   },
+  horizontal: {
+    flex: 1,
+    justifyContent: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  }
 });
