@@ -37,6 +37,8 @@ import Equipment from "../Classes/Equipment";
 import Facility from "../Classes/Facility";
 import Availabillity from "../Classes/Availabillity";
 import FieldEq from "../Classes/FieldEq";
+import Order from "../Classes/Order";
+
 
 
 
@@ -53,6 +55,7 @@ class SearchPage extends Component {
       Facilities: this.props.Facilities,
       Availablities: this.props.Availablities,
       FieldsEquipment: this.props.FieldsEquipment,
+      Orders: this.props.Orders,
       AddressCity: "",
       addressStreet: "",
       addressNumber: "",
@@ -66,8 +69,11 @@ class SearchPage extends Component {
     this.updateFieldA = this.updateFieldA.bind(this);
   }
 
+ 
 
   componentDidMount() {
+
+    
 
     // this.UsersApiUrl =
     //   "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
@@ -148,6 +154,8 @@ class SearchPage extends Component {
     console.log(this.state.Facilities);
     console.log(this.state.Availablities);
     console.log(this.state.FieldsEquipment);
+    console.log(this.state.Orders);
+
 
   }
 

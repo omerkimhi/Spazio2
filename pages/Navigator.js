@@ -30,6 +30,8 @@ import Facility from "../Classes/Facility";
 import Availabillity from "../Classes/Availabillity";
 import FieldEq from "../Classes/FieldEq";
 import Favourite from "../Classes/Favourite";
+import Order from "../Classes/Order";
+
 
 
 const HomeStack = createStackNavigator();
@@ -60,6 +62,7 @@ class Navigator extends Component {
       userLogged: null,
       spaceSelected: "",
       FavoriteSpaces: [],
+      Orders: [],
       addedFav: false
     };
     this.FetchGetUsers = this.FetchGetUsers.bind(this);
@@ -91,6 +94,8 @@ class Navigator extends Component {
       "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
     this.FieldEqApiUrl =
       "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
+      this.OrdersApiUrl = 
+      "http://proj.ruppin.ac.il/igroup17/prod/api/order/";
 
     this.FetchGetUsers();
     this.FetchGetSpaces();
@@ -98,6 +103,7 @@ class Navigator extends Component {
     this.FetchGetFacilities();
     this.FetchGetAvailabilities();
     this.FetchGetFieldsEq();
+    this.FetchGetOrders();
 
   }
 
@@ -304,6 +310,8 @@ class Navigator extends Component {
     console.log(this.state.Facilities);
     console.log(this.state.Availablities);
     console.log(this.state.FieldsEquipment);
+    console.log(this.state.Orders);
+
   }
 
   addFavourite = (userId, spaceId) => {
@@ -336,6 +344,35 @@ class Navigator extends Component {
     )
   }
 
+  FetchGetOrders = () => {
+    fetch(this.OrdersApiUrl, {
+      method: "GET"
+    })
+      .then(res => {
+        return res.json();
+      })
+      .then(
+        result => {
+          this.setState({
+            Orders: result.map(
+              item => 
+              new Order(
+                item.OrderId,
+                item.SpaceId,
+                item.UserId,
+                item.ReservationDate,
+                item.StartHour,
+                item.EndHour,
+                item.Price,
+                item.OrderDate
+                )
+            )
+          });
+        },
+        error => { }
+      );
+  };
+
   HomeScreen = ({ navigation }) => {
 
     return (
@@ -361,6 +398,7 @@ class Navigator extends Component {
         Users={this.state.Users}
         Facilities={this.state.Facilities}
         FieldsEquipment={this.state.FieldsEquipment}
+        Orders={this.state.Orders}
         navigation={navigation} />
     );
   }
@@ -496,7 +534,8 @@ class Navigator extends Component {
       || this.state.Facilities.length == 0
       || this.state.Users.length == 0
       || this.state.Availablities.length == 0
-      || this.state.EquipmentList.length == 0)
+      || this.state.EquipmentList.length == 0
+      || this.state.Orders.length == 0)
   }
 
   render() {
