@@ -21,17 +21,17 @@ class AddressModal extends Component {
             show: false,
             dateSelected: "",
             hoursOfDaySelected: "",
-            availa: [],
+            availa: this.props.Availablities,
 
         }
     }
 
     componentDidMount = () => {
 
-        this.setState({
+        // this.setState({
 
-            availa: this.props.Availablities
-        })
+        //     availa: this.props.Availablities
+        // }, () => { console.log("availa: ", this.state.availa) })
 
     }
 
@@ -53,25 +53,25 @@ class AddressModal extends Component {
     }
 
     saveChanges = () => {
-        this.props.getAddress(this.state.City, this.state.Street, this.state.Number)
+        this.props.getDayOfDateSelected(this.state.dateSelected)
         this.handleClose();
     };
 
     checkAvailability = (day) => {
 
         this.setState({
-            dateSelected: day.format("DD/MM/YYYY")
+            dateSelected: day.format("dddd").toLowerCase()
         }, () => console.log("date selected: ", this.state.dateSelected));
 
-        this.state.availa.map((item) => {
-            let itemDay = item.Day.charAt(0).toUpperCase() + item.Day.slice(1);
-            if (itemDay == day.format('dddd')) {
-                this.setState({
-                    hoursOfDaySelected: item.val
-                })
+        // this.state.availa.map((item) => {
+        //     let itemDay = item.Day.charAt(0).toUpperCase() + item.Day.slice(1);
+        //     if (itemDay == day.format('dddd')) {
+        //         this.setState({
+        //             hoursOfDaySelected: item.val
+        //         }, () => console.log("hours ", this.state.hoursOfDaySelected))
 
-            }
-        })
+        //     }
+        // })
     }
 
 
@@ -108,7 +108,7 @@ class AddressModal extends Component {
                     </Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={this.handleClose}>Close</Button>
-                        <Button variant="primary" onClick={this.handleClose}>Save changes</Button>
+                        <Button variant="primary" onClick={this.saveChanges}>Save changes</Button>
 
                     </Modal.Footer>
                 </Modal>

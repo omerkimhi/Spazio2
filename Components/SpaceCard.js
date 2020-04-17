@@ -13,12 +13,16 @@ import Availabillity from "../Classes/Availabillity";
 class SpaceCard extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+
+        }
     }
     getHour() {
-        let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()];
+        console.log("this.props.selectedDay: ", this.props.selectedDay)
+        let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][this.props.selectedDay];
         for (let j = 0; j < this.props.Availablities.length; j++) {
             if (this.props.Availablities[j].spaceId == this.props.space.spaceId) {
-                return this.props.Availablities[j][weekday];
+                return this.props.Availablities[j][this.props.selectedDay];
             }
         }
     }
@@ -41,7 +45,7 @@ class SpaceCard extends Component {
 
 
     render() {
-
+        
 
         const starIcon = require("../assets/Images/starIcon.jpg");
         const starIconPNG = require("../assets/Images/starIconPNG.png");

@@ -28,7 +28,7 @@ class SearchFeed extends Component {
     }
 
     render() {
-        const { SpacesToShow, Availablities } = this.props.route.params;
+        const { SpacesToShow, Availablities, selectedDay } = this.props.route.params;
 
 
         return (
@@ -77,7 +77,7 @@ class SearchFeed extends Component {
 
                         {
 
-                            SpacesToShow.map((space) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={Availablities} />)
+                            SpacesToShow.map((space) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={Availablities} selectedDay={selectedDay} />)
                         }
 
 

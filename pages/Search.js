@@ -47,17 +47,19 @@ class SearchPage extends Component {
 
     this.state = {
       field: "",
-      Users: [],
-      Spaces: [],
-      EquipmentList: [],
-      Facilities: [],
-      Availablities: [],
-      FieldsEquipment: [],
+      Users: this.props.Users,
+      Spaces: this.props.Spaces,
+      EquipmentList: this.props.EquipmentList,
+      Facilities: this.props.Facilities,
+      Availablities: this.props.Availablities,
+      FieldsEquipment: this.props.FieldsEquipment,
       AddressCity: "",
       addressStreet: "",
       addressNumber: "",
-      SpacesToShow: [],
-      hasFiltered: false
+      SpacesToShow: this.props.Spaces,
+      hasFiltered: false,
+      hasSelectedDate: false,
+      selectedDay: this.getDay(new Date().getDay())
     };
     this.updateFieldB = this.updateFieldB.bind(this);
     this.updateFieldS = this.updateFieldS.bind(this);
@@ -67,30 +69,30 @@ class SearchPage extends Component {
 
   componentDidMount() {
 
-    this.UsersApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
-    this.SpacesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/prod/api/space";
-    this.EquipmentApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/prod/api/Equipment/";
-    this.FacilitiesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/prod/api/Facilities/";
-    this.AvailabilitiesApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
-    this.FieldEqApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
+    // this.UsersApiUrl =
+    //   "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
+    // this.SpacesApiUrl =
+    //   "http://proj.ruppin.ac.il/igroup17/prod/api/space";
+    // this.EquipmentApiUrl =
+    //   "http://proj.ruppin.ac.il/igroup17/prod/api/Equipment/";
+    // this.FacilitiesApiUrl =
+    //   "http://proj.ruppin.ac.il/igroup17/prod/api/Facilities/";
+    // this.AvailabilitiesApiUrl =
+    //   "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
+    // this.FieldEqApiUrl =
+    //   "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
 
 
 
-    this.setState({
-      SpacesToShow: this.props.Spaces,
-      Spaces: this.props.Spaces,
-      Availablities: this.props.Availablities,
-      EquipmentList: this.props.EquipmentList,
-      Users: this.props.Users,
-      Facilities: this.props.Facilities,
-      FieldsEquipment: this.props.FieldsEquipment
-    })
+    // this.setState({
+    //   SpacesToShow: this.props.Spaces,
+    //   Spaces: this.props.Spaces,
+    //   Availablities: this.props.Availablities,
+    //   EquipmentList: this.props.EquipmentList,
+    //   Users: this.props.Users,
+    //   Facilities: this.props.Facilities,
+    //   FieldsEquipment: this.props.FieldsEquipment
+    //})
 
   }
 
@@ -149,16 +151,25 @@ class SearchPage extends Component {
 
   }
 
-  getHour(day) {
+  getDay(day) {
+    
     let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][day];
-
-
     return weekday
   }
 
+  getDayOfDateSelected = (day) => {
+    this.setState({
+      hasSelectedDate: true,
+      selectedDay: day
+    })
+
+  }
+
   whatToShow = () => {
-    let day = this.getHour(new Date().getDay());
-    console.log("today is: ", today)
+   let day = this.state.selectedDay;
+
+    console.log("day selected is: ", day);
+
     if (this.state.hasFiltered == true) {
       let tempArray = [];
       this.state.SpacesToShow.map((space) => {
@@ -174,7 +185,7 @@ class SearchPage extends Component {
       let tempArray = [];
       this.state.Spaces.map((space) => {
         this.state.Availablities.map((ava) => {
-          if (ava.spaceId == space.spaceId) {
+          if (ava.spaceId == space.spaceId&& ava[day] != "00:00-00:00") {
             tempArray.push(space);
           }
         })
@@ -193,10 +204,10 @@ class SearchPage extends Component {
 
 
   render() {
-    this.getHour();
-    this.LastAddedSpaces();
-    let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][new Date().getDay()]
 
+   
+    this.LastAddedSpaces();
+    
     return (
       <ScrollView style={{ flex: 1 }} >
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
@@ -261,7 +272,7 @@ class SearchPage extends Component {
                 >
                   Time{" "}
                 </Text>
-                <DateModal Availablities={this.state.Availablities} />
+                <DateModal getDayOfDateSelected={this.getDayOfDateSelected} Availablities={this.state.Availablities} />
                 {/* <ButtonToolbar>
                   <ToggleButtonGroup
                     type="radio"
@@ -293,7 +304,7 @@ class SearchPage extends Component {
               <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
                 Show data
               </Button>
-              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow(), Availablities: this.state.Availablities }) }} style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow(), Availablities: this.state.Availablities, selectedDay:this.state.selectedDay }) }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>
