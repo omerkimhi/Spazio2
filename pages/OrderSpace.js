@@ -96,7 +96,7 @@ class OrderSpace extends Component {
                             <TimeSelector timeSelectedChanged={this.timeSelectedChanged} hoursOfDaySelected={this.state.hoursOfDaySelected} />
                         </View>
                         <View style={{ top: '5%', }}>
-                            <Text>Total price is: {this.state.price}</Text>
+                            <Text>Total price is: {this.state.price}  ({this.state.spaceSelected.price} NIS per hour)</Text>
                         </View>
                         <View style={{ marginTop: '8%', paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderTopColor: "#d9d9d9", borderTopWidth: 1 }}>
                             <Text style={{ fontSize: 22, fontWeight: '600' }}>Space's terms & rules</Text>

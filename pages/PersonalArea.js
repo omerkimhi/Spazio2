@@ -16,7 +16,7 @@ import User from '../Classes/User';
 import Favourite from '../Classes/Favourite';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import MyDetails from "./Personal Area Pages/MyDetails";
 
 
 
@@ -53,7 +53,9 @@ class PersonalArea extends Component {
                     <View style={{ alignSelf: 'flex-start', flexDirection: 'column' }}>
                         <View style={{ flexDirection: 'row', paddingTop: '5%' }}>
                             <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
-                                <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
+
+                                <MyDetails user={this.state.user} />
+                                {/* <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
                                     <Icon
 
                                         name='user'
@@ -61,8 +63,8 @@ class PersonalArea extends Component {
                                         color='#595959'
                                     />
                                 </View>
-                                <Text>My details</Text>
-                                <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
+                                <Text>My details</Text> */}
+                                
                             </View>
 
                             <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '3%' }}>
@@ -94,8 +96,8 @@ class PersonalArea extends Component {
                         </View>
 
                         <View style={{ flexDirection: 'row', paddingTop: '10%' }}>
-                            <TouchableHighlight onPress={() => this.props.navigation.navigate('Favorites')}>
-                                <View style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }}>
+                            <TouchableHighlight style={{ alignItems: 'center', flexDirection: 'column', marginHorizontal: '15%' }} onPress={() => this.props.navigation.navigate('Favorites')}>
+                                <View >
                                     <View style={{ alignItems: 'center', width: 50, height: 50, borderRadius: 50 / 2, borderColor: '#056b60', borderWidth: 2 }}>
                                         <Icon
 

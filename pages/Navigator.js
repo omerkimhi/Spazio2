@@ -369,7 +369,7 @@ class Navigator extends Component {
   RegisterScreen = () => {
     return (
 
-      <Register FieldsEquipment={this.state.FieldsEquipment} />
+      <Register fromPersonalArea={false} FieldsEquipment={this.state.FieldsEquipment} />
 
     );
   }
