@@ -21,7 +21,7 @@ class Register extends Component {
             PhoneNumber: "",
             addedUsers: [],
             spaceName: "",
-            spaceOwner:false
+            spaceOwner: false
 
         };
     }
@@ -111,7 +111,7 @@ class Register extends Component {
 
     getSpacesAdded = (newSpace, Avail, Fac, Eq) => {
         this.setState({
-            spaceOwner:true
+            spaceOwner: true
         })
         console.log("added to register: ", newSpace, Avail, Fac, Eq);
     }
@@ -122,95 +122,122 @@ class Register extends Component {
         const personI = require('../assets/Images/PersonIcon.png');
         const spaceI = require('../assets/Images/SpaceIcon.png');
 
+        if (this.props.fromPersonalArea) {
+            return (
+                
+                <ScrollView>
+                    <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
+                        <View style={{ paddingTop: 10 }}>
+                            <View style={styles.container}>
 
-        return (
-            <ScrollView>
-                <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
-                    <View style={{ paddingTop: 35 }}>
-                       
-                        {/* <View style={{ alignSelf: 'center', alignItems: 'center', height: '20%', flexDirection: 'row' }}>
-                            <Image source={logow1} style={{ width: 50, height: 50 }} />
-                            <Text style={{ color: 'white', fontSize: 20, alignSelf: 'center' }}>SPAZIO</Text>
-                        </View> */}
+                                <View style={{ paddingLeft: '5%', flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'column', width: '60%' }}>
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Email adress:</Text>
+                                        <Text style={{ fontSize: 18, fontWeight: '400', fontStyle: 'italic' }}>{this.props.user.email}</Text>
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Password:</Text>
+                                        <Text style={{ fontSize: 18, fontWeight: '400', fontStyle: 'italic' }}>{this.props.user.password}</Text>
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Phone number:</Text>
+                                        <Text style={{ fontSize: 18, fontWeight: '400', fontStyle: 'italic' }}>{this.props.user.phoneNumber}</Text>
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Name:</Text>
+                                        <Text style={{ fontSize: 18, fontWeight: '400', fontStyle: 'italic' }}>{this.props.user.fullName}</Text>
 
-                        <View style={styles.container}>
-
-                            <View style={{ paddingLeft: '5%', flexDirection: 'row' }}>
-                                <View style={{ flexDirection: 'column', width: '60%' }}>
-                                    <Text style={{ color: 'white', fontSize: 22 }}>Email adress:</Text>
-                                    <Input onChangeText={this.EmailChanged} placeholder=" email@adress.com"
-                                        leftIcon={
-                                            <Icon
-                                                name='envelope'
-                                                size={24}
-                                                color='#595959'
-                                            />
-                                        } />
-                                    <Text style={{ color: 'white', fontSize: 22 }}>Password:</Text>
-                                    <Input onChangeText={this.PasswordChanged} placeholder=" Password"
-                                        leftIcon={
-                                            <Icon
-                                                name='lock'
-                                                size={24}
-                                                color='#595959'
-                                            />
-                                        } />
-                                    <Text style={{ color: 'white', fontSize: 22 }}>Phone number:</Text>
-                                    <Input onChangeText={this.PhoneNumberChanged} placeholder=" 05X-XXXX-XXX"
-                                        leftIcon={
-                                            <Icon
-                                                name='phone'
-                                                size={24}
-                                                color='#595959'
-                                            />
-                                        } />
-
-                                    <Text style={{ color: 'white', fontSize: 22 }}>First name:</Text>
-                                    <Input onChangeText={this.FirstNameChanged} placeholder="" />
-                                    <Text style={{ color: 'white', fontSize: 22 }}>Last name:</Text>
-                                    <Input onChangeText={this.LastNameChanged} />
-
-
-                                    <View style={{ flexDirection: 'row', paddingTop: 10 }}>
-                                        <Icon
-                                            name='id-card'
-                                            size={24}
-                                            color='#595959'
-                                        />
-                                        <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}> Add your ID</Text>
-                                    </View>
-                                    <View style={{ flexDirection: 'row', paddingTop: 2, paddingTop: '5%' }}>
-                                        <Icon
-                                            name='credit-card'
-                                            size={24}
-                                            color='#595959'
-                                        />
-                                        <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}> Add your credit-card</Text>
                                     </View>
 
                                 </View>
-                                <View style={{ width: '35%', alignItems: 'center', marginTop: '10%', paddingLeft: '5%' }}>
-                                    <Image source={personI} style={{ width: 70, height: 70 }} />
-                                    <Text style={{ color: '#595959', marginBottom: 20, fontSize: 18 }}>Add a photo</Text>
 
-                                    <AddSpaceModal FieldsEquipment={this.props.FieldsEquipment} getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.getSpaceData} />
-
-                                </View>
-
-                                <View>
-
-                                </View>
 
                             </View>
-                            <View style={{ paddingTop: 15, height: 30 }}>
-                                <Button color='#056b60' title='Register' onPress={this.addUser} />
-                            </View>
-
                         </View>
-                    </View>
-                </LinearGradient>
-            </ScrollView>
-        );
+                    </LinearGradient>
+                </ScrollView>
+
+            )
+
+        }
+        else {
+            return (
+                <ScrollView>
+                    <LinearGradient colors={['#056b60', 'white']} style={{ flex: 1 }} >
+                        <View style={{ paddingTop: 35 }}>
+                            <View style={styles.container}>
+
+                                <View style={{ paddingLeft: '5%', flexDirection: 'row' }}>
+                                    <View style={{ flexDirection: 'column', width: '60%' }}>
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Email adress:</Text>
+                                        <Input onChangeText={this.EmailChanged} placeholder=" email@adress.com"
+                                            leftIcon={
+                                                <Icon
+                                                    name='envelope'
+                                                    size={24}
+                                                    color='#595959'
+                                                />
+                                            } />
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Password:</Text>
+                                        <Input onChangeText={this.PasswordChanged} placeholder=" Password"
+                                            leftIcon={
+                                                <Icon
+                                                    name='lock'
+                                                    size={24}
+                                                    color='#595959'
+                                                />
+                                            } />
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Phone number:</Text>
+                                        <Input onChangeText={this.PhoneNumberChanged} placeholder=" 05X-XXXX-XXX"
+                                            leftIcon={
+                                                <Icon
+                                                    name='phone'
+                                                    size={24}
+                                                    color='#595959'
+                                                />
+                                            } />
+
+                                        <Text style={{ color: 'white', fontSize: 22 }}>First name:</Text>
+                                        <Input onChangeText={this.FirstNameChanged} placeholder="" />
+                                        <Text style={{ color: 'white', fontSize: 22 }}>Last name:</Text>
+                                        <Input onChangeText={this.LastNameChanged} />
+
+
+                                        <View style={{ flexDirection: 'row', paddingTop: 10 }}>
+                                            <Icon
+                                                name='id-card'
+                                                size={24}
+                                                color='#595959'
+                                            />
+                                            <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}> Add your ID</Text>
+                                        </View>
+                                        <View style={{ flexDirection: 'row', paddingTop: 2, paddingTop: '5%' }}>
+                                            <Icon
+                                                name='credit-card'
+                                                size={24}
+                                                color='#595959'
+                                            />
+                                            <Text style={{ color: '#595959', alignSelf: 'center', fontSize: 18, paddingLeft: 2 }}> Add your credit-card</Text>
+                                        </View>
+
+                                    </View>
+                                    <View style={{ width: '35%', alignItems: 'center', marginTop: '10%', paddingLeft: '5%' }}>
+                                        <Image source={personI} style={{ width: 70, height: 70 }} />
+                                        <Text style={{ color: '#595959', marginBottom: 20, fontSize: 18 }}>Add a photo</Text>
+
+                                        <AddSpaceModal FieldsEquipment={this.props.FieldsEquipment} getSpacesAdded={this.getSpacesAdded} sendSpaceData={this.getSpaceData} />
+
+                                    </View>
+
+                                    <View>
+
+                                    </View>
+
+                                </View>
+                                <View style={{ paddingTop: 15, height: 30 }}>
+                                    <Button color='#056b60' title='Register' onPress={this.addUser} />
+                                </View>
+
+                            </View>
+                        </View>
+                    </LinearGradient>
+                </ScrollView>
+            );
+        }
     }
 }
 export default Register;
