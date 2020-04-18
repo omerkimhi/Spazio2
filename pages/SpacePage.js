@@ -209,6 +209,7 @@ class SpacePage extends Component {
 
 
                 </ScrollView >
+                
                 <View style={{ position: 'absolute', width: '100%', bottom: 0, height: '12%' }}>
                     <Button onClick={() => { this.props.navigation.navigate('OrderPage', { Space: this.state.spaceSelected, Availablity: this.state.availa }) }} style={{ height: '100%', paddingBottom: 0, backgroundColor: "red" }}>
                         ORDER      THIS      SPACE      NOW!

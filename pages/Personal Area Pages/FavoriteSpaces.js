@@ -80,22 +80,51 @@ export default class FavoriteSpaces extends Component {
     //     </View>
     // );
 
+    getHour() {
+        console.log("this.props.selectedDay: ", this.props.selectedDay)
+        let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][this.props.selectedDay];
+        for (let j = 0; j < this.props.Availablities.length; j++) {
+            if (this.props.Availablities[j].spaceId == this.props.space.spaceId) {
+                return this.props.Availablities[j][this.props.selectedDay];
+            }
+        }
+    }
+
+    showAvailability = (space) => {
+        let availabilities = [];
+        let spaceAvailabilities = [];
+        for (let i = 0; i < this.props.Availablities.length; i++) {
+            if (this.props.Availablities[i].spaceId == space.spaceId) {
+                spaceAvailabilities = this.props.Availablities[i];
+            }
+        }
+        Object.keys(spaceAvailabilities).map((item, value) => {
+            let val = spaceAvailabilities[item];
+            if (item != "spaceId" && item != "id")
+                availabilities.push({ "Day": item, "val": val })
+        });
+        return availabilities
+    }
+
     setHeader = (space) => {
         return (
+            <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage', { Space: space.Space, Availablities: this.showAvailability(space.Space) }); this.props.spaceSelected(space.Space) }} underlayColor="white">
+                 <View>
             <View style={{ justifyContent: 'space-around', flexDirection: 'row', }}>
                 <Text>{space.price} NIS/hr      </Text>
-                {/* <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage', { Space: space.Space }) }} > */}
-                <Text style={{ alignSelf: 'center', fontWeight: '500', fontSize: 18 }}>{space.name}</Text>
-                {/* </TouchableHighlight> */}
+                
+                    <Text style={{ alignSelf: 'center', fontWeight: '500', fontSize: 18 }}>{space.name}</Text>
+                
                 <Text style={{}}>  {space.street} {space.number}, {space.city}</Text>
             </View>
+            </View>
+                </TouchableHighlight>
         )
     }
 
 
 
     render() {
-
 
 
         console.log("Favorite spaces: ", this.props.Spaces);

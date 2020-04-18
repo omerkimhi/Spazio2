@@ -69,11 +69,11 @@ class SearchPage extends Component {
     this.updateFieldA = this.updateFieldA.bind(this);
   }
 
- 
+
 
   componentDidMount() {
 
-    
+
 
     // this.UsersApiUrl =
     //   "http://proj.ruppin.ac.il/igroup17/prod/api/User/";
@@ -160,7 +160,7 @@ class SearchPage extends Component {
   }
 
   getDay(day) {
-    
+
     let weekday = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'][day];
     return weekday
   }
@@ -174,7 +174,7 @@ class SearchPage extends Component {
   }
 
   whatToShow = () => {
-   let day = this.state.selectedDay;
+    let day = this.state.selectedDay;
 
     console.log("day selected is: ", day);
 
@@ -193,7 +193,7 @@ class SearchPage extends Component {
       let tempArray = [];
       this.state.Spaces.map((space) => {
         this.state.Availablities.map((ava) => {
-          if (ava.spaceId == space.spaceId&& ava[day] != "00:00-00:00") {
+          if (ava.spaceId == space.spaceId && ava[day] != "00:00-00:00") {
             tempArray.push(space);
           }
         })
@@ -212,10 +212,16 @@ class SearchPage extends Component {
 
 
   render() {
+    let tenants = [];
+    this.state.Users.map((space) => {
+      if (space.spaceOwner) {
+        tenants.push(space);
+      }
+    })
 
-   
+
     this.LastAddedSpaces();
-    
+
     return (
       <ScrollView style={{ flex: 1 }} >
         <View style={{ paddingTop: 20, backgroundColor: "#fff" }}>
@@ -312,7 +318,7 @@ class SearchPage extends Component {
               <Button onClick={this.showData} style={{ backgroundColor: "#056b60" }}>
                 Show data
               </Button>
-              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow(), Availablities: this.state.Availablities, selectedDay:this.state.selectedDay }) }} style={{ backgroundColor: "#056b60" }}>
+              <Button onClick={() => { this.props.navigation.navigate('SearchFeed', { SpacesToShow: this.whatToShow(), Availablities: this.state.Availablities, selectedDay: this.state.selectedDay }) }} style={{ backgroundColor: "#056b60" }}>
                 Search
               </Button>
             </View>
@@ -333,10 +339,10 @@ class SearchPage extends Component {
               Spaces registered{" "}
             </Text>
             <Text style={{ fontSize: 17, color: "#056b60", fontWeight: "600" }}>
-              {this.state.Users.length}{" "}
+              {this.state.Users.length - tenants.length}{" "}
             </Text>
             <Text style={{ fontSize: 17, fontWeight: "400" }}>
-              Users registered
+              Tenants registered
             </Text>
           </View>
 

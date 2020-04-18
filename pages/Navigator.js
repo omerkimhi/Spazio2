@@ -94,7 +94,7 @@ class Navigator extends Component {
       "http://proj.ruppin.ac.il/igroup17/prod/api/Availability/";
     this.FieldEqApiUrl =
       "http://proj.ruppin.ac.il/igroup17/prod/api/FieldEq/";
-      this.OrdersApiUrl = 
+    this.OrdersApiUrl =
       "http://proj.ruppin.ac.il/igroup17/prod/api/order/";
 
     this.FetchGetUsers();
@@ -125,7 +125,8 @@ class Navigator extends Component {
                   item.Password,
                   item.UserName,
                   item.PhoneNumber,
-                  item.Photo
+                  item.Photo,
+                  item.SpaceOwner
                 )
             )
           });
@@ -355,16 +356,16 @@ class Navigator extends Component {
         result => {
           this.setState({
             Orders: result.map(
-              item => 
-              new Order(
-                item.OrderId,
-                item.SpaceId,
-                item.UserId,
-                item.ReservationDate,
-                item.StartHour,
-                item.EndHour,
-                item.Price,
-                item.OrderDate
+              item =>
+                new Order(
+                  item.OrderId,
+                  item.SpaceId,
+                  item.UserId,
+                  item.ReservationDate,
+                  item.StartHour,
+                  item.EndHour,
+                  item.Price,
+                  item.OrderDate
                 )
             )
           });
@@ -384,7 +385,7 @@ class Navigator extends Component {
 
     return (
 
-      <PersonalArea user={this.state.userLogged} navigation={navigation} />
+      <PersonalArea Spaces={this.state.Spaces} Orders={this.state.Orders} user={this.state.userLogged} navigation={navigation} />
     );
   }
 
@@ -428,7 +429,8 @@ class Navigator extends Component {
       <SpacePage navigation={navigation} route={route}
         Facilities={this.state.Facilities}
         FieldsEquipment={this.state.FieldsEquipment}
-        EquipmentList={this.state.EquipmentList} />
+        EquipmentList={this.state.EquipmentList}
+      />
 
     );
   }
@@ -495,7 +497,7 @@ class Navigator extends Component {
   FavoritesSpaceslScreen = ({ route, navigation }) => {
 
     return (
-      <FavoriteSpaces Spaces={this.checkFavorites()} navigation={navigation} route={route} />
+      <FavoriteSpaces Availablities={this.state.Availablities} Spaces={this.checkFavorites()} spaceSelected={this.spaceSelectedFunc} navigation={navigation} route={route} />
     )
 
 
