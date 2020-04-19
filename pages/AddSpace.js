@@ -78,8 +78,11 @@ class AddSpace extends Component {
     getData = (data, name) => {
         this.setState({
             [name]: data
-        }, () => console.log(this.state[name]))
+        })
     }
+     // this was in in arrow function above after the row [name]: data like this  }, () => console.log(this.state[name]) )
+    //help for testing 
+    //console.log(this.state[name])
 
     onChangeText = (text) => {
         this.props.sendSpaceData(text)

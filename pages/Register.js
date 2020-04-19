@@ -34,64 +34,9 @@ class Register extends Component {
       newSpaceToAdd: null,
       newAvailabilityToAdd: null,
       newFacilityToAdd: null,
-      newEquipmentToAdd: {},
+      newEquipmentToAdd: null,
 
-      spaceToPostTest: {
-        space: {
-          AccountNumber: "02981694",
-          Bank: "Leumi",
-          Branch: "574",
-          Capabillity: "12",
-          City: "Haifa",
-          Description:
-            "Lorem ipsumGiladdddddd dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          Field: "Beauty",
-          Imageurl1:
-            "https://media-cdn.tripadvisor.com/media/photo-s/15/4c/8c/72/gett-s-hair-studio-salon.jpg",
-          Imageurl2:
-            "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/ff/61/25/getlstd-property-photo.jpg",
-          Imageurl3:
-            "https://i.pinimg.com/originals/f2/6e/31/f26e31804ed5324bb444b7233491abaa.jpg",
-          Imageurl4:
-            "https://i.pinimg.com/originals/b8/5a/40/b85a409cd599f522155a381b38b8875e.jpg",
-          Imageurl5: "",
-          Name: "Zaki Hair Salon",
-          Number: "15",
-          Price: "85.34",
-          Rank: "3",
-          Street: "Herzel",
-          TermsOfUse:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-          Uploadtime: "3/20/2020 12:00:00 AM",
-          UserEmail: "al@gmail.com",
-        },
-        facility: {
-          parking: "true",
-          toilet: "false",
-          kitchen: "true",
-          intercom: "false",
-          accessible: "true",
-          airCondition: "false",
-          wifi: "true",
-          spaceId: "false",
-        },
-        availability: {
-          Friday: "00:00-03:00",
-          Monday: "10:00-19:00",
-          Saturday: "14:30-16:30",
-          Sunday: "09:00-12:00",
-          Thursday: "06:00-09:00",
-          Tuesday: "11:00-14:00",
-          Wednesday: "11:00-13:00",
-        },
-        equipment: {
-          Id: "9",
-          Name: "Drum",
-          SpaceId: "8",
-        },
-      },
-    };
-  }
+  }}
 
   getSpaceData = (data) => {
     this.setState(
@@ -106,8 +51,8 @@ class Register extends Component {
 
   componentDidMount() {
     this.spaceToPostApiUrl =
-      "http://proj.ruppin.ac.il/igroup17/proj/api/spacedata";
-    this.userToPostApiUrl = "http://proj.ruppin.ac.il/igroup17/proj/api/user"; //*** TODO: CHANGE THE API TO THE PROD  ***/
+      "https://proj.ruppin.ac.il/igroup17/Mobile/project/api/spacedata/";
+    this.userToPostApiUrl = "https://proj.ruppin.ac.il/igroup17/proj/api/user"; //*** TODO: CHANGE THE API TO THE PROD  ***/
 
     //console.log(this.state.newFacilityToAdd); ** for testing
     //console.log(this.state.newEquipmentToAdd); ** for testing
@@ -147,7 +92,7 @@ class Register extends Component {
       RegistrationDate: "",
     };
 
-    console.log("im user", user.UserName);
+    //console.log("im user", user.UserName);
 
     fetch(this.userToPostApiUrl, {
       method: "POST",
@@ -183,63 +128,6 @@ class Register extends Component {
   addNewSpace = () => {
     // console.log("the space has been added");
 
-    // spaceToPostTest2 is varibable of json for testing
-    var spaceToPostTest2 = {
-      space: {
-        AccountNumber: "02981694",
-        Bank: "Leumi",
-        Branch: "574",
-        Capabillity: "12",
-        City: "Haifa",
-        Description:
-          "Lorem ipsumGiladdddddd dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        Field: "Beauty",
-        Imageurl1:
-          "https://media-cdn.tripadvisor.com/media/photo-s/15/4c/8c/72/gett-s-hair-studio-salon.jpg",
-        Imageurl2:
-          "https://media-cdn.tripadvisor.com/media/photo-m/1280/14/ff/61/25/getlstd-property-photo.jpg",
-        Imageurl3:
-          "https://i.pinimg.com/originals/f2/6e/31/f26e31804ed5324bb444b7233491abaa.jpg",
-        Imageurl4:
-          "https://i.pinimg.com/originals/b8/5a/40/b85a409cd599f522155a381b38b8875e.jpg",
-        Imageurl5: "",
-        Name: "Zaki Hair Salon",
-        Number: "15",
-        Price: "85.34",
-        Rank: "3",
-        Street: "Herzel",
-        TermsOfUse:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        Uploadtime: "3/20/2020 12:00:00 AM",
-        UserEmail: "al@gmail.com",
-      },
-      facility: {
-        parking: "true",
-        toilet: "false",
-        kitchen: "true",
-        intercom: "false",
-        accessible: "true",
-        airCondition: "false",
-        wifi: "true",
-        spaceId: "false",
-      },
-      availability: {
-        Friday: "00:00-03:00",
-        Monday: "10:00-19:00",
-        Saturday: "14:30-16:30",
-        Sunday: "09:00-12:00",
-        Thursday: "06:00-09:00",
-        Tuesday: "11:00-14:00",
-        Wednesday: "11:00-13:00",
-      },
-      equipment: {
-        Id: "9",
-        Name: "Drum",
-        SpaceId: "8",
-      },
-    };
-    //end of testing variable
-
     var tempFacility = {
       Parking: "false",
       Toilet: "false",
@@ -263,12 +151,10 @@ class Register extends Component {
     var equipmentList = [];
     this.state.newEquipmentToAdd.forEach((el) => {
       var eq = {
-        Equipment: {
           Id: "",
           Name: el.toString(),
           SpaceId: "",
-        },
-      };
+        };
 
       equipmentList.push(eq);
     });
@@ -281,11 +167,11 @@ class Register extends Component {
       City: this.state.newSpaceToAdd.city,
       Description: this.state.newSpaceToAdd.description,
       Field: this.state.newSpaceToAdd.field,
-      Imageurl1: "Unavailable",
-      Imageurl2: "Unavailable",
-      Imageurl3: "TobeContinue",
-      Imageurl4: "comingsoon?",
-      Imageurl5: "forsure",
+      Imageurl1: "",
+      Imageurl2: "",
+      Imageurl3: "",
+      Imageurl4: "",
+      Imageurl5: "",
       Name: this.state.newSpaceToAdd.name,
       Number: this.state.newSpaceToAdd.number,
       Price: this.state.newSpaceToAdd.price,
@@ -309,13 +195,16 @@ class Register extends Component {
     var newSpaceToPostTest5555 = {
       space: tempspace2,
       facility: tempFacility,
-      equipment: equipmentList[0],
+      equipment: equipmentList,
       availability: tempavailability,
     };
-    
+
+
+    console.log("variable name:newSpaceToPostTest5555")
     console.log(newSpaceToPostTest5555);
+    console.log("variable name:this  state newSpaceToAdd")
     console.log(this.state.newSpaceToAdd);
-    console.log(spaceToPostTest2);
+
 
     fetch(this.spaceToPostApiUrl, {
       method: "POST",
@@ -348,14 +237,16 @@ class Register extends Component {
       newFacilityToAdd: Fac,
       newEquipmentToAdd: Eq,
     });
-    console.log("added to register: ", newSpace, Avail, Fac, Eq);
+    // help for testing 
+    //console.log("added to register: ", newSpace, Avail, Fac, Eq);
   };
 
   render() {
     const logow1 = require("../assets/Images/LogoW.png");
     const personI = require("../assets/Images/PersonIcon.png");
     const spaceI = require("../assets/Images/SpaceIcon.png");
-    console.log(this.state.spaceToPost);
+
+    
     if (this.props.fromPersonalArea) {
       return (
         <ScrollView>
