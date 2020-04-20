@@ -171,7 +171,7 @@ class PersonalArea extends Component {
                                         color='#595959'
                                     />
                                 </View>
-                                <Text>Help&About</Text>
+                                <Text>Help&About </Text>
                                 <Text style={{ color: 'red', fontSize: 12, fontWeight: '500' }}>coming soon</Text>
                             </View>
 
