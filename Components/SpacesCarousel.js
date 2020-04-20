@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TouchableHighlight } from 'react-native';
+import { View, Text, Image, TouchableHighlight ,FlatList} from 'react-native';
 import { Carousel } from 'react-bootstrap';
 
 
@@ -25,12 +25,12 @@ class SpacesCarousel extends Component {
       < View style={{ height: 200, width: 350 }}>
 
         <Carousel>
-          {this.props.Spaces.map((item) =>
+          {this.props.Spaces.map((item,index) =>
 
             <Carousel.Item>
-              <TouchableHighlight onPress={() => { this.props.navigation.navigate('SpacePage') }} underlayColor="white">
-                <View>
-                  <img
+              <TouchableHighlight  onPress={() => { this.props.navigation.navigate('SpacePage') }} underlayColor="white">
+                <View  >
+                  <img   
                     className="d-block w-100"
                     height='200'
                     src={item.image1}

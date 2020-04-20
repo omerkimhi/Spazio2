@@ -55,7 +55,7 @@ class AddSpace extends Component {
 
     onchangeField = (field) => {
         let tempArray = [];
-        this.props.FieldsEquipment.map((item) => {
+        this.props.FieldsEquipment.map((item,index) => {
             if (item.field == field) {
                 tempArray.push(item.name)
             }

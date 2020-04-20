@@ -118,7 +118,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             Users: result.map(
-              item =>
+              (item,index) =>
                 new User(
                   item.Id,
                   item.Email,
@@ -146,7 +146,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             Spaces: result.map(
-              item =>
+             (item,index) =>
                 new Space(
                   item.Id,
                   item.Name,
@@ -188,7 +188,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             EquipmentList: result.map(
-              item => new Equipment(item.Id, item.Name, item.SpaceId)
+              (item,index) => new Equipment(item.Id, item.Name, item.SpaceId)
             )
           });
         },
@@ -206,7 +206,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             Facilities: result.map(
-              item =>
+              (item,index) =>
                 new Facility(
                   item.FacilityId,
                   item.Parking,
@@ -235,7 +235,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             Availablities: result.map(
-              item =>
+              (item,index) =>
                 new Availabillity(
                   item.Id,
                   item.Sunday,
@@ -264,7 +264,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             FieldsEquipment: result.map(
-              item => new FieldEq(item.Id, item.Field, item.Name)
+              (item,index) => new FieldEq(item.Id, item.Field, item.Name)
             )
           });
         },
@@ -286,7 +286,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             FavoriteSpaces: result.map(
-              item =>
+              item,index =>
                 item
 
             )
@@ -356,7 +356,7 @@ class Navigator extends Component {
         result => {
           this.setState({
             Orders: result.map(
-              item =>
+             (item,index) =>
                 new Order(
                   item.OrderId,
                   item.SpaceId,
@@ -484,8 +484,8 @@ class Navigator extends Component {
 
   checkFavorites = () => {
     let favSpaces = [];
-    this.state.Spaces.map((space) => {
-      this.state.FavoriteSpaces.map((num) => {
+    this.state.Spaces.map((space,index) => {
+      this.state.FavoriteSpaces.map((num,index) => {
         if (num == space.spaceId) {
           favSpaces.push(space);
         }

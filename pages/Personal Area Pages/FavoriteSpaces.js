@@ -15,7 +15,7 @@ export default class FavoriteSpaces extends Component {
     componentDidMount = () => {
         let data = [];
 
-        this.props.Spaces.map((space) => {
+        this.props.Spaces.map((space,index) => {
             data.push({
                 URI: space.image1,
                 name: space.name,

@@ -181,7 +181,7 @@ class SpacePage extends Component {
 
                     <View style={{ paddingTop: "2%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 22, fontWeight: '600' }}>Equipment</Text>
-                        {this.state.EquipmentList.map((item) => {
+                        {this.state.EquipmentList.map((item,index) => {
                             return (item.spaceId === this.state.spaceSelected.spaceId) ? (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
                                 <Icon style={{ marginTop: 2 }}
                                     size={15} color="#056b60"
@@ -194,7 +194,7 @@ class SpacePage extends Component {
                     <View style={{ marginBottom: '5%', paddingTop: "5%", paddingBottom: '1%', paddingHorizontal: '4%', borderBottomColor: "#d9d9d9", borderBottomWidth: 1 }}>
                         <Text style={{ fontSize: 22, fontWeight: '600' }}>Facilities</Text>
 
-                        {facili.map((item) => {
+                        {facili.map((item,index) => {
                             return (<View style={{ flexDirection: 'row', paddingTop: '1%' }}>
                                 <Icon style={{ marginTop: 2 }}
                                     size={15} color="#056b60"

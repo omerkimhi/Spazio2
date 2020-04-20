@@ -34,7 +34,7 @@ class OrderSpace extends Component {
             dateSelected: day.format("DD/MM/YYYY")
         }, () => console.log("date selected: ", this.state.dateSelected));
 
-        this.state.availa.map((item) => {
+        this.state.availa.map((item,index) => {
             let itemDay = item.Day.charAt(0).toUpperCase() + item.Day.slice(1);
             if (itemDay == day.format('dddd')) {
                 this.setState({

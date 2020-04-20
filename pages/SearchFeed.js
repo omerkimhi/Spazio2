@@ -79,7 +79,7 @@ class SearchFeed extends Component {
 
                             SpacesToShow.length == 0
                                 ? <Text style={{ marginTop: 70, color: '#056b60', fontSize: 20, fontWeight: '500', alignSelf: 'center' }}>No Spaces found</Text>
-                                : SpacesToShow.map((space) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={Availablities} selectedDay={selectedDay} />)
+                                : SpacesToShow.map((space,index) => <SpaceCard key={space.spaceId} spaceSelected={this.spaceSelected} navigation={this.props.navigation} space={space} Availablities={Availablities} selectedDay={selectedDay} />)
                         }
 
 

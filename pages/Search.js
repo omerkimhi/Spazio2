@@ -180,8 +180,8 @@ class SearchPage extends Component {
 
     if (this.state.hasFiltered == true) {
       let tempArray = [];
-      this.state.SpacesToShow.map((space) => {
-        this.state.Availablities.map((ava) => {
+      this.state.SpacesToShow.map((space,index) => {
+        this.state.Availablities.map((ava,index) => {
           if (ava.spaceId == space.spaceId && ava[day] != "00:00-00:00") {
             tempArray.push(space);
           }
@@ -191,8 +191,8 @@ class SearchPage extends Component {
     }
     else {
       let tempArray = [];
-      this.state.Spaces.map((space) => {
-        this.state.Availablities.map((ava) => {
+      this.state.Spaces.map((space,index) => {
+        this.state.Availablities.map((ava,index) => {
           if (ava.spaceId == space.spaceId && ava[day] != "00:00-00:00") {
             tempArray.push(space);
           }
@@ -213,7 +213,7 @@ class SearchPage extends Component {
 
   render() {
     let tenants = [];
-    this.state.Users.map((space) => {
+    this.state.Users.map((space,index) => {
       if (space.spaceOwner) {
         tenants.push(space);
       }

@@ -41,7 +41,7 @@ class PersonalArea extends Component {
         let userOrders = [];
         let userOrdersSpaces = [];
         let lateSpace = 0;
-        this.props.Orders.map((order) => {
+        this.props.Orders.map((order, index) => {
             if (order.userId == this.state.user.userId) {
                 userOrders.push(order)
                 let tempDate = new Date(order.reservationDate)
